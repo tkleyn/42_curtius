@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2019/10/16 16:59:12 by tkleynts         ###   ########.fr        #
+#    Updated: 2019/10/23 13:10:55 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,11 @@ SRC =	ft_isalnum.c		ft_memccpy.c		ft_memset.c						\
 		ft_memchr.c			ft_isalpha.c		ft_strncmp.c					\
 		ft_memcmp.c			ft_strndup.c		ft_memcpy.c						
 
-B_SRC =	ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c					\
-		ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c					\
-		ft_lstmap.c			ft_lstnew.c			ft_lstsize.c					
+B_SRC =	ft_lstadd_back_bonus.c					ft_lstadd_front_bonus.c			\
+		ft_lstclear_bonus.c						ft_lstdelone_bonus.c			\
+		ft_lstiter_bonus.c						ft_lstlast_bonus.c				\
+		ft_lstmap_bonus.c						ft_lstnew_bonus.c				\
+		ft_lstsize_bonus.c					
 
 OBJS = $(SRC:.c=.o)
 B_OBJS = $(B_SRC:.c=.o)
