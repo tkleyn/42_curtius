@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2019/10/23 13:10:55 by tkleynts         ###   ########.fr        #
+#    Updated: 2019/10/24 12:59:48 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME) : $(OBJS) libft.h
 			ar -rc $(NAME) $(OBJS)
 
 clean :
-			rm -f $(OBJS)
+			rm -f $(OBJS) $(B_OBJS)
 
 fclean :	clean
 			rm -f $(NAME)

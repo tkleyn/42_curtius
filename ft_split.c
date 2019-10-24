@@ -6,12 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:39:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/21 16:15:46 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:07:22 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static char		**desaloc(char **tab, int allocated)
 {

@@ -6,11 +6,10 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:07:30 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/10 15:48:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:06:43 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strndup(const char *s1, size_t size)
