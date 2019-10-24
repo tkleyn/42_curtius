@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2019/10/24 12:59:48 by tkleynts         ###   ########.fr        #
+#    Updated: 2019/10/24 17:16:59 by adorigo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC =	ft_isalnum.c		ft_memccpy.c		ft_memset.c						\
 		ft_strlcpy.c		ft_strrchr.c		ft_strmapi.c					\
 		ft_itoa.c			ft_split.c			ft_strtrim.c					\
 		ft_memchr.c			ft_isalpha.c		ft_strncmp.c					\
-		ft_memcmp.c			ft_strndup.c		ft_memcpy.c						
+		ft_memcmp.c			ft_strndup.c		ft_memcpy.c						\
+		ft_calloc.c
 
 B_SRC =	ft_lstadd_back_bonus.c					ft_lstadd_front_bonus.c			\
 		ft_lstclear_bonus.c						ft_lstdelone_bonus.c			\
