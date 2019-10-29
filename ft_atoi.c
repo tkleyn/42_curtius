@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:10:13 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/24 13:04:39 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:25:36 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		number = number * 10 + (*str++ - '0');
-		if (number > 2147483647 && sign == 1)
-			return (-1);
-		else if (number > 2147483648 && sign == -1)
-			return (0);
+		if (number > 9223372036854775807)
+			return (sign > 0 ? -1 : 0);
 	}
-	return (number * sign);
+	return ((int)(number * sign));
 }
