@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 13:27:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/16 18:04:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:31:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t i;
 
 	i = 0;
-	while (*str)
+	while (str && *str)
 	{
 		str++;
 		i++;
