@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkleynts <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:24:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/09 18:41:37 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:34:11 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 char	*ft_strcpy(char *dest, const char *src)
 {
 	char *dst;
+
+	if (!dest || !src)
+		return (NULL);
 
 	dst = dest;
 	while (*src)
