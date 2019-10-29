@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/24 13:12:39 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:31:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
+								void (*del)(void *));
 
 #endif
