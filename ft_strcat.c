@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:25:26 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/24 13:07:13 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:32:40 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 char	*ft_strcat(char *dest, const char *src)
 {
 	char *str;
-
+	
+	if (!dest || *src)
+		return (NULL);
 	str = dest;
 	while (*str)
 		str++;
