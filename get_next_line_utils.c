@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/07 15:20:27 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/07 15:25:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int endl_check(char *str)
+int			endl_check(char *str)
 {
 	while (str && *str)
 	{
@@ -23,7 +23,7 @@ int endl_check(char *str)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
 	size_t i;
 
@@ -36,19 +36,15 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strmdup(char *s1, size_t size)
+char		*ft_strmdup(char *s1, size_t size)
 {
-	char *new_str;
-	char *new_cpy;
-	char *s1_cpy;
-	int free_bool;
+	char	*new_str;
+	char	*new_cpy;
+	char	*s1_cpy;
+	int		free_bool;
 
-	free_bool = 0;
 	if (size = 0)
-	{
 		size = ft_strlen(s1);
-		free_bool = 1;
-	}
 	if (!(new_str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	new_cpy = new_str;
@@ -59,7 +55,5 @@ char	*ft_strmdup(char *s1, size_t size)
 		size--;
 	}
 	*new_cpy = '\0';
-	if (free_bool)
-		free(s1);
 	return (new_str);
 }

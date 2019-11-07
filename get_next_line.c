@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/07 15:19:31 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/07 15:33:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 int		get_next_line(int fd, char **line)
 {
-    char read_buff[BUFFER_SIZE];
-	static char *rest;
-    int read_size;
-	char *endl_found;
+	char			read_buff[BUFFER_SIZE];
+	static char		*rest;
+	int				read_size;
+	char			*endl_found;
 
-    *line = NULL;
+	*line = NULL;
 	if (rest && (endl_found = endl_check(rest)))
 	{
 		line = ft_strmdup(endl_found, endl_found - rest);
-		rest = ft_strmdup(endl_found + 1, 0);
+		endl_found = ft_strmdup(endl_found + 1, 0);
+		free(rest);
+		rest = endl_found;
 		return (1);
 	}
 	while ((read_size = read(fd, read_buff, BUFFER_SIZE)) < 0)
 	{
-			
+		
     }
 
 }
+
+
 	
 	
 	
