@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/08 15:29:54 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:44:02 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ int		get_next_line(int fd, char **line)
 	}
 	while ((read_size = read(fd, read_buff, BUFFER_SIZE)) > 0)
 	{
-		if (endl_check(read_buff))
+		rest = ft_strjoin(rest, read_buff);
+		if ((endl_found = endl_check(rest)))
 		{
 			/* code */
 		}
+		
 		
   }
 	if (read_size == 0)
