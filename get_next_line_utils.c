@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/07 15:25:44 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/08 15:30:50 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char		*ft_strmdup(char *s1, size_t size)
 	char	*new_str;
 	char	*new_cpy;
 	char	*s1_cpy;
-	int		free_bool;
 
 	if (size = 0)
 		size = ft_strlen(s1);
@@ -55,5 +54,26 @@ char		*ft_strmdup(char *s1, size_t size)
 		size--;
 	}
 	*new_cpy = '\0';
+	return (new_str);
+}
+
+char		*ft_strjoin(char const *line, char const *buff)
+{
+	char	*new_str;
+	char	*new_str_cpy;
+
+	if (!line && !buff)
+		return (NULL);
+	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)line)
+											+ ft_strlen((char *)buff) + 1))))
+		return (NULL);
+	new_str_cpy = new_str;
+	while (line && *line)
+		*new_str_cpy++ = *line++;
+	while (buff && *buff)
+		*new_str_cpy++ = *buff++;
+	if (line)
+		free(line);
+	*new_str_cpy++ = '\0';
 	return (new_str);
 }
