@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:48:32 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/07 15:54:26 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/12 17:28:51 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+
 
 int			get_next_line(int fd, char **line);
-int			endl_check(char *str);
+char		*endl_check(char *str);
 size_t		ft_strlen(const char *str);
 char		*ft_strmdup(char *s1, size_t size);
-char		*ft_strjoin(char const *line, char const *buff);
+char		*ft_strjoin(char *line, char *buff);
 
 #endif
 

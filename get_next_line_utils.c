@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/08 15:30:50 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/12 17:28:38 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			endl_check(char *str)
+char			*endl_check(char *str)
 {
 	while (str && *str)
 	{
@@ -42,7 +42,7 @@ char		*ft_strmdup(char *s1, size_t size)
 	char	*new_cpy;
 	char	*s1_cpy;
 
-	if (size = 0)
+	if (size == 0)
 		size = ft_strlen(s1);
 	if (!(new_str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
@@ -57,7 +57,7 @@ char		*ft_strmdup(char *s1, size_t size)
 	return (new_str);
 }
 
-char		*ft_strjoin(char const *line, char const *buff)
+char		*ft_strjoin(char *line, char *buff)
 {
 	char	*new_str;
 	char	*new_str_cpy;
