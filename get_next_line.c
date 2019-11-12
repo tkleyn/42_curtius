@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/12 14:25:21 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:03:14 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,3 @@ int		get_next_line(int fd, char **line)
 	else
 		return (-1);
 }
-
-	//check \n static read_buff
-		//fct(line, readbuff, size) copie/malloc size elem of readbuff into *line
-		//strcpy(readbuff, readbuff[size - 1])
-		//return ()
-	//malloc/cpy read_buff to line
-
-	//while (read())
-	//{
-		//if \n 
-			//malloc(size line + counter)
-			//cpy line and counter elem of read_buff
-			//free line 
-			//line = ptr
-			//srtrcpy(read_buff, readbuff[counter])
-			//return ()
-	//}

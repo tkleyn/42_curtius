@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/12 17:28:38 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/12 18:34:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char		*ft_strjoin(char *line, char *buff)
 {
 	char	*new_str;
 	char	*new_str_cpy;
+	char	*line_cpy;
 
 	if (!line && !buff)
 		return (NULL);
@@ -68,12 +69,13 @@ char		*ft_strjoin(char *line, char *buff)
 											+ ft_strlen((char *)buff) + 1))))
 		return (NULL);
 	new_str_cpy = new_str;
+	line_cpy = line;
 	while (line && *line)
 		*new_str_cpy++ = *line++;
 	while (buff && *buff)
 		*new_str_cpy++ = *buff++;
 	if (line)
-		free(line);
+		free(line_cpy);
 	*new_str_cpy++ = '\0';
 	return (new_str);
 }
