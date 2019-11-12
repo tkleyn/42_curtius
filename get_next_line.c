@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/12 18:03:14 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/12 19:32:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		get_next_line(int fd, char **line)
 	char			*endl_found;
 
 
-	if (!line || fd < 0 || fd > OPEN_MAX)
+	if (!line || fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1)
 		return (-1);
 	*line = NULL;
 	if (rest && (endl_found = endl_check(rest)))
@@ -43,8 +43,10 @@ int		get_next_line(int fd, char **line)
 			return (1);
 		}
   	}
-	if (read_size == 0)
-		return (0);
-	else
+	if (read_size < 0)
+	//free
 		return (-1);
+	*line = ft_strmdup(rest, 0);
+	rest = NULL;
+	return (0);
 }
