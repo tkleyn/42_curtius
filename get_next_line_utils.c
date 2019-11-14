@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/14 10:05:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/14 11:23:39 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char			*endl_check(char *str)
 	return (NULL);
 }
 
-size_t		ft_strlen(const char *str)
+size_t			ft_strlen(const char *str)
 {
 	size_t i;
 
@@ -36,7 +36,7 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strmdup(char *s1, int size)
+char			*ft_strmdup(char *s1, int size)
 {
 	char	*new_str;
 	char	*new_cpy;
@@ -57,7 +57,7 @@ char		*ft_strmdup(char *s1, int size)
 	return (new_str);
 }
 
-char		*ft_strjoin(char *line, char *buff)
+char			*ft_strjoin(char *line, char *buff)
 {
 	char	*new_str;
 	char	*new_str_cpy;
@@ -66,7 +66,7 @@ char		*ft_strjoin(char *line, char *buff)
 	if (!line && !buff)
 		return (NULL);
 	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)line)
-											+ ft_strlen((char *)buff) + 1))))
+										+ ft_strlen((char *)buff) + 1))))
 		return (NULL);
 	new_str_cpy = new_str;
 	line_cpy = line;
@@ -78,4 +78,21 @@ char		*ft_strjoin(char *line, char *buff)
 		free(line_cpy);
 	*new_str_cpy++ = '\0';
 	return (new_str);
+}
+
+int				line_packager(char **line, char **rest)
+{
+	char *endl_found;
+
+	if ((endl_found = endl_check(*rest)))
+	{
+		if ((*line = ft_strmdup(*rest, endl_found - *rest)) < 0)
+			return (-1);
+		if ((endl_found = ft_strmdup(endl_found + 1, -1)) < 0)
+			return (-1);
+		free(*rest);
+		*rest = endl_found;
+		return (1);
+	}
+	return (0);
 }
