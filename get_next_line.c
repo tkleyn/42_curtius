@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/14 11:44:09 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/15 14:02:22 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,4 @@ int		get_next_line(int fd, char **line)
 	*line = ft_strmdup(rest, -1);
 	rest = NULL;
 	return (0);
-}
-
-#include <fcntl.h>
-
-int main (int argc, char **argv)
-{
-	int fd;
-
-	if (argc == 2)	
-		fd = open(argv[1], O_RDONLY);
-	else
-		fd = open("get_next_line_utils.c", O_RDONLY);
-	char *line;
-
-	while (get_next_line(fd, &line))
-		printf("%s\n", line);
-	
-	close(fd);
 }
