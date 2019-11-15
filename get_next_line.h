@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:48:32 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/14 11:41:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:47:51 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdio.h>
 
 size_t		ft_strlen(const char *str);
 char		*endl_check(char *str);
