@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/18 12:20:06 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/18 17:02:42 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,36 @@ int		line_packager(char **line, char **rest)
 	return (0);
 }
 
+int		body(char **line, char *read_buff, char **rest, int fd)
+{
+	int		read_size;
+	int		package_return;
+
+	while ((read_size = read(fd, read_buff, BUFFER_SIZE)) > 0)
+	{
+		read_buff[read_size] = '\0';
+		*rest = ft_strjoin(*rest, read_buff);
+		package_return = line_packager(line, rest);
+		if (package_return == 1)
+			return (1);
+		else if (package_return == 1)
+			return (ft_desaloc(rest));
+	}
+	if (read_size < 0)
+		return (ft_desaloc(rest));
+	*line = ft_strmdup(*rest, -1);
+	*rest = NULL;
+	return (0);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	char			read_buff[BUFFER_SIZE + 1];
 	static char		*rest;
-	int				read_size;
 	int				package_return;
 
 	if (!line || fd < 0 || fd > OPEN_MAX || BUFFER_SIZE < 1)
-		return (ft_desaloc(line, &rest));
+		return (ft_desaloc(&rest));
 	*line = NULL;
 	if (rest)
 	{
@@ -45,21 +66,7 @@ int		get_next_line(int fd, char **line)
 		if (package_return == 1)
 			return (1);
 		else if (package_return == 1)
-			return (ft_desaloc(line, &rest));
+			return (ft_desaloc(&rest));
 	}
-	while ((read_size = read(fd, read_buff, BUFFER_SIZE)) > 0)
-	{
-		read_buff[read_size] = '\0';
-		rest = ft_strjoin(rest, read_buff);
-		package_return = line_packager(line, &rest);
-		if (package_return == 1)
-			return (1);
-		else if (package_return == 1)
-			return (ft_desaloc(line, &rest));
-	}
-	if (read_size < 0)
-		return (ft_desaloc(line, &rest));
-	*line = ft_strmdup(rest, -1);
-	rest = NULL;
-	return (0);
+	return (body(line, read_buff, &rest, fd));
 }

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:51:46 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/18 12:12:46 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/18 14:02:59 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,8 @@ char			*ft_strjoin(char *line, char *buff)
 	return (new_str);
 }
 
-int				ft_desaloc(char **line, char **rest)
+int				ft_desaloc(char **rest)
 {
-	if (line && *line)
-	{
-		free(*line);
-		*line = NULL;
-	}
 	if (rest && *rest)
 	{
 		free(*rest);
