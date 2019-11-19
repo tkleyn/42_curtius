@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/19 17:04:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:28:46 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		line_packager(char **line, char **rest)
 
 	if ((endl_found = endl_check(*rest)))
 	{
-		if ((*line = ft_strmdup(*rest, endl_found - *rest)) < 0)
+		if (!(*line = ft_strmdup(*rest, endl_found - *rest)))
 			return (-1);
-		if ((endl_found = ft_strmdup(endl_found + 1, -1)) < 0)
+		if (!(endl_found = ft_strmdup(endl_found + 1, -1)))
 			return (-1);
 		free(*rest);
 		*rest = endl_found;
@@ -42,13 +42,13 @@ int		body(char **line, char *read_buff, char **rest, int fd)
 		package_return = line_packager(line, rest);
 		if (package_return == 1)
 			return (1);
-		else if (package_return == 1)
+		else if (package_return == -1)
 			return (ft_desaloc(rest));
 	}
 	if (read_size < 0)
 		return (ft_desaloc(rest));
 	*line = ft_strmdup(*rest, -1);
-	*rest = NULL;
+	ft_desaloc(rest);
 	return (0);
 }
 
