@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/19 14:27:52 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:41:37 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		body(char **line, char *read_buff, char **rest, int fd)
 	while ((read_size = read(fd, read_buff, BUFFER_SIZE)) > 0)
 	{
 		read_buff[read_size] = '\0';
-		*rest = ft_strjoin(*rest, read_buff);
+		if (*rest = ft_strjoin(*rest, read_buff) == NULL)
+			return (ft_desaloc(rest));
 		package_return = line_packager(line, rest);
 		if (package_return == 1)
 			return (1);
