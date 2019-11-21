@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/19 19:28:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/21 17:42:03 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		get_next_line(int fd, char **line)
 		package_return = line_packager(line, &rest[fd]);
 		if (package_return == 1)
 			return (1);
-		else if (package_return == 1)
+		else if (package_return == -1)
 			return (ft_desaloc(&rest[fd]));
 	}
 	return (body(line, read_buff, &rest[fd], fd));
