@@ -6,19 +6,24 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:43:57 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/23 13:09:59 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/23 16:34:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+char	*pc_find(char *str)
 {
-	(void)format;
-	return (0);
+	while (str && *str)
+	{
+		if (*str == '%')
+			return (*str);
+		str++;
+	}
+	return (NULL);
 }
 
-int		main()
+int		ft_printf(const char *format, ...)
 {
-	ft_strlen("jean");
+	return (0);
 }
