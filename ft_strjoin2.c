@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:59:25 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/27 16:04:20 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:54:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char			*ft_strjoin2(char *s1, char *s2)
 	char	*new_str;
 	char	*new_str_cpy;
 	char	*s1_cpy;
+	char	*s2_cpy;
 
 	if (!s2)
 		return (NULL);
@@ -25,12 +26,14 @@ char			*ft_strjoin2(char *s1, char *s2)
 		return (NULL);
 	new_str_cpy = new_str;
 	s1_cpy = s1;
+	s2_cpy = s2;
 	while (s1 && *s1)
 		*new_str_cpy++ = *s1++;
 	while (s2 && *s2)
 		*new_str_cpy++ = *s2++;
+	*new_str_cpy++ = '\0';
 	if (s1)
 		free(s1_cpy);
-	*new_str_cpy++ = '\0';
+	free(s2_cpy);
 	return (new_str);
 }
