@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/29 13:57:04 by tkleynts         ###   ########.fr       */
+/*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
+/*   Updated: 2019/11/29 13:31:00 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include "libft/libft.h"
-
-int     ft_printf(const char *format, ...);
-
-typedef struct
+char			*itohex_a()
 {
-    va_list     args;
-    char        *f_cpy;
-}               t_utils;
 
-#endif
+}
+
+char			*ctoa()
+{
+	
+}
