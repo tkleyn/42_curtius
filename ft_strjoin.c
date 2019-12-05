@@ -33,3 +33,4 @@ char			*ft_strjoin(char *s1, char *s2)
 		free(s1_cpy);
 	*new_str_cpy++ = '\0';
 	return (new_str);
+}
