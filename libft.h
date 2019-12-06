@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/11/27 16:05:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/12/06 16:38:12 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char				*ft_strcat(char *dest, const char *src);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strndup(const char *s1, size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strnjoin2(char *s1, char *s2, size_t size);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -76,5 +76,9 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 								void (*del)(void *));
+char				*ft_utoa(unsigned int n);
+char				*ft_itohex(int num, char *base);
+
+
 
 #endif
