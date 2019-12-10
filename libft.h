@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/12/06 16:38:12 by tkleynts         ###   ########.fr       */
+/*   Updated: 2019/12/10 16:54:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_list
 }					t_list;
 
 char				*ft_itoa(int n);
+
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
@@ -77,8 +78,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 								void (*del)(void *));
 char				*ft_utoa(unsigned int n);
-char				*ft_itohex(int num, char *base);
-
-
+char				*itohex(int num, char *base);
+char				*ptohex(unsigned long num, char *base);
 
 #endif
