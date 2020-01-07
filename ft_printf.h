@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/12/11 10:59:14 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:51:34 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct
 }               t_utils;
 
 typedef struct
-{
+{    
+    int         ljust;//-
     int         pad;//0
     int         prec;//.num
     int         width;//num
-    int         ljust;//-
 }               t_flags;
 
 int             ft_printf(const char *format, ...);

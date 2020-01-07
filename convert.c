@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/12/10 20:39:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/07 14:48:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ static char			*atoa(char *str)
 	return (ft_strdup("(null)"));
 }
 
-char			*is_convert(t_utils *data)
+char				*is_convert(t_utils *data)
 {
-	//char	*to_join;
 	if (*data->f_cpy == 'd' || *data->f_cpy == 'i')
 		return (ft_itoa(va_arg(data->args, int)));
 	else if (*data->f_cpy == 'c')
