@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/07 15:51:34 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:09:28 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # include "libft/libft.h"
 
 typedef struct
-{
-    va_list     args;
-    char        *f_cpy;
-    char        *buff;
-}               t_utils;
-
-typedef struct
 {    
     int         ljust;//-
     int         pad;//0
@@ -33,7 +26,15 @@ typedef struct
     int         width;//num
 }               t_flags;
 
+typedef struct
+{
+    va_list     args;
+    char        *f_cpy;
+    char        *buff;
+}               t_utils;
+
 int             ft_printf(const char *format, ...);
-char			*is_convert(t_utils *data);
+void            is_convert(t_utils *data, t_flags *flgs);
+char			*is_flag(t_utils *data, t_flags *flgs);
 
 #endif

@@ -6,40 +6,52 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/07 14:48:23 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:16:55 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char			*ctoa(char c)
+static char			*conv_c(t_utils *data, t_flags *flgs, char *str)
 {
-	return (ft_strndup(&c, 1));
+
 }
 
-static char			*atoa(char *str)
+static char			*conv_s(t_utils *data, t_flags *flgs, char *str)
 {
-	if (str)
-		return (ft_strdup(str));
-	return (ft_strdup("(null)"));
+	if (!str)
+		ft_strjoin(data->buff, "(null)");
 }
 
-char				*is_convert(t_utils *data)
+static char			*conv_diu(t_utils *data, t_flags *flgs, char *str)
+{
+
+}
+
+static char			*conv_x(t_utils *data, t_flags *flgs, char *str)
+{
+
+}
+
+static char			*conv_p(t_utils *data, t_flags *flgs, char *str)
+{
+
+}
+
+void				is_convert(t_utils *data, t_flags *flgs)
 {
 	if (*data->f_cpy == 'd' || *data->f_cpy == 'i')
-		return (ft_itoa(va_arg(data->args, int)));
+		conv_diu(data, flgs, ft_itoa(va_arg(data->args, int)));
 	else if (*data->f_cpy == 'c')
-		return (ctoa((char)va_arg(data->args, int)));
+		conv_c(data, flgs, (char)va_arg(data->args, int));
 	else if (*data->f_cpy == 's')
-		return (atoa(va_arg(data->args, char *)));
+		conv_s (data, flgs, va_arg(data->args, char *));
 	else if (*data->f_cpy == 'u')
-		return (ft_utoa(va_arg(data->args, unsigned int)));
+		conv_diu (data, flgs, ft_utoa(va_arg(data->args, unsigned int)));
 	else if (*data->f_cpy == 'x')
-		return (itohex(va_arg(data->args, int), "0123456789abcdef"));
+		conv_x (data, flgs, itohex(va_arg(data->args, int), "0123456789abcdef"));
 	else if (*data->f_cpy == 'X')
-		return (itohex(va_arg(data->args, int), "0123456789ABCDEF"));
+		conv_x (data, flgs, itohex(va_arg(data->args, int), "0123456789ABCDEF"));
 	else if (*data->f_cpy == 'p')
-		return (ptohex(va_arg(data->args, unsigned long), "0123456789abcdef"));
-	else
-		return (NULL);
+		conv_p(data, flgs, va_arg(data->args, unsigned long), "0123456789abcdef");
 }
