@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:12 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/13 20:05:55 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 {
 	char		*r;
 	char		*f_work;
-	
+
 	if (*data->f_cpy == 'd' || *data->f_cpy == 'i')
 		r = (conv_diu(data, flgs, ft_itoa(va_arg(data->args, int))));
 	else if (*data->f_cpy == 'c')
@@ -32,13 +32,13 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 's')
 		r = (conv_s(data, flgs, va_arg(data->args, char *)));
 	else if (*data->f_cpy == 'u')
-		r = (conv_diu(data, flgs, ft_utoa(va_arg(data->args, UI))));
+		r = (conv_diu(data, flgs, ft_utoa(va_arg(data->args, t_ui))));
 	else if (*data->f_cpy == 'x')
 		r = (conv_x(data, flgs, itohex(va_arg(data->args, int), X_MIN)));
 	else if (*data->f_cpy == 'X')
 		r = (conv_x(data, flgs, itohex(va_arg(data->args, int), X_MAJ)));
 	else if (*data->f_cpy == 'p')
-		r = (conv_p(data, flgs, ptohex(va_arg(data->args, UL), X_MIN)));
+		r = (conv_p(data, flgs, ptohex(va_arg(data->args, t_ui), X_MIN)));
 	else
 		r = (NULL);
 	f_work = ft_strdup(data->f_cpy + 1);
@@ -51,7 +51,7 @@ char					*is_flag(t_utils *data)
 {
 	char		*f_work;
 	t_flags		flgs;
-	
+
 	flgs_set(&flgs);
 	f_work = data->f_cpy;
 	if (*f_work && *f_work == '-' && f_work++)
