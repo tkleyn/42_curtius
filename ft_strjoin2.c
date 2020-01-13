@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:59:25 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/12/04 11:03:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/13 14:26:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char			*ft_strjoin2(char *s1, char *s2)
 	char	*s2_cpy;
 
 	if (!s2)
-		return (NULL);
+		return (s1);
 	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1)
 						+ ft_strlen((char *)s2) + 1))))
 		return (NULL);
