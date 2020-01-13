@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 16:30:35 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/13 19:18:08 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define X_MIN "0123456789abcdef"
 
 typedef struct
-{    
-    int         ljust;//-
+{
+	int         ljust;//-
     int         pad;//0
     int         prec;//.num
     int         width;//num
@@ -37,12 +37,14 @@ typedef struct
 }               t_utils;
 
 int             ft_printf(const char *format, ...);
-char			*is_convert(t_utils *data, t_flags *flgs);
 char			*is_flag(t_utils *data);
 char			*conv_c(t_utils *data, t_flags *flgs, char c);
 char			*conv_s(t_utils *data, t_flags *flgs, char *str);
 char			*conv_diu(t_utils *data, t_flags *flgs, char *str);
 char			*conv_x(t_utils *data, t_flags *flgs, char *str);
 char			*conv_p(t_utils *data, t_flags *flgs, char *str);
+int				ft_add_l(char **str, int width, char c);
+int				ft_add_r(char **str, int width, char c);
+int				ft_s_dow(char **str, int prec);
 
 #endif
