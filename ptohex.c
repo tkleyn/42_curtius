@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:20:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/12/10 19:52:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/13 20:02:40 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char					*ptohex(unsigned long num, char *base)
 	string[0] = '0';
 	string[1] = 'x';
 	string[size] = '\0';
-
 	while (size > 2)
 	{
 		string[size - 1] = base[num % 16];
