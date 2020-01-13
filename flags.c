@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 15:03:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/13 16:49:53 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char					*is_flag(t_utils *data)
 {
 	char		*f_work;
 	t_flags		flgs;
-
+	
+	flgs.width = 0;
 	f_work = data->f_cpy;
 	if (*f_work && *f_work == '-' && f_work++)
 		flgs.ljust = 1;
