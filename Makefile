@@ -6,13 +6,13 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2019/12/10 21:55:13 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/01/15 16:35:00 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT = libft/libft.a
 NAME = libftprintf.a
-SRC =	ft_printf.c	convert.c flags.c				
+SRC =	ft_printf.c	convert.c flags.c flags_utils.c			
 OBJS = $(SRC:.c=.o)
 
 CC = gcc

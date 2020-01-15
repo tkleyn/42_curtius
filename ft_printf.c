@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:43:57 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 14:28:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/15 16:26:40 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int				ft_printf(const char *format, ...)
 		data.buff = ft_strnjoin2(data.buff, data.f_cpy, pc - data.f_cpy);
 		pc = ft_strdup(++pc);
 		data.f_cpy = pc;
-		data.buff = ft_strjoin2(data.buff, is_flag(&data));
+		if(!(pc = is_flag(&data)))
+			return (0);
+		data.buff = ft_strjoin2(data.buff, pc);
 	}
 	va_end(data.args);
 	data.buff = ft_strjoin2(data.buff, data.f_cpy);

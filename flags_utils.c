@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 19:55:17 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/14 16:41:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int				ft_add_l(char **str, int width, char c)
 {
 	char		*tmp;
 	int			len;
-
+	
+	if (width < 0)
+		width = -width;
 	len = ft_strlen(*str);
 	if (len >= width)
 		return (0);
@@ -34,6 +36,9 @@ int				ft_add_r(char **str, int width, char c)
 	char		*tmp;
 	int			len;
 
+
+	if (width < 0)
+		width = -width;
 	len = ft_strlen(*str);
 	if (len >= width)
 		return (0);
