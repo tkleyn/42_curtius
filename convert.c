@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/14 17:05:29 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/16 10:58:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,19 @@ char			*conv_s(t_utils *data, t_flags *flgs, char *str)
 	return (str);
 }
 
-char			*conv_diu(t_utils *data, t_flags *flgs, char *str)
+char			*conv_diuxp(t_utils *data, t_flags *flgs, char *str)
 {
 	if (!str)
 		return (NULL);
 	if (flgs->prec > 0 && ft_add_l(&str, flgs->prec, '0') != 0)
 		return (NULL);
-	if (flgs->width > 0 && !flgs->ljust && ft_add_l(&str, flgs->width, ' ') != 0)
+	if (flgs->width > 0 && !flgs->ljust && !flgs->pad && ft_add_l(&str, flgs->width, ' ') != 0)
 		return (NULL);
 	else if ((flgs->width < 0 || flgs->ljust) && ft_add_r(&str, flgs->width, ' ') != 0)
 		return (NULL);
-	
-	return (str);
-}
-
-
-char			*conv_x(t_utils *data, t_flags *flgs, char *str)
-{
-	return (str);
-}
-
-char			*conv_p(t_utils *data, t_flags *flgs, char *str)
-{
+    else if (flgs->pad && !flgs->ljust && flgs->width > 0 && !flgs->prec && ft_add_l(&str, flgs->width, '0') != 0)
+    	return (NULL);
+	else if (flgs->pad && !flgs->ljust && flgs->width > 0 && ft_add_l(&str, flgs->width, ' ') != 0)
+    	return (NULL);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/14 15:07:13 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/16 11:03:47 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	char		*f_work;
 
 	if (*data->f_cpy == 'd' || *data->f_cpy == 'i')
-		r = (conv_diu(data, flgs, ft_itoa(va_arg(data->args, int))));
+		r = (conv_diuxp(data, flgs, ft_itoa(va_arg(data->args, int))));
 	else if (*data->f_cpy == 'c')
 		r = (conv_c(data, flgs, (char)va_arg(data->args, int)));
 	else if (*data->f_cpy == 's')
 		r = (conv_s(data, flgs, va_arg(data->args, char *)));
 	else if (*data->f_cpy == 'u')
-		r = (conv_diu(data, flgs, ft_utoa(va_arg(data->args, t_ui))));
+		r = (conv_diuxp(data, flgs, ft_utoa(va_arg(data->args, t_ui))));
 	else if (*data->f_cpy == 'x')
-		r = (conv_x(data, flgs, itohex(va_arg(data->args, int), X_MIN)));
+		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, int), X_MIN)));
 	else if (*data->f_cpy == 'X')
-		r = (conv_x(data, flgs, itohex(va_arg(data->args, int), X_MAJ)));
+		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, int), X_MAJ)));
 	else if (*data->f_cpy == 'p')
-		r = (conv_p(data, flgs, ptohex(va_arg(data->args, t_ui), X_MIN)));
+		r = (conv_diuxp(data, flgs, ptohex(va_arg(data->args, t_ui), X_MIN)));
 	else
 		r = (NULL);
 	f_work = ft_strdup(data->f_cpy + 1);
@@ -58,6 +58,8 @@ char					*is_flag(t_utils *data)
 		flgs.ljust = 1;
 	if (*f_work && *f_work == '0' && f_work++)
 		flgs.pad = 1;
+	if (*f_work && *f_work == '-' && f_work++)
+		flgs.ljust = 1;
 	while (*f_work && ft_isdigit(*f_work))
 		flgs.width = (flgs.width * 10) + (*f_work++ - '0');
 	if (*f_work && *f_work == '*' && flgs.width == 0 && f_work++)
