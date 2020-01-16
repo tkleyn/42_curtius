@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:20:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/13 20:02:40 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/16 11:21:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t			get_size(unsigned long num)
 	size_t	size;
 
 	size = 0;
-	while (num > 0 || size == 0)
+	while (num > 1 || size == 0)
 	{
 		num = num / 16;
 		size++;
