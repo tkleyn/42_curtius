@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:31:36 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/17 12:01:29 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:23:48 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int main()
 {
 	char *jean;
-	printf("printf :%0.10c\n", 't');
-	ft_printf("frintf :%0.10c\n", 't');
+	printf("printf :%04i\n", -532);
+
+	ft_printf("frintf :%04i\n", -532);
 }

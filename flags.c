@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/17 12:04:28 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/17 13:14:07 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ static void				flgs_set(t_flags *flgs)
 	flgs->pad = 0;
 	flgs->prec = -1;
 	flgs->width = 0;
+}
+
+static int skip_atoi(char **s)
+{
+	int i;
+	
+	i = 0;
+	while (ft_isdigit(**s))
+		i = i * 10 + *((*s)++) - '0';
+	return i;
 }
 
 static char				*is_convert(t_utils *data, t_flags *flgs)
@@ -43,7 +53,8 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 		r = (conv_s(data, flgs, "%"));
 	else
 		return (NULL);
-	f_work = ft_strdup(data->f_cpy + 1);
+	if (!(f_work = ft_strdup(data->f_cpy + 1)))
+		return (NULL);
 	free(data->f_cpy);
 	data->f_cpy = f_work;
 	return (r);
@@ -62,13 +73,11 @@ char					*is_flag(t_utils *data)
 		flgs.pad = 1;
 	if (*f_work && *f_work == '-' && f_work++)
 		flgs.ljust = 1;
-	while (*f_work && ft_isdigit(*f_work))
-		flgs.width = (flgs.width * 10) + (*f_work++ - '0');
+	flgs.width = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.width == 0 && f_work++)
 		flgs.width = va_arg(data->args, int);
 	if (*f_work && *f_work == '.' && f_work++)
-		while (*f_work && ft_isdigit(*f_work))
-			flgs.prec = (flgs.prec * 10) + (*f_work++ - '0');
+		flgs.prec = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.prec == 0 && f_work++)
 		flgs.prec = va_arg(data->args, int);
 	f_work = ft_strdup(f_work);
