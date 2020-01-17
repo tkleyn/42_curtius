@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/16 11:20:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/17 12:04:28 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void				flgs_set(t_flags *flgs)
 {
 	flgs->ljust = 0;
 	flgs->pad = 0;
-	flgs->prec = 0;
+	flgs->prec = -1;
 	flgs->width = 0;
 }
 
@@ -34,13 +34,15 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 'u')
 		r = (conv_diuxp(data, flgs, ft_utoa(va_arg(data->args, t_ui))));
 	else if (*data->f_cpy == 'x')
-		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, int), X_MIN)));
+		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, t_ui), X_MIN)));
 	else if (*data->f_cpy == 'X')
-		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, int), X_MAJ)));
+		r = (conv_diuxp(data, flgs, itohex(va_arg(data->args, t_ui), X_MAJ)));
 	else if (*data->f_cpy == 'p')
 		r = (conv_diuxp(data, flgs, ptohex(va_arg(data->args, t_ul), X_MIN)));
+	else if (*data->f_cpy == '%')
+		r = (conv_s(data, flgs, "%"));
 	else
-		r = (NULL);
+		return (NULL);
 	f_work = ft_strdup(data->f_cpy + 1);
 	free(data->f_cpy);
 	data->f_cpy = f_work;
