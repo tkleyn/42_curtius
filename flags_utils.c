@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/20 14:48:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/20 19:16:09 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ int				ft_add_l(char **str, int width, char c, int w)
 		*tmp = '-';
 		ft_memset(tmp + 1, (int)c, width - len);
 		ft_strncpy(&tmp[width - len + 1],  (*str + 1), len - 1);
+	}
+	else if (**str == '0' && *(*str + 1) == 'x' && w == 2)
+	{
+		width +=2;
+		if (!(tmp = (char *)malloc(width + 1)))
+			return (-1);
+		*tmp = '0';
+		*(tmp + 1) = 'x';
+		ft_memset(tmp + 2, (int)c, width - len);
+		ft_strncpy(&tmp[width - len + 2],  (*str + 2), len - 2);
 	}
 	else
 	{
