@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/16 14:28:31 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:48:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				ft_add_l(char **str, int width, char c)
+int				ft_add_l(char **str, int width, char c, int w)
 {
 	char		*tmp;
 	int			len;
@@ -24,7 +24,8 @@ int				ft_add_l(char **str, int width, char c)
 		return (0);
 	if (**str == '-' && c == '0')
 	{
-		width++;
+		if (w)
+			width++;
 		if (!(tmp = (char *)malloc(width + 1)))
 			return (-1);
 		*tmp = '-';
