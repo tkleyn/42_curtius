@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/16 11:11:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:00:12 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef unsigned long	t_ul;
-typedef unsigned int	t_ui;
+typedef unsigned long		t_ul;
+typedef unsigned long long	t_ull;
+typedef unsigned int		t_ui;
 
 typedef struct		s_list
 {
@@ -81,8 +82,8 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 								void (*del)(void *));
 char				*ft_utoa(unsigned int n);
-char				*itohex(int num, char *base);
-char				*ptohex(unsigned long num, char *base);
+char				*itohex(unsigned long long num, char *base);
+char				*ptohex(unsigned long long num, char *base);
 char				*ft_strncpy(char *dest, const char *src, size_t len);
 
 #endif
