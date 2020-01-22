@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin2.c                                     :+:      :+:    :+:   */
+/*   ft_strnjoin3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 15:05:15 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 18:05:21 by tkleynts         ###   ########.fr       */
+/*   Created: 2020/01/22 18:10:13 by tkleynts          #+#    #+#             */
+/*   Updated: 2020/01/22 18:10:15 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strnjoin2(char *s1, char *s2, size_t size)
+char			*ft_strnjoin3(char *s1, char *s2, size_t size1, size_t size2)
 {
 	char	*new_str;
 	char	*new_str_cpy;
@@ -20,14 +20,13 @@ char			*ft_strnjoin2(char *s1, char *s2, size_t size)
 
 	if (!s2)
 		return (NULL);
-	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1)
-						+ size + 1))))
+	if (!(new_str = (char *)malloc(sizeof(char) * (size1 + size2 + 1))))
 		return (NULL);
 	new_str_cpy = new_str;
 	s1_cpy = s1;
-	while (s1 && *s1)
+	while (size1--)
 		*new_str_cpy++ = *s1++;
-	while (size--)
+	while (size2--)
 		*new_str_cpy++ = *s2++;
 	if (s1_cpy)
 		free(s1_cpy);

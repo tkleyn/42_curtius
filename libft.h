@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 16:00:12 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:10:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ char				*ft_utoa(unsigned int n);
 char				*itohex(unsigned long long num, char *base);
 char				*ptohex(unsigned long long num, char *base);
 char				*ft_strncpy(char *dest, const char *src, size_t len);
+char				*ft_strnjoin3(char *s1, char *s2, size_t size1, size_t size2);
 
 #endif
