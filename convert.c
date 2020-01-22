@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/20 17:28:44 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:32:01 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ char			*conv_p(t_utils *data, t_flags *flgs, char *str)
 	if (flgs->prec == 0 && (!flgs->width || ft_atoi(str) == 0))
 	{
 		free(str);		
-		if (!(str = (ft_strdup(""))))
+		if (!(str = (ft_strdup("0x"))))
 				return (NULL);
 	}
-	if (flgs->prec > 0 && ft_add_l(&str, flgs->prec, '0', 1) != 0)
+	if (flgs->prec > 0 && ft_add_l(&str, flgs->prec, '0', 2) != 0)
 		return (NULL);
 	if (flgs->width > 0 && !flgs->ljust && !flgs->pad && ft_add_l(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);

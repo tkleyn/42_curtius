@@ -6,53 +6,55 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/20 19:16:09 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/22 14:37:17 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static char		*add_l_utils(char **str, int width, char c, int len, int w)
+{
+	char	*tmp;
+
+	width += w;
+	if (!(tmp = (char *)malloc(width + 1)))
+		return (NULL);
+	if (!w && **str == '-' && c == '0')
+		w++;
+	ft_memset(tmp + w, (int)c, width - len);
+	ft_strncpy(&tmp[width - len + w],  (*str + w), len - w);
+	return (tmp);
+}
 
 int				ft_add_l(char **str, int width, char c, int w)
 {
 	char		*tmp;
 	int			len;
 	
-	if (width < 0)
-		width = -width;
+	(width < 0) ? (width = -width) : (width = width);
 	len = ft_strlen(*str);
-	if (len > width)
+	if (len >= width)
 		return (0);
 	if (**str == '-' && c == '0')
 	{
-		if (w)
-			width++;
-		if (!(tmp = (char *)malloc(width + 1)))
+		if(!(tmp = add_l_utils(str, width, c, len, w)))
 			return (-1);
 		*tmp = '-';
-		ft_memset(tmp + 1, (int)c, width - len);
-		ft_strncpy(&tmp[width - len + 1],  (*str + 1), len - 1);
 	}
 	else if (**str == '0' && *(*str + 1) == 'x' && w == 2)
 	{
-		width +=2;
-		if (!(tmp = (char *)malloc(width + 1)))
+		if(!(tmp = add_l_utils(str,width, c, len, w)))
 			return (-1);
 		*tmp = '0';
 		*(tmp + 1) = 'x';
-		ft_memset(tmp + 2, (int)c, width - len);
-		ft_strncpy(&tmp[width - len + 2],  (*str + 2), len - 2);
 	}
-	else
-	{
-		if (!(tmp = (char *)malloc(width + 1)))
-			return (-1);
-		ft_memset(tmp, (int)c, width - len);
-		ft_strncpy(&tmp[width - len], *str, len);
-	}
+	else if(!(tmp = add_l_utils(str,width, c, len, 0)))
+		return (-1);
 	free(*str);
 	*str = tmp;
 	return (0);
 }
+
 
 int				ft_add_r(char **str, int width, char c)
 {
