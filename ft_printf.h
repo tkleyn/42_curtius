@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/20 18:06:52 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:36:47 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct
 	va_list		args;
 	char		*f_cpy;
 	char		*buff;
+	size_t		size_ret;			
 }	t_utils;
 
 int				ft_printf(const char *format, ...);

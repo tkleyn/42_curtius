@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 14:35:07 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:19:01 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 'X')
 		r = (conv_diux(data, flgs, itohex(va_arg(data->args, t_ui), X_MAJ)));
 	else if (*data->f_cpy == 'p')
-		r = (conv_p(data, flgs, ptohex(va_arg(data->args, unsigned long long), X_MIN)));
+		r = (conv_p(data, flgs, ptohex((t_ull)va_arg(data->args, void *), X_MIN)));
 	else if (*data->f_cpy == '%')
 		r = (conv_s(data, flgs, "%"));
 	else
@@ -64,18 +64,18 @@ char					*is_flag(t_utils *data)
 {
 	char		*f_work;
 	t_flags		flgs;
+	int			ret;
 
 	flgs_set(&flgs);
 	f_work = data->f_cpy;
-	if (*f_work && *f_work == '-' && f_work++)
-		flgs.ljust = 1;
-	if (*f_work && *f_work == '0' && f_work++)
-		flgs.pad = 1;
-	if (*f_work && *f_work == '-' && f_work++)
-		flgs.ljust = 1;
+	(*f_work && *f_work == '-' && f_work++) ? (flgs.ljust = 1) : (flgs.ljust);
+	(*f_work && *f_work == '0' && f_work++) ? (flgs.pad = 1) : (flgs.pad);
+	(*f_work && *f_work == '0' && f_work++) ? (flgs.pad = 1) : (flgs.pad);
+	(*f_work && *f_work == '-' && f_work++) ? (flgs.ljust = 1) : (flgs.ljust);
 	flgs.width = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.width == 0 && f_work++)
 		flgs.width = va_arg(data->args, int);
+	((ret = skip_atoi(&f_work)) != 0) ? (flgs.width = ret) : (flgs.width);
 	if (*f_work && *f_work == '.' && f_work++)
 		flgs.prec = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.prec == 0 && f_work++)

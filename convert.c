@@ -6,18 +6,32 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 14:32:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:49:13 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int is_z(char	*str)
+{
+	if(*str == '-')
+		str++;
+	if(*str == '0')
+		return (1);
+	return (0);
+}
+
 char			*conv_c(t_utils *data, t_flags *flgs, char c)
 {
 	char *str;
+	int bz_add;
 
+	bz_add = 0;
+	(c == '\0') ? (bz_add++) : (bz_add);
 	if (!(str = ft_strndup(&c, 1)))
 		return (NULL);
+	if (flgs->width > 1 && *str == '\0')
+		flgs->width--;
 	if (flgs->width > 1 && !flgs->ljust && !flgs->pad 
 						&& ft_add_l(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
@@ -27,6 +41,7 @@ char			*conv_c(t_utils *data, t_flags *flgs, char c)
 	if (flgs->width > 1 && !flgs->ljust && flgs->pad 
 						&& ft_add_l(&str, flgs->width, '0', 0) != 0)
 		return (NULL);
+	data->size_ret = ft_strlen(str) + bz_add;
 	return (str);
 }
 
@@ -52,7 +67,7 @@ char			*conv_s(t_utils *data, t_flags *flgs, char *str)
 		return (NULL);
 	if (flgs->width < 0 && ft_add_r(&str, flgs->width, ' ') != 0)
 		return (NULL);
-	
+	data->size_ret = ft_strlen(str);
 	return (str);
 }
 
@@ -60,7 +75,7 @@ char			*conv_diux(t_utils *data, t_flags *flgs, char *str)
 {
 	if (!str)
 		return (NULL);
-	if (flgs->prec == 0 && (!flgs->width || ft_atoi(str) == 0))
+	if (flgs->prec == 0 && is_z(str))
 	{
 		free(str);		
 		if (!(str = (ft_strdup(""))))
@@ -72,11 +87,12 @@ char			*conv_diux(t_utils *data, t_flags *flgs, char *str)
 		return (NULL);
 	if ((flgs->width < 0 || flgs->ljust) && ft_add_r(&str, flgs->width, ' ') != 0)
 		return (NULL);
-    if (flgs->pad && !flgs->ljust && flgs->width > 0 && flgs->prec == -1 
+    if (flgs->pad && !flgs->ljust && flgs->width > 0 && flgs->prec < 0 
 						&& ft_add_l(&str, flgs->width, '0', 0) != 0)
     	return (NULL);
 	if (flgs->pad && !flgs->ljust && flgs->width > 0 && ft_add_l(&str, flgs->width, ' ', 0) != 0)
     	return (NULL);
+	data->size_ret = ft_strlen(str);
 	return (str);
 }
 
@@ -84,7 +100,7 @@ char			*conv_p(t_utils *data, t_flags *flgs, char *str)
 {
 	if (!str)
 		return (NULL);
-	if (flgs->prec == 0 && (!flgs->width || ft_atoi(str) == 0))
+	if (flgs->prec == 0 && str[2] == '0')
 	{
 		free(str);		
 		if (!(str = (ft_strdup("0x"))))
@@ -101,5 +117,6 @@ char			*conv_p(t_utils *data, t_flags *flgs, char *str)
     	return (NULL);
 	if (flgs->pad && !flgs->ljust && flgs->width > 0 && ft_add_l(&str, flgs->width, ' ', 0) != 0)
     	return (NULL);
+	data->size_ret = ft_strlen(str);
 	return (str);
 }
