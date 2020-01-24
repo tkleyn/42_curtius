@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 17:36:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:05:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			*conv_s(t_utils *data, t_flags *flgs, char *str);
 char			*conv_diux(t_utils *data, t_flags *flgs, char *str);
 char			*conv_p(t_utils *data, t_flags *flgs, char *str);
 int				ft_add_l(char **str, int width, char c, int w);
-int				ft_add_r(char **str, int width, char c);
+int				ft_add_r(char **str, int width, char c, int is_z);
 int				ft_s_dow(char **str, int prec);
 
 #endif

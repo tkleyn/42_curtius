@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/23 14:10:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/24 14:17:46 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char		*add_l_utils(char **str, int width, char c, int len, int w)
 {
+	//printf("%s, %d, %c, %d, %d \n", *str, width, c, len, w);
 	char	*tmp;
 	width += w;
 	if (!(tmp = (char *)malloc(width + 1)))
@@ -54,15 +55,15 @@ int				ft_add_l(char **str, int width, char c, int w)
 	return (0);
 }
 
-int				ft_add_r(char **str, int width, char c)
+int				ft_add_r(char **str, int width, char c, int is_z)
 {
 	char		*tmp;
 	int			len;
-
+	int			r;
 
 	if (width < 0)
 		width = -width;
-	len = ft_strlen(*str);
+	(is_z) ? (len = 1) :(len = ft_strlen(*str));
 	if (len >= width)
 		return (0);
 	if (!(tmp = (char *)malloc(width + 1)))
@@ -72,7 +73,7 @@ int				ft_add_r(char **str, int width, char c)
 	tmp[width] = '\0';
 	free(*str);
 	*str = tmp;
-	return (0);
+	return ((is_z) ? (width - len) : (0));
 }
 
 int				ft_s_dow(char **str, int prec)
