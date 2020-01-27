@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/24 14:20:44 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 12:59:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char			*conv_c(t_utils *data, t_flags *flgs, char c)
 	if (flgs->width > 1 && !flgs->ljust && !flgs->pad 
 						&& ft_add_l(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
-	if (flgs->width > 1 && flgs->ljust && 
+	if (flgs->width != 0 && (flgs->ljust || flgs->width < 0) && 
 		(bz_add += ft_add_r(&str, flgs->width, ' ', bz_add)) == -1)
 		return (NULL);
-	if (flgs->width > 1 && !flgs->ljust && flgs->pad 
+	if (flgs->width != 0 && !flgs->ljust && flgs->pad 
 						&& ft_add_l(&str, flgs->width, '0', 0) != 0)
 		return (NULL);
 	data->size_ret = ft_strlen(str) + bz_add;
