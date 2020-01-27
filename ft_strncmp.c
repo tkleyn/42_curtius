@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:36:54 by tkleynts          #+#    #+#             */
-/*   Updated: 2019/10/10 20:05:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:37:48 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t size)
 {
+	if (!s1)
+		return (-1);
 	while (size != 0 && (*s1 || *s2))
 	{
 		if (*s1 != *s2)
