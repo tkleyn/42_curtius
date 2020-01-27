@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 14:00:30 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:22:38 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void				flgs_set(t_flags *flgs)
+static void					flgs_set(t_flags *flgs)
 {
 	flgs->ljust = 0;
 	flgs->pad = 0;
@@ -20,21 +20,22 @@ static void				flgs_set(t_flags *flgs)
 	flgs->width = 0;
 }
 
-static int skip_atoi(char **s)
+static int					skip_atoi(char **s)
 {
 	int i;
-	
+
 	i = 0;
 	while (ft_isdigit(**s))
 		i = i * 10 + *((*s)++) - '0';
-	return i;
+	return (i);
 }
 
-static char				*is_convert(t_utils *data, t_flags *flgs)
+static char					*is_convert(t_utils *data, t_flags *flgs)
 {
 	char		*r;
 	char		*f_work;
 
+	r = NULL;
 	if (*data->f_cpy == 'd' || *data->f_cpy == 'i')
 		r = (conv_diux(data, flgs, ft_itoa(va_arg(data->args, int))));
 	else if (*data->f_cpy == 'c')
@@ -48,11 +49,9 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 'X')
 		r = (conv_diux(data, flgs, itohex(va_arg(data->args, t_ui), X_MAJ)));
 	else if (*data->f_cpy == 'p')
-		r = (conv_p(data, flgs, ptohex((t_ull)va_arg(data->args, void *), X_MIN)));
+		r = (conv_p(data, flgs, ptohex(va_arg(data->args, t_ull), X_MIN)));
 	else if (*data->f_cpy == '%')
 		r = (conv_pc(data, flgs, "%"));
-	else
-		return (NULL);
 	if (!(f_work = ft_strdup(data->f_cpy + 1)))
 		return (NULL);
 	free(data->f_cpy);
@@ -60,7 +59,7 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	return (r);
 }
 
-char					*is_flag(t_utils *data)
+char						*is_flag(t_utils *data)
 {
 	char		*f_work;
 	t_flags		flgs;
@@ -77,12 +76,14 @@ char					*is_flag(t_utils *data)
 	flgs.width = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.width == 0 && f_work++)
 		flgs.width = va_arg(data->args, int);
-	((ret = skip_atoi(&f_work)) != 0) ? (flgs.width = ret) : (flgs.width);
+	ret = skip_atoi(&f_work);
+	(ret != 0) ? (flgs.width = ret) : (flgs.width);
 	if (*f_work && *f_work == '.' && f_work++)
 		flgs.prec = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.prec == 0 && f_work++)
 		flgs.prec = va_arg(data->args, int);
-	f_work = ft_strdup(f_work);
+	if (!(f_work = ft_strdup(f_work)))
+		return (NULL);
 	free(data->f_cpy);
 	data->f_cpy = f_work;
 	return (is_convert(data, &flgs));

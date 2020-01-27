@@ -6,23 +6,25 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/24 14:17:46 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:15:09 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char		*add_l_utils(char **str, int width, char c, int len, int w)
+static char		*add_l_utils(char **str, int width, char c, int w)
 {
-	//printf("%s, %d, %c, %d, %d \n", *str, width, c, len, w);
 	char	*tmp;
+	int		len;
+
+	len = ft_strlen(*str);
 	width += w;
 	if (!(tmp = (char *)malloc(width + 1)))
 		return (NULL);
 	if (!w && **str == '-' && c == '0')
 		w++;
 	ft_memset(tmp + w, (int)c, width - len);
-	ft_strncpy(&tmp[width - len + w],  (*str + w), len - w);
+	ft_strncpy(&tmp[width - len + w], (*str + w), len - w);
 	return (tmp);
 }
 
@@ -30,25 +32,25 @@ int				ft_add_l(char **str, int width, char c, int w)
 {
 	char		*tmp;
 	int			len;
-	
-	(width < 0) ? (width = -width) : (width = width);
+
+	(width < 0) ? (width = -width) : (width);
 	len = ft_strlen(*str);
 	if (len >= width + w)
 		return (0);
 	if (**str == '-' && c == '0')
 	{
-		if(!(tmp = add_l_utils(str, width, c, len, w)))
+		if (!(tmp = add_l_utils(str, width, c, w)))
 			return (-1);
 		*tmp = '-';
 	}
 	else if (**str == '0' && *(*str + 1) == 'x' && w == 2)
 	{
-		if(!(tmp = add_l_utils(str,width, c, len, w)))
+		if (!(tmp = add_l_utils(str, width, c, w)))
 			return (-1);
 		*tmp = '0';
 		*(tmp + 1) = 'x';
 	}
-	else if(!(tmp = add_l_utils(str,width, c, len, 0)))
+	else if (!(tmp = add_l_utils(str, width, c, 0)))
 		return (-1);
 	free(*str);
 	*str = tmp;
@@ -63,7 +65,10 @@ int				ft_add_r(char **str, int width, char c, int is_z)
 
 	if (width < 0)
 		width = -width;
-	(is_z) ? (len = 1) :(len = ft_strlen(*str));
+	if (is_z)
+		len = 1;
+	else
+		len = ft_strlen(*str);
 	if (len >= width)
 		return (0);
 	if (!(tmp = (char *)malloc(width + 1)))

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:25:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 15:25:57 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:49:34 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char			*conv_pc(t_utils *data, t_flags *flgs, char *str)
 {
-
 	if (str && !(str = (ft_strdup(str))))
 		return (NULL);
 	if (flgs->prec < ft_strlen(str) && flgs->prec > 0 &&
 						ft_s_dow(&str, flgs->prec) != 0)
 		return (NULL);
-	if ((flgs->ljust || flgs->width < 0)&& flgs->width && ft_add_r(&str, flgs->width, ' ', 0) != 0)
+	if ((flgs->ljust || flgs->width < 0) && flgs->width &&
+					ft_add_r(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
 	if (flgs->pad && flgs->width && ft_add_l(&str, flgs->width, '0', 0) != 0)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:24:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 15:24:13 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:45:54 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char			*conv_c(t_utils *data, t_flags *flgs, char c)
 {
-	char *str;
-	int bz_add;
+	char	*str;
+	int		bz_add;
 
 	bz_add = 0;
 	(c == '\0') ? (bz_add++) : (bz_add);
@@ -23,13 +23,13 @@ char			*conv_c(t_utils *data, t_flags *flgs, char c)
 		return (NULL);
 	if (flgs->width >= 1 && *str == '\0' && !flgs->ljust)
 		flgs->width--;
-	if (flgs->width >= 1 && !flgs->ljust && !flgs->pad 
+	if (flgs->width >= 1 && !flgs->ljust && !flgs->pad
 						&& ft_add_l(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
-	if (flgs->width != 0 && (flgs->ljust || flgs->width < 0) && 
+	if (flgs->width != 0 && (flgs->ljust || flgs->width < 0) &&
 		(bz_add += ft_add_r(&str, flgs->width, ' ', bz_add)) == -1)
 		return (NULL);
-	if (flgs->width != 0 && !flgs->ljust && flgs->pad 
+	if (flgs->width != 0 && !flgs->ljust && flgs->pad
 						&& ft_add_l(&str, flgs->width, '0', 0) != 0)
 		return (NULL);
 	data->size_ret = ft_strlen(str) + bz_add;
