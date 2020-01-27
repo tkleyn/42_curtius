@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/23 16:19:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:49:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ char					*is_flag(t_utils *data)
 
 	flgs_set(&flgs);
 	f_work = data->f_cpy;
-	(*f_work && *f_work == '-' && f_work++) ? (flgs.ljust = 1) : (flgs.ljust);
-	(*f_work && *f_work == '0' && f_work++) ? (flgs.pad = 1) : (flgs.pad);
-	(*f_work && *f_work == '0' && f_work++) ? (flgs.pad = 1) : (flgs.pad);
-	(*f_work && *f_work == '-' && f_work++) ? (flgs.ljust = 1) : (flgs.ljust);
+	while (*f_work && *f_work == '-' && f_work++)
+		(flgs.ljust = 1);
+	while (*f_work && *f_work == '0' && f_work++)
+		(flgs.pad = 1);
+	while (*f_work && *f_work == '-' && f_work++)
+		(flgs.ljust = 1);
 	flgs.width = skip_atoi(&f_work);
 	if (*f_work && *f_work == '*' && flgs.width == 0 && f_work++)
 		flgs.width = va_arg(data->args, int);
