@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:11:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 13:53:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 14:37:10 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char			*conv_c(t_utils *data, t_flags *flgs, char c)
 	(c == '\0') ? (bz_add++) : (bz_add);
 	if (!(str = ft_strndup(&c, 1)))
 		return (NULL);
-	if (flgs->width > 1 && *str == '\0' && !flgs->ljust)
+	if (flgs->width >= 1 && *str == '\0' && !flgs->ljust)
 		flgs->width--;
-	if (flgs->width > 1 && !flgs->ljust && !flgs->pad 
+	if (flgs->width >= 1 && !flgs->ljust && !flgs->pad 
 						&& ft_add_l(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
 	if (flgs->width != 0 && (flgs->ljust || flgs->width < 0) && 
@@ -126,12 +126,10 @@ char			*conv_pc(t_utils *data, t_flags *flgs, char *str)
 
 	if (str && !(str = (ft_strdup(str))))
 		return (NULL);
-	if (!str && !(str = (ft_strdup("(null)"))))
-		return (NULL);
 	if (flgs->prec < ft_strlen(str) && flgs->prec > 0 &&
 						ft_s_dow(&str, flgs->prec) != 0)
 		return (NULL);
-	if (flgs->ljust && flgs->width && ft_add_r(&str, flgs->width, ' ', 0) != 0)
+	if ((flgs->ljust || flgs->width < 0)&& flgs->width && ft_add_r(&str, flgs->width, ' ', 0) != 0)
 		return (NULL);
 	if (flgs->pad && flgs->width && ft_add_l(&str, flgs->width, '0', 0) != 0)
 		return (NULL);
