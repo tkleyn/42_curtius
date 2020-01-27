@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 11:49:58 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:52:11 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char				*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 'p')
 		r = (conv_p(data, flgs, ptohex((t_ull)va_arg(data->args, void *), X_MIN)));
 	else if (*data->f_cpy == '%')
-		r = (conv_s(data, flgs, "%"));
+		r = (conv_pc(data, flgs, "%"));
 	else
 		return (NULL);
 	if (!(f_work = ft_strdup(data->f_cpy + 1)))

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/24 14:05:20 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:52:40 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				ft_printf(const char *format, ...);
 char			*is_flag(t_utils *data);
 char			*conv_c(t_utils *data, t_flags *flgs, char c);
 char			*conv_s(t_utils *data, t_flags *flgs, char *str);
+char			*conv_pc(t_utils *data, t_flags *flgs, char *str);
 char			*conv_diux(t_utils *data, t_flags *flgs, char *str);
 char			*conv_p(t_utils *data, t_flags *flgs, char *str);
 int				ft_add_l(char **str, int width, char c, int w);
