@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin3.c                                     :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 18:10:13 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 18:10:15 by tkleynts         ###   ########.fr       */
+/*   Created: 2020/01/27 16:48:02 by tkleynts          #+#    #+#             */
+/*   Updated: 2020/01/27 17:04:24 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strnjoin3(char *s1, char *s2, size_t size1, size_t size2)
+char			*ft_strnjoin(char *s1, char *s2, size_t size1, size_t size2)
 {
 	char	*new_str;
 	char	*new_str_cpy;

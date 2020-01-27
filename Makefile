@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/01/22 18:10:00 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/01/27 17:06:12 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,7 @@ SRC =	ft_isalnum.c		ft_memccpy.c		ft_memset.c						\
 		ft_lstsize_bonus.c														\
 		ft_strjoin2.c		ft_strnjoin2.c		ft_utoa.c						\
 		itohex.c			ptohex.c			ft_strncpy.c					\
-		ft_strnjoin3.c
-
+		ft_strnjoin.c		
 OBJS = $(SRC:.c=.o)
 B_OBJS = $(B_SRC:.c=.o)
 

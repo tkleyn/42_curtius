@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 18:10:04 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:52:50 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char				*ft_strndup(const char *s1, size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strjoin2(char *s1, char *s2);
-char				*ft_strnjoin2(char *s1, char *s2, size_t size);
+char				*ft_strnjoin(char *s1, char *s2, size_t size1, size_t size2);
+char				*ft_strnjoin2(char *s1, char *s2, size_t size1, size_t size2);
 char				*ft_strtrim(char const *s1, char const *set);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -85,6 +86,5 @@ char				*ft_utoa(unsigned int n);
 char				*itohex(unsigned long long num, char *base);
 char				*ptohex(unsigned long long num, char *base);
 char				*ft_strncpy(char *dest, const char *src, size_t len);
-char				*ft_strnjoin3(char *s1, char *s2, size_t size1, size_t size2);
 
 #endif
