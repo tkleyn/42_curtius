@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 13:52:40 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 18:31:07 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 typedef struct
 {
-	int			ljust;//-
-	int			pad;//0
-	int			prec;//.num
-	int			width;//num
+	int			ljust;
+	int			pad;
+	int			prec;
+	int			width;
 }				t_flags;
 
 typedef struct
@@ -34,7 +34,7 @@ typedef struct
 	va_list		args;
 	char		*f_cpy;
 	char		*buff;
-	size_t		size_ret;			
+	size_t		size_ret;
 }	t_utils;
 
 int				ft_printf(const char *format, ...);
@@ -47,5 +47,6 @@ char			*conv_p(t_utils *data, t_flags *flgs, char *str);
 int				ft_add_l(char **str, int width, char c, int w);
 int				ft_add_r(char **str, int width, char c, int is_z);
 int				ft_s_dow(char **str, int prec);
+char			*error_free(char *str);
 
 #endif

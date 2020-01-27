@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:24:35 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 16:02:33 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:45:53 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ char			*conv_diux(t_utils *data, t_flags *flgs, char *str)
 			return (NULL);
 	}
 	if (flgs->prec > 0 && ft_add_l(&str, flgs->prec, '0', 1) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->width > 0 && !flgs->ljust && !flgs->pad &&
 				ft_add_l(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if ((flgs->width < 0 || flgs->ljust) &&
 						ft_add_r(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->pad && !flgs->ljust && flgs->width > 0 && flgs->prec < 0
 					&& ft_add_l(&str, flgs->width, '0', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->pad && !flgs->ljust && flgs->width > 0
 					&& ft_add_l(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	data->size_ret = ft_strlen(str);
 	return (str);
 }

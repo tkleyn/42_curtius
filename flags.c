@@ -6,18 +6,26 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 17:22:38 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 18:09:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void					flgs_set(t_flags *flgs)
+char						*error_free(char *str)
+{
+	if (str)
+		free(str);
+	return (NULL);
+}
+
+static char					*flgs_set(t_flags *flgs, char *str)
 {
 	flgs->ljust = 0;
 	flgs->pad = 0;
 	flgs->prec = -1;
 	flgs->width = 0;
+	return (str);
 }
 
 static int					skip_atoi(char **s)
@@ -65,8 +73,7 @@ char						*is_flag(t_utils *data)
 	t_flags		flgs;
 	int			ret;
 
-	flgs_set(&flgs);
-	f_work = data->f_cpy;
+	f_work = flgs_set(&flgs, data->f_cpy);
 	while (*f_work && *f_work == '-' && f_work++)
 		(flgs.ljust = 1);
 	while (*f_work && *f_work == '0' && f_work++)

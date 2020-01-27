@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:25:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 16:04:09 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 17:43:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ char			*conv_s(t_utils *data, t_flags *flgs, char *str)
 		return (NULL);
 	if (flgs->prec < ft_strlen(str) && flgs->prec > 0 &&
 						ft_s_dow(&str, flgs->prec) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->ljust && flgs->width && ft_add_r(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->pad && flgs->width && ft_add_l(&str, flgs->width, '0', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->width >= 0 && ft_add_l(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	if (flgs->width < 0 && ft_add_r(&str, flgs->width, ' ', 0) != 0)
-		return (NULL);
+		return (error_free(str));
 	data->size_ret = ft_strlen(str);
 	return (str);
 }
