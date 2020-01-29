@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:43:57 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/29 12:50:34 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:52:37 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int		free_struct(t_utils *d, int c_printed)
 			free(d->f_cpy);
 		d->f_cpy = NULL;
 		d->buff = NULL;
+		va_end(d->args);
 	}
 	return (c_printed);
 }
@@ -43,7 +44,7 @@ int				check_pc(t_utils *d, char *pc, size_t *to_print)
 	return (1);
 }
 
-int				ft_printf(const char *format, ...)
+int				frintf(const char *format, ...)
 {
 	char		*pc;
 	int			c_printed;
@@ -60,7 +61,6 @@ int				ft_printf(const char *format, ...)
 		if (!(check_pc(&d, pc, &to_print)))
 			return (free_struct(&d, 0));
 	}
-	va_end(d.args);
 	if (!(d.buff = ft_strnjoin(d.buff, d.f_cpy, to_print, ft_strlen(d.f_cpy))))
 		return (free_struct(&d, 0));
 	return (free_struct(&d, write(1, d.buff, to_print += ft_strlen(d.f_cpy))));

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:44:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 18:31:07 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:52:54 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct
 	size_t		size_ret;
 }	t_utils;
 
-int				ft_printf(const char *format, ...);
+int				frintf(const char *format, ...);
 char			*is_flag(t_utils *data);
 char			*conv_c(t_utils *data, t_flags *flgs, char c);
 char			*conv_s(t_utils *data, t_flags *flgs, char *str);
