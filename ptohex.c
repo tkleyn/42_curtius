@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:20:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/22 16:01:06 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/01/27 18:28:39 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char					*ptohex(unsigned long long num, char *base)
 {
 	char	*string;
 	size_t	size;
+
 	size = get_size(num);
 	string = (char *)malloc(size + 1);
 	string[0] = '0';
