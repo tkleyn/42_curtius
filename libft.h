@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/01/27 18:28:26 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:36:13 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					frintf(const char *format, ...);
 char				*ft_itoa(int n);
-
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
