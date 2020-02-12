@@ -6,58 +6,60 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/02/04 20:07:11 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/02/12 17:02:19 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-F = frintf/
-
-SRC =	ft_memcpy.c		ft_memccpy.c	ft_memchr.c		ft_memcmp.c			\
-		ft_memset.c		ft_memmove.c	ft_calloc.c		ft_bzero.c			\
-																			\
-		ft_isalnum.c	ft_isdigit.c	ft_isascii.c	ft_isprint.c		\
-		ft_isalpha.c														\
-																			\
-		ft_strcpy.c		ft_strlen.c		ft_strndup.c	ft_strdup.c			\
-		ft_strjoin2.c	ft_strnjoin2.c	ft_substr.c		ft_strjoin.c		\
-		ft_strcat.c		ft_strlcat.c	ft_strnstr.c	ft_strlcpy.c		\
-		ft_strrchr.c	ft_strmapi.c	ft_strtrim.c	ft_split.c			\
-		ft_strncmp.c	ft_strchr.c		ft_strncpy.c	ft_strnjoin.c		\
-																			\
-		ft_atoi.c		ft_itoa.c		ft_utoa.c		itohex.c			\
-		ptohex.c															\
-																			\
-		ft_tolower.c	ft_toupper.c										\
-																			\
-		ft_putnbr_fd.c	ft_putendl_fd.c	ft_putnbr.c	ft_putchar_fd.c			\
-		ft_putchar.c		ft_putstr.c		ft_putstr_fd.c					\
-																			\
-		ft_lstadd_back.c	ft_lstadd_front.c	ft_lstclear.c		ft_lstdelone.c	\
-		ft_lstiter.c		ft_lstlast.c		ft_lstmap.c			ft_lstnew.c		\
-		ft_lstsize.c					
-
-
-F_SRC = 	$(F)frintf.c		$(F)conv_c.c									\
-			$(F)conv_diux.c		$(F)conv_p.c									\
-			$(F)conv_s.c		$(F)conv_pc.c									\
-			$(F)flags.c			$(F)flags_utils.c				
-
-
-OBJS = $(SRC:.c=.o)
-F_OBJS = $(F_SRC:.c=.o)
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
+F = frintf/
+M = Mem/
+O = Other/
+S = Str/
+C = Conv/
+G = GNL/
+
+HEADERS = libft.h $(F)frintf.h
+
+M_SRC =	$(M)ft_memcpy.c		$(M)ft_memccpy.c	$(M)ft_memchr.c		$(M)ft_memcmp.c			\
+		$(M)ft_memset.c		$(M)ft_memmove.c	$(M)ft_calloc.c		$(M)ft_bzero.c			
+																			
+O_SRC =	$(O)ft_isalnum.c	$(O)ft_isdigit.c	$(O)ft_isascii.c	$(O)ft_isprint.c		\
+		$(O)ft_isalpha.c	$(O)ft_tolower.c	$(O)ft_toupper.c
+																														
+S_SRC =	$(S)ft_strcpy.c		$(S)ft_strlen.c		$(S)ft_strndup.c	$(S)ft_strdup.c			\
+		$(S)ft_strjoin2.c	$(S)ft_strnjoin2.c	$(S)ft_substr.c		$(S)ft_strjoin.c		\
+		$(S)ft_strcat.c		$(S)ft_strlcat.c	$(S)ft_strnstr.c	$(S)ft_strlcpy.c		\
+		$(S)ft_strrchr.c	$(S)ft_strmapi.c	$(S)ft_strtrim.c	$(S)ft_split.c			\
+		$(S)ft_strncmp.c	$(S)ft_strchr.c		$(S)ft_strncpy.c	$(S)ft_strnjoin.c		
+																		
+C_SRC =	$(C)ft_atoi.c		$(C)ft_itoa.c		$(C)ft_utoa.c		$(C)ft_itohex.c			\
+		$(C)ft_ptohex.c															
+																			
+G_SRC = $(G)ft_gnl.c
+
+F_SRC = $(F)frintf.c		$(F)conv_c.c		$(F)conv_diux.c		$(F)conv_p.c			\
+		$(F)conv_s.c		$(F)conv_pc.c		$(F)flags.c			$(F)flags_utils.c
+
+M_OBJS = $(M_SRC:.c=.o)
+O_OBJS = $(O_SRC:.c=.o)
+S_OBJS = $(S_SRC:.c=.o)
+C_OBJS = $(C_SRC:.c=.o)
+G_OBJS = $(G_SRC:.c=.o)
+F_OBJS = $(F_SRC:.c=.o)
+
+OBJS = $(M_OBJS) $(O_OBJS) $(S_OBJS) $(C_OBJS) $(G_OBJS) $(F_OBJS)
+
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(F_OBJS) libft.h $(F)frintf.h
-			ar -rc $(NAME) $(OBJS) $(F_OBJS)
+$(NAME) : $(OBJS) $(HEADERS)
+			ar -rc $(NAME) $(OBJS)
 
 clean :
-			rm -f $(OBJS) $(F_OBJS)
+			rm -f $(OBJS)
 
 fclean :	clean
 			rm -f $(NAME)

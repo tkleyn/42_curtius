@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/04 19:14:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:51:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static char					*is_convert(t_utils *data, t_flags *flgs)
 	else if (*data->f_cpy == 'u')
 		r = (conv_diux(data, flgs, ft_utoa(va_arg(data->args, t_ui))));
 	else if (*data->f_cpy == 'x')
-		r = (conv_diux(data, flgs, itohex(va_arg(data->args, t_ui), X_MIN)));
+		r = (conv_diux(data, flgs, ft_itohex(va_arg(data->args, t_ui), X_MIN)));
 	else if (*data->f_cpy == 'X')
-		r = (conv_diux(data, flgs, itohex(va_arg(data->args, t_ui), X_MAJ)));
+		r = (conv_diux(data, flgs, ft_itohex(va_arg(data->args, t_ui), X_MAJ)));
 	else if (*data->f_cpy == 'p')
-		r = (conv_p(data, flgs, ptohex(va_arg(data->args, t_ull), X_MIN)));
+		r = (conv_p(data, flgs, ft_ptohex(va_arg(data->args, t_ull), X_MIN)));
 	else if (*data->f_cpy == '%')
 		r = (conv_pc(data, flgs, "%"));
 	if (!(f_work = ft_strdup(data->f_cpy + 1)))
