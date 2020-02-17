@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/02/12 17:02:19 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/02/17 15:43:14 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ M_SRC =	$(M)ft_memcpy.c		$(M)ft_memccpy.c	$(M)ft_memchr.c		$(M)ft_memcmp.c			\
 		$(M)ft_memset.c		$(M)ft_memmove.c	$(M)ft_calloc.c		$(M)ft_bzero.c			
 																			
 O_SRC =	$(O)ft_isalnum.c	$(O)ft_isdigit.c	$(O)ft_isascii.c	$(O)ft_isprint.c		\
-		$(O)ft_isalpha.c	$(O)ft_tolower.c	$(O)ft_toupper.c
-																														
+		$(O)ft_isalpha.c	$(O)ft_tolower.c	$(O)ft_toupper.c	$(O)ft_isspace.c
+																											
 S_SRC =	$(S)ft_strcpy.c		$(S)ft_strlen.c		$(S)ft_strndup.c	$(S)ft_strdup.c			\
 		$(S)ft_strjoin2.c	$(S)ft_strnjoin2.c	$(S)ft_substr.c		$(S)ft_strjoin.c		\
 		$(S)ft_strcat.c		$(S)ft_strlcat.c	$(S)ft_strnstr.c	$(S)ft_strlcpy.c		\

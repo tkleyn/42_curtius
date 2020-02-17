@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:08:30 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:42:19 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_isspace(int c);
 
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s1);
