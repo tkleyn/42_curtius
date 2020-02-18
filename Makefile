@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/02/17 15:43:14 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/02/18 14:19:50 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ S_SRC =	$(S)ft_strcpy.c		$(S)ft_strlen.c		$(S)ft_strndup.c	$(S)ft_strdup.c			\
 		$(S)ft_strjoin2.c	$(S)ft_strnjoin2.c	$(S)ft_substr.c		$(S)ft_strjoin.c		\
 		$(S)ft_strcat.c		$(S)ft_strlcat.c	$(S)ft_strnstr.c	$(S)ft_strlcpy.c		\
 		$(S)ft_strrchr.c	$(S)ft_strmapi.c	$(S)ft_strtrim.c	$(S)ft_split.c			\
-		$(S)ft_strncmp.c	$(S)ft_strchr.c		$(S)ft_strncpy.c	$(S)ft_strnjoin.c		
+		$(S)ft_strncmp.c	$(S)ft_strchr.c		$(S)ft_strncpy.c	$(S)ft_strnjoin.c		\
+		$(S)split_space.c
 																		
 C_SRC =	$(C)ft_atoi.c		$(C)ft_itoa.c		$(C)ft_utoa.c		$(C)ft_itohex.c			\
 		$(C)ft_ptohex.c															
