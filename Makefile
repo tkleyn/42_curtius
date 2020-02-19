@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/02/18 14:19:50 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/02/19 16:12:41 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ C_SRC =	$(C)ft_atoi.c		$(C)ft_itoa.c		$(C)ft_utoa.c		$(C)ft_itohex.c			\
 G_SRC = $(G)ft_gnl.c
 
 F_SRC = $(F)frintf.c		$(F)conv_c.c		$(F)conv_diux.c		$(F)conv_p.c			\
-		$(F)conv_s.c		$(F)conv_pc.c		$(F)flags.c			$(F)flags_utils.c
+		$(F)conv_s.c		$(F)conv_pc.c		$(F)flags.c			$(F)flags_utils.c		\
+		$(F)ffrintf.c
 
 M_OBJS = $(M_SRC:.c=.o)
 O_OBJS = $(O_SRC:.c=.o)

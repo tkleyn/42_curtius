@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/18 14:20:33 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/19 16:13:07 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef unsigned int		t_ui;
 # endif
 
 int					frintf(const char *format, ...);
+int					ffrintf(int fd, const char *format, ...);
 int					ft_gnl(int fd, char **line);
 
 int					ft_isalnum(int c);

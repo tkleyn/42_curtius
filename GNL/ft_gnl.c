@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 16:15:37 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/19 12:55:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int				body(char **line, char *read_buff, char **rest, int fd)
 		else if (package_return == -1)
 			return (ft_desaloc(rest));
 	}
-	if (read_size < 0)
+	if (read_size <= 0)
 		return (ft_desaloc(rest));
 	*line = ft_strdup(*rest);
 	ft_desaloc(rest);
