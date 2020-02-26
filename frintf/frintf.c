@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 07:43:57 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/19 16:15:17 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/26 11:25:08 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frintf.h"
 
-int		free_struct(t_utils *d, int c_printed)
+int				free_struct(t_utils *d, int c_printed)
 {
 	if (d)
 	{

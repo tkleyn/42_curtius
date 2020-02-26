@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/19 16:13:07 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/26 11:25:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnstr(const char *haystack, const char *needle,
 								size_t len);
 char				**split_space(char const *s);
-
 
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
