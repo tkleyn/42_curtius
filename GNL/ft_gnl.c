@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:47:40 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/19 12:55:33 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/27 15:39:22 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,14 @@ int						ft_gnl(int fd, char **line)
 	static char		*rest[OPEN_MAX];
 	int				package_return;
 
-	if (!line || fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE < 1)
+	if (fd < 0)
+	{
+		*line = rest[-fd];
+		if (rest[-fd] && *rest[-fd])
+			return (0);
+		return (-1);
+	}
+	if (!line || fd >= OPEN_MAX || BUFFER_SIZE < 1)
 		return (-1);
 	*line = NULL;
 	if (rest[fd])
