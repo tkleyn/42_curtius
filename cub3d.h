@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/19 12:03:04 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/26 14:31:05 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct
 			unsigned char	c_red;
 			unsigned char	c_grn;
 			unsigned char	c_blu;
+			char			**map;
 }			t_cub;
 
 #endif

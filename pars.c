@@ -6,11 +6,30 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/26 11:40:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/27 15:51:32 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void			tab_free(char **tab)
+{
+	char **tb_cpy;
+
+	tb_cpy = tab;
+	while (*tb_cpy)
+		free(*tb_cpy++);
+	free(tab);
+	tab = NULL;
+}
+
+int				f_err(char *msg, int ret, char **tab)
+{
+	ffrintf(2, "Error\n%s\n", msg);
+	if (tab)
+		tab_free(tab);
+	return (ret);
+}
 
 char			*rm_spaces(char *str)
 {
@@ -36,7 +55,38 @@ char			*rm_spaces(char *str)
 			*new_str_cpy++ = *str_cpy;
 		str_cpy++;
 	}
+	*new_str_cpy = '\0';
 	return (new_str);
+}
+
+int fct(int fd, t_cub *data)
+{
+	char		buff[59];
+	int			by_read;
+	char		*tmp;
+	int			i;
+	int			len;
+
+	i = 0;
+	(ft_gnl(-fd, &tmp) != 0) ? (tmp = NULL) : (tmp = tmp);
+	len = ft_strlen(tmp);
+	while ((by_read = read(fd, buff, sizeof(buff))) >= 1)
+	{
+		if (!(tmp = ft_strnjoin(tmp, buff, len, by_read)))
+			return (f_err("map", -1, NULL));
+		len +=by_read;
+	}
+	if (!(data->map = ft_split(tmp, '\n')))
+			return (f_err("map", -1, NULL));
+	while(data->map[i] != 0)
+	{
+		tmp = rm_spaces(data->map[i]);
+		free(data->map[i]);
+		data->map[i] = tmp;
+		//
+		i++;
+	}
+	return 0;
 }
 
 int				is_str_digit(char *str)
@@ -47,25 +97,6 @@ int				is_str_digit(char *str)
 			return (0);
 	}
 	return (1);
-}
-
-void			tab_free(char **tab)
-{
-	char **tb_cpy;
-
-	tb_cpy = tab;
-	while (*tb_cpy)
-		free(*tb_cpy++);
-	free(tab);
-	tab = NULL;
-}
-
-int				f_err(char *msg, int ret, char **tab)
-{
-	ffrintf(2, "Error\n%s\n", msg);
-	if (tab)
-		tab_free(tab);
-	return (ret);
 }
 
 int				ck_path(char *str, t_cub *data, char *msg, char **path)
@@ -163,7 +194,7 @@ int				load_cub(char *file, t_cub *data)
 	ck = 0;
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (f_err("Map file not found", -1, NULL));
-	while (ft_gnl(fd, &str) > 0 && ck != 255)
+	while (ck != 255 && ft_gnl(fd, &str) > 0)
 	{
 		if (*str == '\0')
 			continue;
@@ -173,14 +204,18 @@ int				load_cub(char *file, t_cub *data)
 		if (ret < 0)
 			return (-1);
 	}
-	close(fd);
 	if (ck != 255)
 		return (f_err("Invalid .cub file", -1, NULL));
+	if(fct(fd, data) < 0)
+		return (-1);
+	close(fd);
 	return (0);
 }
 
 int				main(int argc, char **argv)
 {
+	int i = 0;
+
 	if (argc != 2)
 		return (f_err("Wrong number of args", -1, NULL));
 	t_cub loaded_file;
@@ -194,5 +229,9 @@ int				main(int argc, char **argv)
 		frintf("path S : %s\n", loaded_file.tp_s);
 		frintf("F col : %d:%d:%d\n", loaded_file.f_red, loaded_file.f_grn, loaded_file.f_blu);
 		frintf("Ccol : %d:%d:%d\n", loaded_file.c_red, loaded_file.c_grn, loaded_file.c_blu);
+		
+		while (loaded_file.map[i] != 0)
+			frintf("%s\n", loaded_file.map[i++]);
 	}
 }
+
