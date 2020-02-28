@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/26 11:25:44 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/28 10:08:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_isspace(int c);
+int					is_str_digit(char *str);
 
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *s1);
@@ -62,6 +63,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnstr(const char *haystack, const char *needle,
 								size_t len);
 char				**split_space(char const *s);
+char				*rm_spaces(char *str);
 
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
