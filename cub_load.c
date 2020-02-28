@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 10:15:49 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/28 11:38:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,28 @@ void			tab_free(char **tab)
 
 int				f_err(char *msg, int ret, char **tab)
 {
-	ffrintf(2, "Error\n%s\n", msg);
+	ffrintf(2, "\nError\n%s\n", msg);
 	if (tab)
 		tab_free(tab);
 	return (ret);
+}
+
+int				ck_map(char *str, t_cub *data, int i)
+{
+	while (*str)
+	{
+		if (*str == '0' || *str == '1' || *str == '2')
+			str++;
+		else if (data->spawn_x < 0 && (*str == 'N' || *str == 'S' || *str == 'W' || *str == 'E') && str++)
+		{
+			data->spawn_x = str - data->map[i];
+			data->spawn_y = i;
+			*str = '0';
+		}
+		else
+			return(-1);
+	}
+	return (1);
 }
 
 int get_map(int fd, t_cub *data)
@@ -55,7 +73,8 @@ int get_map(int fd, t_cub *data)
 		tmp = rm_spaces(data->map[i]);
 		free(data->map[i]);
 		data->map[i] = tmp;
-		//
+		if(ck_map(tmp, data, i) < 0)
+			return (f_err("Invalid map", -1, data->map));
 		i++;
 	}
 	return 0;
@@ -103,6 +122,7 @@ int				main(int argc, char **argv)
 	if (argc != 2)
 		return (f_err("Wrong number of args", -1, NULL));
 	t_cub loaded_file;
+	loaded_file.spawn_x = -1;
 	if (!load_cub(argv[1], &loaded_file))
 	{
 		frintf("resolution : %d:%d\n", loaded_file.r_x, loaded_file.r_y);

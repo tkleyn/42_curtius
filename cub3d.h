@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 10:14:15 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/02/28 11:08:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct
 			unsigned char	c_grn;
 			unsigned char	c_blu;
 			char			**map;
+			int				spawn_x;
+			int				spawn_y;
 }			t_cub;
 
 int				ck_path(char *str, t_cub *data, char *msg, char **path);
