@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 11:08:33 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:49:47 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,16 @@ typedef struct
 			int				spawn_y;
 }			t_cub;
 
-int				ck_path(char *str, t_cub *data, char *msg, char **path);
-int				ck_colors(char *str, t_cub *data, char *msg, unsigned char *col);
+int				load_cub(char *file, t_cub *data);
+
+int				ck_path(char *str, char *msg, char **path);
+int				ck_colors(char *str, char *msg, unsigned char *col);
 int				ck_res(char *str, t_cub *data, char *msg);
 int				ck_arg(char *str, t_cub *data, unsigned char *ck);
 
 int				f_err(char *msg, int ret, char **tab);
 void			tab_free(char **tab);
+
+int				get_map(int fd, t_cub *data);
 
 #endif

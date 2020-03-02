@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 11:38:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:46:00 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,53 +31,19 @@ int				f_err(char *msg, int ret, char **tab)
 	return (ret);
 }
 
-int				ck_map(char *str, t_cub *data, int i)
+int				ck_open_file(int *fd, char *file)
 {
-	while (*str)
-	{
-		if (*str == '0' || *str == '1' || *str == '2')
-			str++;
-		else if (data->spawn_x < 0 && (*str == 'N' || *str == 'S' || *str == 'W' || *str == 'E') && str++)
-		{
-			data->spawn_x = str - data->map[i];
-			data->spawn_y = i;
-			*str = '0';
-		}
-		else
-			return(-1);
-	}
+	char *str;
+
+	if (!(str = ft_strrchr(file, '.')))
+		return (f_err("file has no extention", -1, NULL));
+	if (str == file)
+		return (f_err(".cub file has no name", -1, NULL));
+	if (!(*++str == 'c' && *++str == 'u' && *++str == 'b' && *++str == '\0'))
+		return (f_err("Invalid extention", -1, NULL));
+	if ((*fd = open(file, O_RDONLY)) < 0)
+		return (f_err("Map file not found", -1, NULL));
 	return (1);
-}
-
-int get_map(int fd, t_cub *data)
-{
-	char		buff[59];
-	int			by_read;
-	char		*tmp;
-	int			i;
-	int			len;
-
-	i = 0;
-	(ft_gnl(-fd, &tmp) != 0) ? (tmp = NULL) : (tmp = tmp);
-	len = ft_strlen(tmp);
-	while ((by_read = read(fd, buff, sizeof(buff))) >= 1)
-	{
-		if (!(tmp = ft_strnjoin(tmp, buff, len, by_read)))
-			return (f_err("map", -1, NULL));
-		len +=by_read;
-	}
-	if (!(data->map = ft_split(tmp, '\n')))
-			return (f_err("map", -1, NULL));
-	while(data->map[i] != 0)
-	{
-		tmp = rm_spaces(data->map[i]);
-		free(data->map[i]);
-		data->map[i] = tmp;
-		if(ck_map(tmp, data, i) < 0)
-			return (f_err("Invalid map", -1, data->map));
-		i++;
-	}
-	return 0;
 }
 
 int				load_cub(char *file, t_cub *data)
@@ -86,17 +52,10 @@ int				load_cub(char *file, t_cub *data)
 	char			*str;
 	unsigned char	ck;
 	int				ret;
-	int				i;
 
-	if (!(str = ft_strrchr(file, '.')))
-		return (f_err("file has no extention", -1, NULL));
-	if (str == file)
-		return (f_err(".cub file has no name", -1, NULL));
-	if (!(*++str == 'c' && *++str == 'u' && *++str == 'b' && *++str == '\0'))
-		return (f_err("Invalid extention", -1, NULL));
+	if (ck_open_file(&fd, file) < 0)
+		return (-1);
 	ck = 0;
-	if ((fd = open(file, O_RDONLY)) < 0)
-		return (f_err("Map file not found", -1, NULL));
 	while (ck != 255 && ft_gnl(fd, &str) > 0)
 	{
 		if (*str == '\0')
@@ -109,33 +68,8 @@ int				load_cub(char *file, t_cub *data)
 	}
 	if (ck != 255)
 		return (f_err("Invalid .cub file", -1, NULL));
-	if(get_map(fd, data) < 0)
+	if (get_map(fd, data) < 0)
 		return (-1);
 	close(fd);
 	return (0);
 }
-
-int				main(int argc, char **argv)
-{
-	int i = 0;
-
-	if (argc != 2)
-		return (f_err("Wrong number of args", -1, NULL));
-	t_cub loaded_file;
-	loaded_file.spawn_x = -1;
-	if (!load_cub(argv[1], &loaded_file))
-	{
-		frintf("resolution : %d:%d\n", loaded_file.r_x, loaded_file.r_y);
-		frintf("path NO : %s\n", loaded_file.tp_no);
-		frintf("path SO : %s\n", loaded_file.tp_so);
-		frintf("path WE : %s\n", loaded_file.tp_we);
-		frintf("path EA : %s\n", loaded_file.tp_ea);
-		frintf("path S : %s\n", loaded_file.tp_s);
-		frintf("F col : %d:%d:%d\n", loaded_file.f_red, loaded_file.f_grn, loaded_file.f_blu);
-		frintf("Ccol : %d:%d:%d\n", loaded_file.c_red, loaded_file.c_grn, loaded_file.c_blu);
-		
-		while (loaded_file.map[i] != 0)
-			frintf("%s\n", loaded_file.map[i++]);
-	}
-}
-
