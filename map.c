@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/02 15:48:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/03/10 12:05:19 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int					ck_val_map(char *str, t_cub *data, int i)
 		{
 			data->spawn_x = str - data->map[i];
 			data->spawn_y = i;
+			data->spawn_dir = *str;
+
 			*str++ = '0';
 		}
 		else

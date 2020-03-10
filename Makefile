@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/03/10 11:53:15 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/03/10 13:24:37 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = cub3d
 LIBFT = libft/libft.a
 MLX = minilibx/libmlx.a
+MLX_FLGS = -L minilibx -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c cub_load.c map.c check_file.c
 
@@ -23,7 +24,7 @@ OBJS = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT) $(MLX) cub3d.h
-			$(CC)  $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+			$(CC)  $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLGS) -o $(NAME)
 
 $(LIBFT) : 
 			make -C libft all

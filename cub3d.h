@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/10 11:56:33 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:40:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct
 			char			**map;
 			int				spawn_x;
 			int				spawn_y;
+			char			spawn_dir;
+			void			*mlx;
+			void			*window;
+
 }			t_cub;
 
 int				load_cub(char *file, t_cub *data);
