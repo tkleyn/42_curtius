@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/02 15:49:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/03/10 11:56:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #define S 128
 
 # include "libft/libft.h"
+# include "minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
