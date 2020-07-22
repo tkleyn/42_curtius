@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 14:45:06 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:09:38 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int				key_pressed(int key, t_cub *data)
 {
 	if (key == k_UpArrow || key == k_ANSI_W)
-		data->move = -1;
+		data->pos_y -= 0.1; //data->move = -1;
 	else if (key == k_DownArrow || key == k_ANSI_S)
-			data->move = 1;
+			data->pos_y += 0.1;//data->move = 1;
 	else if (key == k_LeftArrow || key == k_ANSI_A)
-				data->rotate = -1;
+				data->pos_x -= 0.1;//->rotate = -1;
 	else if (key == k_RightArrow || key == k_ANSI_D)
-				data->rotate = 1;
+				data->pos_x += 0.1;//data->rotate = 1;
 	else if (key == k_Escape)
 	{
 		mlx_destroy_window(data->mlx, data->window);
@@ -77,6 +77,9 @@ void			struct_init(t_cub *data)
 	data->plane_y	= 0;
 	data->move		= 0;
 	data->rotate	= 0;
+	data->floor		= 0;
+	data->ceiling	= 0;
+
 }
 
 int				main(int argc, char **argv)

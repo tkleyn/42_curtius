@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 14:36:41 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:04:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,24 @@ int dda(t_cub *data)
 			int drawEnd = lineHeight / 2 + data->r_y / 2;
 			if(drawEnd > data->r_y)drawEnd = data->r_y;
 
-			for (int i = drawStart; i < drawEnd; i++)
+			int i;
+
+			i =  0;
+
+			while (i < drawStart)
+			{
 				data->img_i[i * data->r_x + x] = data->ceiling;
+				i++;
+			}
+			
+			for (i = drawStart; i < drawEnd; i++)
+				data->img_i[i * data->r_x + x] = 0XFF0000;
+
+			while (i < data->r_y)
+			{
+				data->img_i[i * data->r_x + x] = data->floor;
+				i++;
+			}
 				
 		}
 		return 0;
