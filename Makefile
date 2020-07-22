@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/03/10 13:24:37 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/07/15 11:44:25 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT = libft/libft.a
 MLX = minilibx/libmlx.a
 MLX_FLGS = -L minilibx -lmlx -framework OpenGL -framework AppKit
 
-SRC = main.c cub_load.c map.c check_file.c
+SRC = main.c cub_load.c map.c check_file.c dda.c
 
 OBJS = $(SRC:.c=.o)
 

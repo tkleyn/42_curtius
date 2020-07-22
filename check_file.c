@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/02 15:50:40 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/14 15:43:08 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ int				ck_path(char *str, char *msg, char **path)
 	return (0);
 }
 
-int				ck_colors(char *str, char *msg, unsigned char *col)
+int				ck_colors(char *str, char *msg, int *col)
 {
 	char		**tab;
 	int			i;
 	int			tmp;
+	int			shft;
 
 	i = 0;
+	shft = 16;
 	if (!(str = rm_spaces(str)))
 		return (f_err(msg, -1, NULL));
 	if (!(tab = ft_split(&str[1], ',')) || tab[1] == 0 || tab[2] == 0 || tab[3])
@@ -42,7 +44,8 @@ int				ck_colors(char *str, char *msg, unsigned char *col)
 		tmp = ft_atoi(tab[i++]);
 		if (tmp < 0 || tmp > 255)
 			return (f_err(msg, -1, tab));
-		*col++ = tmp;
+		*col = *col + (tmp << shft);
+		shft = shft - 8;
 	}
 	tab_free(tab);
 	free(str);
@@ -72,9 +75,9 @@ int				ck_arg(char *str, t_cub *data, unsigned char *ck)
 	if (*str == 'R' && !(*ck & R) && (*ck += R))
 		ret = ck_res(str, data, "Invalid resolution");
 	else if (*str == 'F' && !(*ck & F) && (*ck += F))
-		ret = ck_colors(str, "Invalid floor color", &data->f_red);
+		ret = ck_colors(str, "Invalid floor color", &data->floor);
 	else if (*str == 'C' && !(*ck & C) && (*ck += C))
-		ret = ck_colors(str, "Invalid ceilling color", &data->c_red);
+		ret = ck_colors(str, "Invalid ceilling color", &data->ceiling);
 	else if ((!ft_strncmp(str, "NO", 2)) && !(*ck & NO) && (*ck += NO))
 		ret = ck_path(&str[1], "Invalid NO path", &data->tp_no);
 	else if ((!ft_strncmp(str, "SO", 2)) && !(*ck & SO) && (*ck += SO))

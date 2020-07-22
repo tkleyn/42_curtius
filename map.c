@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/10 12:05:19 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 14:41:00 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,31 @@ int					ck_val_map(char *str, t_cub *data, int i)
 	{
 		if (*str == '0' || *str == '1' || *str == '2')
 			str++;
-		else if (data->spawn_x < 0 && (*str == 'N' || *str == 'S'
+		else if (data->pos_x < 0 && (*str == 'N' || *str == 'S'
 									|| *str == 'W' || *str == 'E'))
 		{
-			data->spawn_x = str - data->map[i];
-			data->spawn_y = i;
-			data->spawn_dir = *str;
-
+			data->pos_x = str - data->map[i] + 0.5;
+			data->pos_y = i + 0.5;
+			if (*str == 'N')
+			{
+				data->dir_y = -1;
+				data->plane_x = 0.66;
+			}
+			else if (*str == 'S')
+			{
+				data->dir_y = 1;
+				data->plane_x = -0.66;
+			}
+			else if (*str == 'W')
+			{
+				data->dir_x = -1;
+				data->plane_y = -0.66;
+			}
+			else if (*str == 'E')
+			{
+				data->dir_x = 1;
+				data->plane_y = 0.66;
+			}
 			*str++ = '0';
 		}
 		else
@@ -91,7 +109,7 @@ int					get_map(int fd, t_cub *data)
 	while (*tmp)
 		if (*tmp++ != '1')
 			return (f_err("Invalid map", -1, data->map));
-	if (data->spawn_x == -1)
+	if (data->pos_x == -1)
 		return (f_err("Invalid map", -1, data->map));
 	return (0);
 }

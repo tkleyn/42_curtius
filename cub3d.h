@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/10 13:40:20 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 12:21:02 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #define S 128
 
 # include "libft/libft.h"
+# include "keycode.h"
+# include "x_events.h"
 # include "minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
@@ -37,25 +39,30 @@ typedef struct
 			char			*tp_s;
 			int				r_x;
 			int				r_y;
-			unsigned char	f_red;
-			unsigned char	f_grn;
-			unsigned char	f_blu;
-			unsigned char	c_red;
-			unsigned char	c_grn;
-			unsigned char	c_blu;
+			int				floor;
+			int				ceiling;
 			char			**map;
-			int				spawn_x;
-			int				spawn_y;
-			char			spawn_dir;
+			double			pos_x;
+			double			pos_y;
+			double			dir_x;
+			double			dir_y;
+			double			plane_x;
+			double			plane_y;
+			int				move;
+			int				rotate;
+
 			void			*mlx;
 			void			*window;
+			void			*img;
+			char			*img_c;
+			int				*img_i;
 
 }			t_cub;
 
 int				load_cub(char *file, t_cub *data);
 
 int				ck_path(char *str, char *msg, char **path);
-int				ck_colors(char *str, char *msg, unsigned char *col);
+int				ck_colors(char *str, char *msg, int *col);
 int				ck_res(char *str, t_cub *data, char *msg);
 int				ck_arg(char *str, t_cub *data, unsigned char *ck);
 
@@ -63,5 +70,8 @@ int				f_err(char *msg, int ret, char **tab);
 void			tab_free(char **tab);
 
 int				get_map(int fd, t_cub *data);
+
+int dda(t_cub *data);
+
 
 #endif
