@@ -6,22 +6,22 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 17:09:38 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/23 14:59:31 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int				key_pressed(int key, t_cub *data)
 {
 	if (key == k_UpArrow || key == k_ANSI_W)
-		data->pos_y -= 0.1; //data->move = -1;
+		data->move_ud = 1;
 	else if (key == k_DownArrow || key == k_ANSI_S)
-			data->pos_y += 0.1;//data->move = 1;
+		data->move_ud = -1;
 	else if (key == k_LeftArrow || key == k_ANSI_A)
-				data->pos_x -= 0.1;//->rotate = -1;
+		data->move_lr = -1;
 	else if (key == k_RightArrow || key == k_ANSI_D)
-				data->pos_x += 0.1;//data->rotate = 1;
+		data->move_lr = 1;
 	else if (key == k_Escape)
 	{
 		mlx_destroy_window(data->mlx, data->window);
@@ -33,20 +33,30 @@ int				key_pressed(int key, t_cub *data)
 int				key_released(int key, t_cub *data)
 {
 	if (key == k_UpArrow || key == k_ANSI_W)
-		data->move = 0;
+		data->move_ud = 0;
 	else if (key == k_DownArrow || key == k_ANSI_S)
-			data->move = 0;
+		data->move_ud = 0;
 	else if (key == k_LeftArrow || key == k_ANSI_A)
-				data->rotate = 0;
+		data->move_lr = 0;
 	else if (key == k_RightArrow || key == k_ANSI_D)
-				data->rotate = 0;
+		data->move_lr = 0;
 	return (0);
 }
 
 int				playzone(t_cub *data)
 {
-	dda(data);
-	mlx_put_image_to_window (data->mlx, data->window, data->img, 0, 0);
+	static int		refresh = 1;
+
+	if(refresh)
+	{
+		dda(data);
+		mlx_put_image_to_window (data->mlx, data->window, data->img, 0, 0);
+		refresh = 0;
+	}
+	if (data->move_ud)
+		refresh = move_fw(data);
+	if (data->move_lr)
+		refresh = move_lr(data);
 	return (0);
 }
 
@@ -69,17 +79,14 @@ int				cub(t_cub *data)
 
 void			struct_init(t_cub *data)
 {
-
-	data->pos_x		= -1;
-	data->dir_x		= 0;
-	data->dir_y		= 0;
-	data->plane_y	= 0;
-	data->plane_y	= 0;
-	data->move		= 0;
+	setpos(data, -1, 0);
+	setdir(data, 0, 0);
+	setplane(data, 0, 0);
+	data->move_ud	= 0;
+	data->move_lr	= 0;
 	data->rotate	= 0;
 	data->floor		= 0;
 	data->ceiling	= 0;
-
 }
 
 int				main(int argc, char **argv)

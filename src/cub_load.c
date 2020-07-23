@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/03/04 18:53:52 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:33:25 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void			tab_free(char **tab)
 {

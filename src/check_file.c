@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/14 15:43:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/22 17:33:26 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int				ck_path(char *str, char *msg, char **path)
 {

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 12:21:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:27:01 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,50 @@
 #define C 64
 #define S 128
 
-# include "libft/libft.h"
+#define SPEED 0.05
+
+# include "../libft/libft.h"
 # include "keycode.h"
 # include "x_events.h"
-# include "minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
 
 typedef struct 
 {
-			char			*tp_no;
-			char			*tp_so;
-			char			*tp_we;
-			char			*tp_ea;
-			char			*tp_s;
-			int				r_x;
-			int				r_y;
-			int				floor;
-			int				ceiling;
-			char			**map;
-			double			pos_x;
-			double			pos_y;
-			double			dir_x;
-			double			dir_y;
-			double			plane_x;
-			double			plane_y;
-			int				move;
-			int				rotate;
+				double	x;
+				double	y;
+}				t_vector;
 
-			void			*mlx;
-			void			*window;
-			void			*img;
-			char			*img_c;
-			int				*img_i;
 
-}			t_cub;
+typedef struct 
+{
+				char			*tp_no;
+				char			*tp_so;
+				char			*tp_we;
+				char			*tp_ea;
+				char			*tp_s;
+				int				r_x;
+				int				r_y;
+				int				floor;
+				int				ceiling;
+				char			**map;
+
+				t_vector		pos;
+				t_vector		dir;
+				t_vector		plane;
+				int				move_ud;
+				int				move_lr;
+				int				rotate;
+
+				void			*mlx;
+				void			*window;
+				void			*img;
+				char			*img_c;
+				int				*img_i;
+
+}				t_cub;
 
 int				load_cub(char *file, t_cub *data);
 
@@ -71,7 +79,13 @@ void			tab_free(char **tab);
 
 int				get_map(int fd, t_cub *data);
 
-int dda(t_cub *data);
+int				dda(t_cub *data);
+void			setpos(t_cub *data, double x, double y);
+void			setdir(t_cub *data, double x, double y);
+void			setplane(t_cub *data, double x, double y);
+
+int				move_fw(t_cub *data);
+int				move_lr(t_cub *data);
 
 
 #endif

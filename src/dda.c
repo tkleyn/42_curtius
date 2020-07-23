@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 16:04:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/23 11:18:32 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int dda(t_cub *data)
 {
@@ -18,11 +18,11 @@ int dda(t_cub *data)
 		{
 			//calculate ray position and direction
 			double cameraX = 2 * x / (double)data->r_x - 1; //x-coordinate in camera space
-			double rayDirX = data->dir_x + data->plane_x * cameraX;
-			double rayDirY = data->dir_y + data->plane_y * cameraX;
+			double rayDirX = data->dir.x + data->plane.x * cameraX;
+			double rayDirY = data->dir.y + data->plane.y * cameraX;
 			//which box of the map we're in
-			int mapX = (int)data->pos_x;
-			int mapY = (int)data->pos_y;
+			int mapX = (int)data->pos.x;
+			int mapY = (int)data->pos.y;
 
 			//length of ray from current position to next x or y-side
 			double sideDistX;
@@ -43,22 +43,22 @@ int dda(t_cub *data)
 			if(rayDirX < 0)
 			{
 				stepX = -1;
-				sideDistX = (data->pos_x - mapX) * deltaDistX;
+				sideDistX = (data->pos.x - mapX) * deltaDistX;
 			}
 			else
 			{
 				stepX = 1;
-				sideDistX = (mapX + 1.0 - data->pos_x) * deltaDistX;
+				sideDistX = (mapX + 1.0 - data->pos.x) * deltaDistX;
 			}
 			if(rayDirY < 0)
 			{
 				stepY = -1;
-				sideDistY = (data->pos_y - mapY) * deltaDistY;
+				sideDistY = (data->pos.y - mapY) * deltaDistY;
 			}
 			else
 			{
 				stepY = 1;
-				sideDistY = (mapY + 1.0 - data->pos_y) * deltaDistY;
+				sideDistY = (mapY + 1.0 - data->pos.y) * deltaDistY;
 			}
 
 			//perform DDA
@@ -83,8 +83,8 @@ int dda(t_cub *data)
 
 			}
 			//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-			if(side == 0) perpWallDist = (mapX - data->pos_x + (1 - stepX) / 2) / rayDirX;
-			else perpWallDist = (mapY - data->pos_y + (1 - stepY) / 2) / rayDirY;
+			if(side == 0) perpWallDist = (mapX - data->pos.x + (1 - stepX) / 2) / rayDirX;
+			else perpWallDist = (mapY - data->pos.y + (1 - stepY) / 2) / rayDirY;
 
 			//Calculate height of line to draw on screen
 			int lineHeight = (int)(data->r_y / perpWallDist);
@@ -98,21 +98,13 @@ int dda(t_cub *data)
 			int i;
 
 			i =  0;
-
 			while (i < drawStart)
-			{
-				data->img_i[i * data->r_x + x] = data->ceiling;
-				i++;
-			}
-			
-			for (i = drawStart; i < drawEnd; i++)
-				data->img_i[i * data->r_x + x] = 0XFF0000;
-
+				data->img_i[i++ * data->r_x + x] = data->ceiling;
+			while (i < drawEnd)
+				data->img_i[i++ * data->r_x + x] = 0xFF0000;
 			while (i < data->r_y)
-			{
-				data->img_i[i * data->r_x + x] = data->floor;
-				i++;
-			}
+				data->img_i[i++ * data->r_x + x] = data->floor;
+
 				
 		}
 		return 0;
