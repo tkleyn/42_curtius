@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/23 14:59:31 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/24 11:04:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ int				key_pressed(int key, t_cub *data)
 		data->move_ud = 1;
 	else if (key == k_DownArrow || key == k_ANSI_S)
 		data->move_ud = -1;
-	else if (key == k_LeftArrow || key == k_ANSI_A)
+	else if (key == k_ANSI_A)
 		data->move_lr = -1;
-	else if (key == k_RightArrow || key == k_ANSI_D)
+	else if (key == k_ANSI_D)
 		data->move_lr = 1;
+	else if(key == k_LeftArrow)
+		data->rotate = -1;
+	else if(key == k_RightArrow)
+		data->rotate = 1;
 	else if (key == k_Escape)
 	{
 		mlx_destroy_window(data->mlx, data->window);
@@ -36,10 +40,13 @@ int				key_released(int key, t_cub *data)
 		data->move_ud = 0;
 	else if (key == k_DownArrow || key == k_ANSI_S)
 		data->move_ud = 0;
-	else if (key == k_LeftArrow || key == k_ANSI_A)
+	else if (key == k_ANSI_A)
 		data->move_lr = 0;
-	else if (key == k_RightArrow || key == k_ANSI_D)
+	else if (key == k_ANSI_D)
 		data->move_lr = 0;
+	else if (key == k_RightArrow || key == k_LeftArrow)
+		data->rotate = 0;
+	
 	return (0);
 }
 
@@ -57,6 +64,8 @@ int				playzone(t_cub *data)
 		refresh = move_fw(data);
 	if (data->move_lr)
 		refresh = move_lr(data);
+	if (data->rotate)
+		refresh = move_rot(data);
 	return (0);
 }
 

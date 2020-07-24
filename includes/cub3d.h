@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/23 15:27:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/24 12:02:02 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,28 @@ typedef struct
 				double	y;
 }				t_vector;
 
+typedef struct 
+{
+				int	x;
+				int	y;
+}				t_ivector;
+
+typedef struct
+{
+				t_vector	side_dist;
+				t_vector	ray_dir;
+				t_vector	delta_dist;
+				t_ivector	m_pos;
+				t_ivector	step;
+				double		camerax;
+				double		perpwalldist;
+				int			hit;
+				int			side;
+				int			drawstart;
+				int			drawend;
+				int			x;
+				
+}				t_dda;
 
 typedef struct 
 {
@@ -86,6 +108,6 @@ void			setplane(t_cub *data, double x, double y);
 
 int				move_fw(t_cub *data);
 int				move_lr(t_cub *data);
-
+int				move_rot(t_cub *data);
 
 #endif
