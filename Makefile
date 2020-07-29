@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/07/23 15:22:39 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/07/29 15:04:40 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ INCLUDES = includes/cub3d.h \
 
 SRC_PATH = src
 SRC_NAME =	main.c \
-			cub_load.c \
-			map.c \
-			check_file.c \
+			cub_pars.c \
+			cub_map.c \
+			cub_check.c \
 			dda.c \
 			move.c \
-			set.c
+			set.c \
+			events.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)
@@ -44,7 +45,7 @@ $(MLX) :
 			make -C minilibx all
 
 clean :
-			rm -f $(OBJS)
+			rm -f src/$(OBJS)
 
 fclean :	clean
 			rm -f $(NAME)

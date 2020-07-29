@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/24 12:02:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/29 14:56:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ typedef struct
 				t_vector	delta_dist;
 				t_ivector	m_pos;
 				t_ivector	step;
-				double		camerax;
 				double		perpwalldist;
-				int			hit;
 				int			side;
 				int			drawstart;
 				int			drawend;
@@ -98,6 +96,7 @@ int				ck_arg(char *str, t_cub *data, unsigned char *ck);
 
 int				f_err(char *msg, int ret, char **tab);
 void			tab_free(char **tab);
+int				clean_exit(t_cub *data);
 
 int				get_map(int fd, t_cub *data);
 
@@ -109,5 +108,6 @@ void			setplane(t_cub *data, double x, double y);
 int				move_fw(t_cub *data);
 int				move_lr(t_cub *data);
 int				move_rot(t_cub *data);
+int				cub_loop(t_cub *data);
 
 #endif
