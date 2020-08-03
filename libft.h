@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 10:08:04 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/08/03 15:35:13 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ char				*ft_utoa(unsigned int n);
 char				*ft_itohex(unsigned long long num, char *base);
 char				*ft_ptohex(unsigned long long num, char *base);
 char				*ft_itoa(int n);
+uint16_t			swap_uint16(uint16_t val);
+int16_t				swap_int16(int16_t val);
+uint32_t			swap_uint32(uint32_t val);
+int32_t				swap_int32(int32_t val);
 
 char				*ft_strncpy(char *dest, const char *src, size_t len);
 
