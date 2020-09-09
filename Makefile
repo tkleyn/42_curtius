@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/07/29 15:04:40 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/08/03 16:17:15 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJS = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) 
-			$(CC)  $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLGS) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLGS) -o $(NAME)
 
 $(LIBFT) : 
 			make -C libft all

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/24 16:03:03 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:47:06 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	draw_image(t_cub *data, t_dda *dda)
 	else if(dda->ray_dir.x >= 0)
 		color = 0x00FF00;
 	else if(dda->ray_dir.x < 0)
-		color = 0xFF8C00;
+		color = 0xFF6600;
 	while (i < dda->drawend)			
 		data->img_i[i++ * data->r_x + dda->x] = color;
 	while (i < data->r_y)
