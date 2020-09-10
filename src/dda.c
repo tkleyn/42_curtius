@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/29 15:47:06 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/10 14:45:16 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,47 @@ int	draw_image(t_cub *data, t_dda *dda)
 		data->img_i[i++ * data->r_x + dda->x] = data->floor;
 	return (1);
 }
+/*
+int draw_tex(t_cub *data, t_dda *dda)
+{	
+	double w_hit; //where exactly the wall was hit
+	tex_data	*tex_draw;
+
+	if(dda->side && dda->ray_dir.y < 0)
+		tex_draw = &data->t[0];
+	else if(dda->side && dda->ray_dir.y >= 0)
+		tex_draw = &data->t[1];
+	else if(dda->ray_dir.x < 0)
+		tex_draw = &data->t[2];
+	else if(dda->ray_dir.x >= 0)
+		tex_draw = &data->t[3];
+
+      //calculate value of w_hit
+	if (dda->side == 0)
+		w_hit = data->pos.y + dda->perpwalldist * dda->ray_dir.y;
+    else
+		w_hit = data->pos.x + dda->perpwalldist * dda->ray_dir.x;
+	w_hit -= floor((w_hit));
+
+	//x coordinate on the texture
+	int texX = (int)(w_hit * (double)tex_draw->size.x);
+	if(dda->side == 0 && dda->ray_dir.x > 0) texX = tex_draw->size.x - texX - 1;
+	if(dda->side == 1 && dda->ray_dir.y < 0) texX = tex_draw->size.x - texX - 1;
+		
+
+	// How much to increase the texture coordinate per screen pixel
+	double step = 1.0 * tex_draw->size.y / dda->lineheight;
+	// Starting texture coordinate
+	double texPos = (dda->drawstart - data->r_y / 2 + dda->lineheight / 2) * step;
+	for(int y = dda->drawstart; y < dda->drawend; y++)
+	{
+		// Cast the texture coordinate to integer, and mask with (tex.height - 1) in case of overflow
+		int texY = (int)texPos & (tex_draw->size.y - 1);
+		texPos += step;
+		data->img_i = texture[tex][tex.height * texY + texX];
+	}
+}
+*/
 
 int dda(t_cub *data)
 {
@@ -112,12 +153,11 @@ int dda(t_cub *data)
 		else 
 			dda.perpwalldist = (dda.m_pos.y - data->pos.y + (1 - dda.step.y) / 2) / dda.ray_dir.y;
 
-		int lineHeight;
-		lineHeight = (int)(data->r_y / dda.perpwalldist);
-		dda.drawstart = -lineHeight / 2 + data->r_y / 2;
+		dda.lineheight = (int)(data->r_y / dda.perpwalldist);
+		dda.drawstart = -dda.lineheight / 2 + data->r_y / 2;
 		if (dda.drawstart < 0)
 			dda.drawstart = 0;
-		dda.drawend = lineHeight / 2 + data->r_y / 2;
+		dda.drawend = dda.lineheight / 2 + data->r_y / 2;
 		if (dda.drawend > data->r_y)
 			dda.drawend = data->r_y;
 			

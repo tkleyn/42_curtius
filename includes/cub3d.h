@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/29 14:56:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/10 13:02:51 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,20 @@ typedef struct
 				int			drawstart;
 				int			drawend;
 				int			x;
+                int lineheight;
+
 				
 }				t_dda;
 
+typedef struct
+{
+                t_ivector   size;
+                void        *tex;
+}tex_data;
+
 typedef struct 
 {
-				char			*tp_no;
-				char			*tp_so;
-				char			*tp_we;
-				char			*tp_ea;
-				char			*tp_s;
+                tex_data        t[5];
 				int				r_x;
 				int				r_y;
 				int				floor;
@@ -85,11 +89,13 @@ typedef struct
 				char			*img_c;
 				int				*img_i;
 
+				uint8_t			apply_tex;
+
 }				t_cub;
 
 int				load_cub(char *file, t_cub *data);
 
-int				ck_path(char *str, char *msg, char **path);
+int				ck_path(char *str, char *msg, void **path);
 int				ck_colors(char *str, char *msg, int *col);
 int				ck_res(char *str, t_cub *data, char *msg);
 int				ck_arg(char *str, t_cub *data, unsigned char *ck);

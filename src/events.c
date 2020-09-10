@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:54:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/07 18:25:48 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/10 14:53:22 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int				key_pressed(int key, t_cub *data)
 		data->rotate = 1;
 	else if (key == k_Escape)
 		clean_exit(data);
+	else if (key == k_ANSI_T)
+		data->apply_tex = ~data->apply_tex;
 	return (0);
 }
 
@@ -43,7 +45,6 @@ int				key_released(int key, t_cub *data)
 		data->move_lr = 0;
 	else if (key == k_RightArrow || key == k_LeftArrow)
 		data->rotate = 0;
-	
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/29 14:55:34 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/10 14:38:00 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ int				clean_exit(t_cub *data)
 {
 	if (data->map)
 		tab_free(data->map);
-	if (data->tp_no)
-		free(data->tp_no);
-	if (data->tp_so)
-		free(data->tp_so);
-	if (data->tp_ea)
-		free(data->tp_ea);
-	if (data->tp_ea)
-		free(data->tp_we);
-	if (data->tp_ea)
-		free(data->tp_s);
+	if (data->t[0].tex && data->t[0].size.x == 0)
+		free(data->t[0].tex);
+	if (data->t[1].tex && data->t[1].size.x == 0)
+		free(data->t[1].tex);
+	if (data->t[2].tex  && data->t[2].size.x == 0)
+		free(data->t[2].tex);
+	if (data->t[3].tex && data->t[3].size.x == 0)
+		free(data->t[3].tex);
+	if (data->t[4].tex && data->t[4].size.x == 0)
+		free(data->t[4].tex);
 	if(data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if(data->window)
-		mlx_destroy_image(data->mlx, data->window);
+		mlx_destroy_image(data->mlx, data->window); 
+    
 	if(data->mlx)
 		free(data->mlx);
+   
 	exit (0);
 }
 
@@ -61,12 +63,13 @@ void			struct_init(t_cub *data)
 	data->rotate	= 0;
 	data->floor		= 0;
 	data->ceiling	= 0;
-	data->tp_no 	= 0;
-	data->tp_so 	= 0;
-	data->tp_ea 	= 0;
-	data->tp_we 	= 0;
-	data->tp_s 		= 0;
+	data->t[0].size.x 	= 0;
+	data->t[1].size.x 	= 0;
+	data->t[2].size.x 	= 0;
+	data->t[3].size.x 	= 0;
+	data->t[4].size.x 	= 0;
 	data->map		= 0;
+	data->apply_tex		= 0;
 }
 
 int				main(int argc, char **argv)

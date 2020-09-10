@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   cub_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/07/22 17:33:26 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/10 11:24:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int				ck_path(char *str, char *msg, char **path)
+int				ck_path(char *str, char *msg, void **path)
 {
 	char			**tab;
 
@@ -79,15 +79,15 @@ int				ck_arg(char *str, t_cub *data, unsigned char *ck)
 	else if (*str == 'C' && !(*ck & C) && (*ck += C))
 		ret = ck_colors(str, "Invalid ceilling color", &data->ceiling);
 	else if ((!ft_strncmp(str, "NO", 2)) && !(*ck & NO) && (*ck += NO))
-		ret = ck_path(&str[1], "Invalid NO path", &data->tp_no);
+		ret = ck_path(&str[1], "Invalid NO path", &data->t[0].tex);
 	else if ((!ft_strncmp(str, "SO", 2)) && !(*ck & SO) && (*ck += SO))
-		ret = ck_path(&str[1], "Invalid SO path", &data->tp_so);
+		ret = ck_path(&str[1], "Invalid SO path", &data->t[1].tex);
+    else if ((!ft_strncmp(str, "WE", 2)) && !(*ck & WE) && (*ck += WE))
+		ret = ck_path(&str[1], "Invalid WE path", &data->t[2].tex);
 	else if ((!ft_strncmp(str, "EA", 2)) && (*ck & EA) != EA && (*ck += EA))
-		ret = ck_path(&str[1], "Invalid EA path", &data->tp_ea);
-	else if ((!ft_strncmp(str, "WE", 2)) && !(*ck & WE) && (*ck += WE))
-		ret = ck_path(&str[1], "Invalid WE path", &data->tp_we);
+		ret = ck_path(&str[1], "Invalid EA path", &data->t[3].tex);
 	else if (*str == 'S' && !(*ck & S) && (*ck += S))
-		ret = ck_path(str, "Invalid S path", &data->tp_s);
+		ret = ck_path(str, "Invalid S path", &data->t[4].tex);
 	else
 		ret = f_err("Invalid .cub file", -1, NULL);
 	return (ret);
