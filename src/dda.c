@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/10 14:45:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:11:07 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,14 @@ int	draw_image(t_cub *data, t_dda *dda)
 		data->img_i[i++ * data->r_x + dda->x] = color;
 	while (i < data->r_y)
 		data->img_i[i++ * data->r_x + dda->x] = data->floor;
-	return (1);
+	return (0);
 }
-/*
+
 int draw_tex(t_cub *data, t_dda *dda)
 {	
 	double w_hit; //where exactly the wall was hit
 	tex_data	*tex_draw;
+	int			i;
 
 	if(dda->side && dda->ray_dir.y < 0)
 		tex_draw = &data->t[0];
@@ -108,7 +109,7 @@ int draw_tex(t_cub *data, t_dda *dda)
 		tex_draw = &data->t[1];
 	else if(dda->ray_dir.x < 0)
 		tex_draw = &data->t[2];
-	else if(dda->ray_dir.x >= 0)
+	else
 		tex_draw = &data->t[3];
 
       //calculate value of w_hit
@@ -128,15 +129,22 @@ int draw_tex(t_cub *data, t_dda *dda)
 	double step = 1.0 * tex_draw->size.y / dda->lineheight;
 	// Starting texture coordinate
 	double texPos = (dda->drawstart - data->r_y / 2 + dda->lineheight / 2) * step;
-	for(int y = dda->drawstart; y < dda->drawend; y++)
+
+	i = 0;
+	while (i < dda->drawstart)
+		data->img_i[i++ * data->r_x + dda->x] = data->ceiling;
+	while (i < dda->drawend)
 	{
 		// Cast the texture coordinate to integer, and mask with (tex.height - 1) in case of overflow
 		int texY = (int)texPos & (tex_draw->size.y - 1);
 		texPos += step;
-		data->img_i = texture[tex][tex.height * texY + texX];
+		data->img_i[i++ * data->r_x + dda->x] = tex_draw->tex_i[tex_draw->size.y * texY + texX];
 	}
+	while (i < data->r_y)
+		data->img_i[i++ * data->r_x + dda->x] = data->floor;
+	return (0);
 }
-*/
+
 
 int dda(t_cub *data)
 {
@@ -160,9 +168,11 @@ int dda(t_cub *data)
 		dda.drawend = dda.lineheight / 2 + data->r_y / 2;
 		if (dda.drawend > data->r_y)
 			dda.drawend = data->r_y;
-			
-		draw_image(data, &dda);
+		if (data->apply_tex)
+			draw_tex(data, &dda);
+		else
+			draw_image(data, &dda);
 		dda.x++;
 	}
-	return 0;
+	return (0);
 }

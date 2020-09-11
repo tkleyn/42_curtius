@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/10 14:38:00 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/11 11:59:17 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,40 @@ void			struct_init(t_cub *data)
 	setpos(data, -1, 0);
 	setdir(data, 0, 0);
 	setplane(data, 0, 0);
-	data->move_ud	= 0;
-	data->move_lr	= 0;
-	data->rotate	= 0;
-	data->floor		= 0;
-	data->ceiling	= 0;
+	data->move_ud		= 0;
+	data->move_lr		= 0;
+	data->rotate		= 0;
+	data->floor			= 0;
+	data->ceiling		= 0;
 	data->t[0].size.x 	= 0;
 	data->t[1].size.x 	= 0;
 	data->t[2].size.x 	= 0;
 	data->t[3].size.x 	= 0;
 	data->t[4].size.x 	= 0;
-	data->map		= 0;
+	data->map			= 0;
 	data->apply_tex		= 0;
+}
+
+int				tex_load(t_cub *data)
+{
+	char *file;
+	int i;
+	int a;
+	
+	i = 0;
+	while (i <= 4)
+	{
+		file = data->t[i].tex;
+		if(!(data->t[i].tex = mlx_xpm_file_to_image(data->mlx, file, &data->t[i].size.x, &data->t[i].size.y)))
+			clean_exit(data);
+		if(!(data->t[i].tex_c = mlx_get_data_addr(data->t[i].tex, &a, &a, &a)))
+			clean_exit(data);
+
+		data->t[i].tex_i = (int*)data->t[i].tex_c;
+		free (file);
+		i++;
+	}
+	return (0);
 }
 
 int				main(int argc, char **argv)
@@ -87,6 +109,7 @@ int				main(int argc, char **argv)
 	if (load_cub(argv[1], &data) < 0)
 		exit (-1);
 	cub_init(&data);
+	tex_load(&data);
 	cub_loop(&data);
 	return (0);
 }

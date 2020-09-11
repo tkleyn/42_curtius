@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/10 13:02:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/11 11:42:27 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct
 {
                 t_ivector   size;
                 void        *tex;
+				char        *tex_c;
+				int        	*tex_i;
 }tex_data;
 
 typedef struct 

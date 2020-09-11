@@ -1,11 +1,11 @@
 R 1680 1050
 F 97,63,16
 C 0,191,255
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-S ./path_to_the_sprite_texture
+NO textures/brick.xpm
+SO textures/stone.xpm
+WE textures/wood.xpm
+EA textures/metal.xpm
+S textures/grass.xpm
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
