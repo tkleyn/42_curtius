@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/11 11:42:27 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/14 11:21:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct
 				int				*img_i;
 
 				uint8_t			apply_tex;
+				uint8_t			refresh;
 
 }				t_cub;
 

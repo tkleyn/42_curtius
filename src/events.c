@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:54:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/11 12:26:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/14 11:23:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				key_pressed(int key, t_cub *data)
 	else if (key == k_ANSI_T)
 	{
 		data->apply_tex = ~data->apply_tex;
+		data->refresh = 1;
 	}
 		
 	return (0);
@@ -53,20 +54,18 @@ int				key_released(int key, t_cub *data)
 
 int				cub_playzone(t_cub *data)
 {
-	static int		refresh = 1;
-
-	if(refresh)
+	if(data->refresh)
 	{
 		dda(data);
 		mlx_put_image_to_window (data->mlx, data->window, data->img, 0, 0);
-		refresh = 0;
+		data->refresh = 0;
 	}
 	if (data->move_ud)
-		refresh = move_fw(data);
+		data->refresh = move_fw(data);
 	if (data->move_lr)
-		refresh = move_lr(data);
+		data->refresh = move_lr(data);
 	if (data->rotate)
-		refresh = move_rot(data);
+		data->refresh = move_rot(data);
 	return (0);
 }
 
