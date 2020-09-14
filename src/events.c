@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:54:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/11 12:03:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/11 12:26:16 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int				key_pressed(int key, t_cub *data)
 		clean_exit(data);
 	else if (key == k_ANSI_T)
 	{
-		frintf("t pressed %d", data->apply_tex);
 		data->apply_tex = ~data->apply_tex;
-		frintf("   %d\n", data->apply_tex);
-
 	}
 		
 	return (0);
