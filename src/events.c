@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:54:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/14 11:23:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/25 13:58:17 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int				key_pressed(int key, t_cub *data)
+static int				key_pressed(int key, t_cub *data)
 {
 	if (key == k_UpArrow || key == k_ANSI_W)
 		data->move_ud = 1;
@@ -37,7 +37,7 @@ int				key_pressed(int key, t_cub *data)
 	return (0);
 }
 
-int				key_released(int key, t_cub *data)
+static int				key_released(int key, t_cub *data)
 {
 	if (key == k_UpArrow || key == k_ANSI_W)
 		data->move_ud = 0;
@@ -52,7 +52,7 @@ int				key_released(int key, t_cub *data)
 	return (0);
 }
 
-int				cub_playzone(t_cub *data)
+static int				cub_playzone(t_cub *data)
 {
 	if(data->refresh)
 	{

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/14 11:21:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/24 14:54:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,12 @@ int				move_fw(t_cub *data);
 int				move_lr(t_cub *data);
 int				move_rot(t_cub *data);
 int				cub_loop(t_cub *data);
+
+void			bmp2img(t_cub *data);
+
+int				cub_init(t_cub *data);
+int				tex_load(t_cub *data);
+
+
 
 #endif

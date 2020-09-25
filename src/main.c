@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/14 11:23:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/25 13:59:57 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int				cub_init(t_cub *data)
 
 	if (!(data->mlx = mlx_init()))
 		clean_exit(data);
-	if (!(data->window = mlx_new_window(data->mlx, data->r_x, data->r_y, "Cub3d")))
-		clean_exit(data);
+	if (!data->apply_tex)
+		if (!(data->window = mlx_new_window(data->mlx, data->r_x, data->r_y, "Cub3d")))
+			clean_exit(data);
 	if (!(data->img = mlx_new_image(data->mlx, data->r_x, data->r_y)))
 		clean_exit(data);
 	if(!(data->img_c = mlx_get_data_addr(data->img, &a, &a, &a)))
@@ -53,7 +54,7 @@ int				cub_init(t_cub *data)
 	return (0);
 }
 
-void			struct_init(t_cub *data)
+static void			struct_init(t_cub *data)
 {
 	setpos(data, -1, 0);
 	setdir(data, 0, 0);
@@ -99,16 +100,17 @@ int				main(int argc, char **argv)
 {
 	t_cub data;
 
-	if (argc == 3)
-	{
-		//screenshot
-		exit(0);
-	}	
-	else if (argc != 2)
+	if (argc < 2)
 		return (f_err("No specified map", -1, NULL));
+	else if (argc > 3)
+		return (f_err("Too many args", -1, NULL));
 	struct_init(&data);
 	if (load_cub(argv[1], &data) < 0)
 		exit (-1);
+	if (argc == 3 && !ft_strncmp("--save", argv[2], 7))
+		bmp2img(&data);
+	else if (argc == 3)
+		return (f_err("Wrong Option", -1, NULL));
 	cub_init(&data);
 	tex_load(&data);
 	cub_loop(&data);
