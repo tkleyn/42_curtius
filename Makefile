@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/09/24 14:20:50 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/09/30 10:43:16 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_NAME =	main.c \
 			move.c \
 			set.c \
 			events.c \
-			bmp_export.c
+			bmp_export.c \
+			draw.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)

@@ -6,23 +6,23 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/24 14:54:20 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/30 12:04:57 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define R 1
-#define NO 2
-#define SO 4
-#define WE 8
-#define EA 16
-#define F 32
-#define C 64
-#define S 128
+# define R 1
+# define NO 2
+# define SO 4
+# define WE 8
+# define EA 16
+# define F 32
+# define C 64
+# define S 128
 
-#define SPEED 0.05
+# define SPEED 0.05
 
 # include "../libft/libft.h"
 # include "keycode.h"
@@ -32,69 +32,66 @@
 # include <stdio.h>
 # include <math.h>
 
-typedef struct 
+typedef struct
 {
-				double	x;
-				double	y;
-}				t_vector;
-
-typedef struct 
-{
-				int	x;
-				int	y;
-}				t_ivector;
+	double	x;
+	double	y;
+}			t_vector;
 
 typedef struct
 {
-				t_vector	side_dist;
-				t_vector	ray_dir;
-				t_vector	delta_dist;
-				t_ivector	m_pos;
-				t_ivector	step;
-				double		perpwalldist;
-				int			side;
-				int			drawstart;
-				int			drawend;
-				int			x;
-                int lineheight;
-
-				
-}				t_dda;
+	int	x;
+	int	y;
+}		t_ivector;
 
 typedef struct
 {
-                t_ivector   size;
-                void        *tex;
-				char        *tex_c;
-				int        	*tex_i;
-}tex_data;
+	t_vector	sde_dst;
+	t_vector	ray_dir;
+	t_vector	delta_dist;
+	t_ivector	m_pos;
+	t_ivector	step;
+	double		perpwalldist;
+	int			side;
+	int			drawstart;
+	int			drawend;
+	int			x;
+	int			lineheight;
+}	t_dda;
 
-typedef struct 
+typedef struct
 {
-                tex_data        t[5];
-				int				r_x;
-				int				r_y;
-				int				floor;
-				int				ceiling;
-				char			**map;
+	t_ivector	size;
+	void		*tex;
+	char		*tex_c;
+	int			*tex_i;
+}	t_tex_data;
 
-				t_vector		pos;
-				t_vector		dir;
-				t_vector		plane;
-				int				move_ud;
-				int				move_lr;
-				int				rotate;
+typedef struct
+{
+	t_tex_data	t[5];
+	int			r_x;
+	int			r_y;
+	int			floor;
+	int			ceiling;
+	char		**map;
 
-				void			*mlx;
-				void			*window;
-				void			*img;
-				char			*img_c;
-				int				*img_i;
+	t_vector	pos;
+	t_vector	dir;
+	t_vector	plane;
+	int			move_ud;
+	int			move_lr;
+	int			rotate;
 
-				uint8_t			apply_tex;
-				uint8_t			refresh;
+	void		*mlx;
+	void		*window;
+	void		*img;
+	char		*img_c;
+	int			*img_i;
 
-}				t_cub;
+	uint8_t		apply_tex;
+	uint8_t		refresh;
+}	t_cub;
 
 int				load_cub(char *file, t_cub *data);
 
@@ -124,6 +121,7 @@ void			bmp2img(t_cub *data);
 int				cub_init(t_cub *data);
 int				tex_load(t_cub *data);
 
-
+int				draw_image(t_cub *data, t_dda *dda);
+int				draw_tex(t_cub *data, t_dda *dda);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/10 11:24:20 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:30:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				ck_arg(char *str, t_cub *data, unsigned char *ck)
 		ret = ck_path(&str[1], "Invalid NO path", &data->t[0].tex);
 	else if ((!ft_strncmp(str, "SO", 2)) && !(*ck & SO) && (*ck += SO))
 		ret = ck_path(&str[1], "Invalid SO path", &data->t[1].tex);
-    else if ((!ft_strncmp(str, "WE", 2)) && !(*ck & WE) && (*ck += WE))
+	else if ((!ft_strncmp(str, "WE", 2)) && !(*ck & WE) && (*ck += WE))
 		ret = ck_path(&str[1], "Invalid WE path", &data->t[2].tex);
 	else if ((!ft_strncmp(str, "EA", 2)) && (*ck & EA) != EA && (*ck += EA))
 		ret = ck_path(&str[1], "Invalid EA path", &data->t[3].tex);
