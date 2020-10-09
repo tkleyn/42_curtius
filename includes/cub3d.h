@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 12:04:57 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/08 14:54:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ typedef struct
 	int			x;
 	int			lineheight;
 }	t_dda;
+
+typedef struct
+{
+	t_vector sprite;
+	t_vector transform;
+	t_ivector drawstart;
+	t_ivector drawend;
+	t_ivector spritedata;
+	int spritescreenx;
+}	t_sprite;
 
 typedef struct
 {

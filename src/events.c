@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 14:54:03 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 11:13:27 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/05 13:57:54 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static int				key_pressed(int key, t_cub *data)
 {

@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 10:40:48 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 13:11:50 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/05 14:27:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static t_tex_data		*choose_tex(t_cub *data, t_dda *dda)
 {

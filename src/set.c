@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 11:20:04 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 11:29:00 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/05 13:58:12 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	setpos(t_cub *data, double x, double y)
 {

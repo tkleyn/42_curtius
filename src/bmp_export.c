@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:00:42 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 10:51:39 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/05 13:57:24 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static void		int2char(uint8_t *char_adr, int int_var)
 {

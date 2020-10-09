@@ -6,12 +6,14 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/09/30 10:43:16 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/10/05 14:27:48 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+.SILENT:
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I. -I./includes
 NAME = cub3d
 LIBFT = libft/libft.a
 MLX = minilibx/libmlx.a
@@ -37,19 +39,21 @@ OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) 
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLGS) -o $(NAME)
+$(NAME) : $(INCLUDES) $(OBJS) $(LIBFT) $(MLX)
+			@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLGS) -o $(NAME)
+			@printf "\r\033[48;5;15;30m✅ $(NAME)\033[0m\033[K\n"
 
 $(LIBFT) : 
-			make -C libft all
+			@make -C libft all
 
 $(MLX) : 
-			make -C minilibx all
+			@make -C minilibx all
 
 clean :
-			rm -f src/$(OBJS)
+			@rm -f src/$(OBJS)
+			@printf "\r\033[48;5;15;30m✅ clean\033[0m\033[K\n"
 
 fclean :	clean
-			rm -f $(NAME)
+			@rm -f $(NAME)
 
 re: fclean all

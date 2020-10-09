@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 11:46:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/09/30 11:16:28 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/05 13:58:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int			move_fw(t_cub *data)
 {
