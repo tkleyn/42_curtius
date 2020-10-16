@@ -12,24 +12,46 @@
 
 #include "cub3d.h"
 
-void	sort_sprite()
+static void		ft_swap_sp(t_sp_pos *a, t_sp_pos *b)
 {
+	t_sp_pos tmp;
 
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-math_sprite(t_cub *data, t_sprite *s)
+static void		sort_sprite(t_cub *data)
+{
+	int i;
+	int j; 
+
+	i = 0;
+	while (i < data->n_srites)
+	{
+		j = 0;
+		while (j < data->n_srites - i - 1)
+		{
+			if (data->s_pos[j].dist > data->s_pos[j + 1].dist) 
+				ft_swap_sp(&data->s_pos[j], &data->s_pos[j + 1]);
+			j++;
+		}
+	}
+}
+
+static			math_sprite(t_cub *data, t_sp_data *s, int i)
 {
 	double invdet;
 
 	//translate sprite position to relative to camera
-	s->sprite.x = sprite[spriteOrder[i]].x - data->pos.x;
-	s->sprite.y = sprite[spriteOrder[i]].y - data->pos.y;
+	s->sprite.x = data->s_pos[i].pos.x - data->pos.x;
+	s->sprite.y = data->s_pos[i].pos.y - data->pos.y;
 
 
 	invdet = 1.0 / (data->plane.x * data->dir.y - data->dir.x * data->plane.y); //required for correct matrix multiplication
 
-	s->transform.x = invdet * (data->dir.y * sprite.x - data->dir.x * sprite.y);
-	s->transform.y = invdet * (-data->plane.y * sprite.x + data->plane.x * sprite.y); //this is actually the depth inside the screen, that what Z is in 3D
+	s->transform.x = invdet * (data->dir.y * s->sprite.x - data->dir.x * s->sprite.y);
+	s->transform.y = invdet * (-data->plane.y * s->sprite.x + data->plane.x * s->sprite.y); //this is actually the depth inside the screen, that what Z is in 3D
 
 	s->spritescreenx = (int)(data->r_x/ 2) * (1 + s->transform.x / s->transform.y);
 
@@ -51,7 +73,7 @@ math_sprite(t_cub *data, t_sprite *s)
 		s->drawend.x = data->r_x - 1;
 }
 
-void	draw_sprite(t_cub *data, t_sprite *s)
+static void		draw_sprite(t_cub *data, t_sp_data *s, int i)
 {
 	int stripe;
 	int y;
@@ -73,7 +95,7 @@ void	draw_sprite(t_cub *data, t_sprite *s)
 			{
 				int d = (y) * 256 -data->r_y * 128 + s->spritedata.y * 128; //256 and 128 factors to avoid floats
 				int texY = ((d * data->t[4].size.y) / s->spritedata.y) / 256;
-				uint32_t color = texture[sprite[spriteOrder[i]].texture][data->t[4].size.x * texY + texX]; //get current color from the texture
+				uint32_t color = data->t[4].tex_i[data->t[4].size.x * texY + texX]; //get current color from the texture
 				if ((color & 0x00FFFFFF) != 0) 
 					buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
 				y++;
@@ -83,28 +105,30 @@ void	draw_sprite(t_cub *data, t_sprite *s)
 	}
 }
 
-void	sprite_cast(t_cub *data)
+void			sprite_cast(t_cub *data)
 {
-	t_sprite s;
+	t_sp_data s;
 	double invdet;
 	int i;
 	
 	i = 0;
 	//sort sprites from far to close
-	while (i < numSprites)
+	while (i < data->n_srites)
 	{
-		spriteOrder[i] = i;
-		spriteDistance[i] = ((data->pos.x - sprite[i].x) * (data->pos.x - sprite[i].x) + (data->pos.y - sprite[i].y) * (data->pos.y - sprite[i].y));
+		data->s_pos[i].dist =	((data->pos.x - data->s_pos[i].pos.x)
+							* (data->pos.x - data->s_pos[i].pos.x)
+							+ (data->pos.y - data->s_pos[i].pos.y)
+							* (data->pos.y - data->s_pos[i].pos.y));
 		i++;
 	}
-	sort_sprites(spriteOrder, spriteDistance, numSprites);
+	sort_sprites(data);
 
 	i = 0;
 	//after sorting the sprites, do the projection and draw them
-	while (i < numSprites)
+	while (i < data->n_srites)
 	{
-		math_sprite(data, &s);
-		draw_sprite(data, &s);
+		math_sprite(data, &s, i);
+		draw_sprite(data, &s, i);
 		i++;
 	}
 }

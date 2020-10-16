@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/05 13:57:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:19:07 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	dda_init2(t_cub *data, t_dda *dda)
+static int	dda_init2(t_cub *data, t_dda *dda)
 {
 	if (dda->ray_dir.x < 0)
 	{
@@ -37,7 +37,7 @@ int	dda_init2(t_cub *data, t_dda *dda)
 	return (1);
 }
 
-int	dda_init(t_cub *data, t_dda *dda)
+static int	dda_init(t_cub *data, t_dda *dda)
 {
 	double camerax;
 
@@ -51,7 +51,7 @@ int	dda_init(t_cub *data, t_dda *dda)
 	return (dda_init2(data, dda));
 }
 
-int	dda_algo(t_cub *data, t_dda *dda)
+static int	dda_algo(t_cub *data, t_dda *dda)
 {
 	int hit;
 

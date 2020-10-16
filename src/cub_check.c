@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/05 13:57:31 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:17:27 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				ck_path(char *str, char *msg, void **path)
+static int				ck_path(char *str, char *msg, void **path)
 {
 	char			**tab;
 
@@ -24,7 +24,7 @@ int				ck_path(char *str, char *msg, void **path)
 	return (0);
 }
 
-int				ck_colors(char *str, char *msg, int *col)
+static int				ck_colors(char *str, char *msg, int *col)
 {
 	char		**tab;
 	int			i;
@@ -52,7 +52,7 @@ int				ck_colors(char *str, char *msg, int *col)
 	return (0);
 }
 
-int				ck_res(char *str, t_cub *data, char *msg)
+static int				ck_res(char *str, t_cub *data, char *msg)
 {
 	char **tab;
 

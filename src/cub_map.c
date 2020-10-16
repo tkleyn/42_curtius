@@ -6,17 +6,45 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/05 13:57:38 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/15 14:02:35 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int					ck_val_map(char *str, t_cub *data, int i)
+static int					alloc_sprite(t_cub *data)
+{
+	int i;
+	int j;
+	int n;
+
+	if (!(data->s_pos = (t_sp_pos *)malloc(sizeof(t_sp_pos) * data->n_srites)))
+		return (-1);
+	j = 0;
+	n = 0;
+	while (j < data->n_row)
+	{
+		i = 0;
+		while (data->map[j][i])
+		{
+			if (data->map[j][i] == '2')
+			{
+				data->s_pos[n].pos.x = i;
+				data->s_pos[n].pos.y = j;
+				n++;
+			}
+			i++;
+		}
+		j++;
+	}
+	return (0);
+}
+
+static int					ck_val_map(char *str, t_cub *data, int i)
 {
 	while (*(str + 1))
 	{
-		if (*str == '0' || *str == '1' || *str == '2')
+		if (*str == '0' || *str == '1' || (*str == '2' && data->n_srites++))
 			str++;
 		else if (data->pos.x < 0 && (*str == 'N' || *str == 'S'
 									|| *str == 'W' || *str == 'E'))
@@ -51,7 +79,7 @@ int					ck_val_map(char *str, t_cub *data, int i)
 	return (0);
 }
 
-int					ck_map(char *str, t_cub *data, int i)
+static int					ck_map(char *str, t_cub *data, int i)
 {
 	static int size;
 
@@ -69,13 +97,15 @@ int					ck_map(char *str, t_cub *data, int i)
 	return (ck_val_map(str, data, i));
 }
 
-int					map_to_tab(int fd, t_cub *data)
+static int					map_to_tab(int fd, t_cub *data)
 {
 	int			len;
 	int			by_read;
 	char		buff[60];
 	char		*tmp;
+	int i;
 
+	i = 0;
 	(ft_gnl(-fd, &tmp) != 0) ? (tmp = NULL) : (tmp);
 	len = ft_strlen(tmp);
 	while ((by_read = read(fd, buff, sizeof(buff))) >= 1)
@@ -84,6 +114,8 @@ int					map_to_tab(int fd, t_cub *data)
 			return (-1);
 		len += by_read;
 	}
+	while(tmp[i])
+		data->n_row++;
 	if (!(data->map = ft_split(tmp, '\n')))
 		return (-1);
 	return (0);
@@ -111,5 +143,7 @@ int					get_map(int fd, t_cub *data)
 			return (f_err("Invalid map", -1, data->map));
 	if (data->pos.x == -1)
 		return (f_err("Invalid map", -1, data->map));
+	if (alloc_sprite(data))
+		return (f_err("Allocation Error", -1, data->map));
 	return (0);
 }

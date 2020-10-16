@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/05 13:57:44 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/14 16:16:52 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				f_err(char *msg, int ret, char **tab)
 	return (ret);
 }
 
-int				ck_open_file(int *fd, char *file)
+static int				ck_open_file(int *fd, char *file)
 {
 	char *str;
 
