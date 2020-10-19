@@ -32,14 +32,15 @@ static void		sort_sprite(t_cub *data)
 		j = 0;
 		while (j < data->n_srites - i - 1)
 		{
-			if (data->s_pos[j].dist > data->s_pos[j + 1].dist) 
+			if (data->s_pos[j].dist < data->s_pos[j + 1].dist) 
 				ft_swap_sp(&data->s_pos[j], &data->s_pos[j + 1]);
 			j++;
 		}
+		i++;
 	}
 }
 
-static			math_sprite(t_cub *data, t_sp_data *s, int i)
+static void			math_sprite(t_cub *data, t_sp_data *s, int i)
 {
 	double invdet;
 
@@ -56,7 +57,7 @@ static			math_sprite(t_cub *data, t_sp_data *s, int i)
 	s->spritescreenx = (int)(data->r_x/ 2) * (1 + s->transform.x / s->transform.y);
 
 	//calculate height of the sprite on screen
-	s->spritedata.y = abs((int)data->r_y / (s->transform.y)); //using 'transform.y' instead of the real distance prevents fisheye
+	s->spritedata.y = fabs((int)data->r_y / (s->transform.y)); //using 'transform.y' instead of the real distance prevents fisheye
 	//calculate lowest and highest pixel to fill in current stripe
 		s->drawstart.y = -s->spritedata.y / 2 +data->r_y / 2;
 	if (s->drawstart.y < 0) s->drawstart.y = 0;
@@ -65,7 +66,7 @@ static			math_sprite(t_cub *data, t_sp_data *s, int i)
 		s->drawend.y = data->r_y- 1;
 
 	//calculate width of the sprite
-	s->spritedata.x = abs((int) data->r_y/ (s->transform.y));
+	s->spritedata.x = fabs((int) data->r_y/ (s->transform.y));
 	s->drawstart.x = -s->spritedata.x / 2 + s->spritescreenx;
 	if (s->drawstart.x < 0) s->drawstart.x = 0;
 		s->drawend.x = s->spritedata.x / 2 + s->spritescreenx;
@@ -73,7 +74,7 @@ static			math_sprite(t_cub *data, t_sp_data *s, int i)
 		s->drawend.x = data->r_x - 1;
 }
 
-static void		draw_sprite(t_cub *data, t_sp_data *s, int i)
+static void		draw_sprite(t_cub *data, t_sp_data *s, double *zbuf)
 {
 	int stripe;
 	int y;
@@ -88,7 +89,7 @@ static void		draw_sprite(t_cub *data, t_sp_data *s, int i)
 		//2) it's on the screen (left)
 		//3) it's on the screen (right)
 		//4) ZBuffer, with perpendicular distance
-		if (s->transform.y > 0 && stripe > 0 && stripe <data->r_x&& s->transform.y < ZBuffer[stripe])
+		if (s->transform.y > 0 && stripe > 0 && stripe <data->r_x&& s->transform.y < zbuf[stripe])
 		{
 			y = s->drawstart.y;
 			while (y < s->drawend.y) //for every pixel of the current stripe
@@ -97,7 +98,7 @@ static void		draw_sprite(t_cub *data, t_sp_data *s, int i)
 				int texY = ((d * data->t[4].size.y) / s->spritedata.y) / 256;
 				uint32_t color = data->t[4].tex_i[data->t[4].size.x * texY + texX]; //get current color from the texture
 				if ((color & 0x00FFFFFF) != 0) 
-					buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
+					data->img_i[y * data->r_x + stripe] = color;//buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
 				y++;
 			}
 		}
@@ -105,10 +106,9 @@ static void		draw_sprite(t_cub *data, t_sp_data *s, int i)
 	}
 }
 
-void			sprite_cast(t_cub *data)
+void			sprite_cast(t_cub *data, double *zbuf)
 {
 	t_sp_data s;
-	double invdet;
 	int i;
 	
 	i = 0;
@@ -121,14 +121,14 @@ void			sprite_cast(t_cub *data)
 							* (data->pos.y - data->s_pos[i].pos.y));
 		i++;
 	}
-	sort_sprites(data);
+	sort_sprite(data);
 
 	i = 0;
 	//after sorting the sprites, do the projection and draw them
 	while (i < data->n_srites)
 	{
 		math_sprite(data, &s, i);
-		draw_sprite(data, &s, i);
+		draw_sprite(data, &s, zbuf);
 		i++;
 	}
 }

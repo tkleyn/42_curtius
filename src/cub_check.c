@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/14 16:17:27 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:51:03 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int				ck_res(char *str, t_cub *data, char *msg)
 		return (f_err(msg, -1, tab));
 	if ((data->r_y = ft_atoi(tab[1])) < 1)
 		return (f_err(msg, -1, tab));
-	(data->r_x > 5120) ? (data->r_x = 5120) : (1);
-	(data->r_y > 2880) ? (data->r_y = 2880) : (1);
+	(data->r_x > 5120) ? (data->r_x = 2560) : (1);
+	(data->r_y > 2880) ? (data->r_y = 1440) : (1);
 	tab_free(tab);
 	return (0);
 }

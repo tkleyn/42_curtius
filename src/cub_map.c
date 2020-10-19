@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/15 14:02:35 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:12:36 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static int					alloc_sprite(t_cub *data)
 		return (-1);
 	j = 0;
 	n = 0;
-	while (j < data->n_row)
+	while (data->map[j])
 	{
 		i = 0;
 		while (data->map[j][i])
 		{
 			if (data->map[j][i] == '2')
 			{
-				data->s_pos[n].pos.x = i;
-				data->s_pos[n].pos.y = j;
+				data->s_pos[n].pos.x = (double)(i + 0.5);
+				data->s_pos[n].pos.y = (double)(j + 0.5);
 				n++;
 			}
 			i++;
@@ -44,7 +44,7 @@ static int					ck_val_map(char *str, t_cub *data, int i)
 {
 	while (*(str + 1))
 	{
-		if (*str == '0' || *str == '1' || (*str == '2' && data->n_srites++))
+		if (*str == '0' || *str == '1' || (*str == '2' && (data->n_srites++ || 1)))
 			str++;
 		else if (data->pos.x < 0 && (*str == 'N' || *str == 'S'
 									|| *str == 'W' || *str == 'E'))
@@ -82,7 +82,7 @@ static int					ck_val_map(char *str, t_cub *data, int i)
 static int					ck_map(char *str, t_cub *data, int i)
 {
 	static int size;
-
+	
 	if (i == 0)
 	{
 		size = ft_strlen(str);
@@ -103,9 +103,7 @@ static int					map_to_tab(int fd, t_cub *data)
 	int			by_read;
 	char		buff[60];
 	char		*tmp;
-	int i;
 
-	i = 0;
 	(ft_gnl(-fd, &tmp) != 0) ? (tmp = NULL) : (tmp);
 	len = ft_strlen(tmp);
 	while ((by_read = read(fd, buff, sizeof(buff))) >= 1)
@@ -114,8 +112,6 @@ static int					map_to_tab(int fd, t_cub *data)
 			return (-1);
 		len += by_read;
 	}
-	while(tmp[i])
-		data->n_row++;
 	if (!(data->map = ft_split(tmp, '\n')))
 		return (-1);
 	return (0);

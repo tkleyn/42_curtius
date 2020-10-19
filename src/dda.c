@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/14 16:19:07 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/19 12:12:28 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	dda_algo(t_cub *data, t_dda *dda)
 			dda->m_pos.y += dda->step.y;
 			dda->side = 1;
 		}
-		if (data->map[dda->m_pos.y][dda->m_pos.x] > '0')
+		if (data->map[dda->m_pos.y][dda->m_pos.x] == '1')
 			hit = 1;
 	}
 	return (1);
@@ -79,6 +79,7 @@ static int	dda_algo(t_cub *data, t_dda *dda)
 int	dda(t_cub *data)
 {
 	t_dda dda;
+	double zbuf[data->r_x];
 
 	dda.x = 0;
 	while (dda.x < data->r_x)
@@ -101,6 +102,8 @@ int	dda(t_cub *data)
 		else
 			draw_image(data, &dda);
 		dda.x++;
+		zbuf[dda.x] = dda.perpwalldist;
 	}
+	sprite_cast(data, zbuf);
 	return (0);
 }
