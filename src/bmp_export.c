@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 11:00:42 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/05 13:57:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:28:57 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void		img_write(t_cub *data, int32_t fd, uint32_t padding)
 	int				tmp;
 
 	i = 0;
-	line = (unsigned char *)malloc(sizeof(char) * 3 * data->r_x + padding);
+	if (!(line = (uint8_t *)malloc(sizeof(char) * 3 * data->r_x + padding)))
+		error_exit(data, "Allocation error");
 	ft_bzero(line, 3 * data->r_x + padding);
 	while (i < data->r_y)
 	{
@@ -59,7 +60,8 @@ static void		img_write(t_cub *data, int32_t fd, uint32_t padding)
 			int2char(&line[j * 3], tmp);
 			j++;
 		}
-		write(fd, line, 3 * data->r_x + padding);
+		if ((write(fd, line, 3 * data->r_x + padding)) < 0)
+			error_exit(data, "Writing in Screenshot.bmp failed");
 		i++;
 	}
 	free(line);
@@ -73,7 +75,9 @@ void			bmp2img(t_cub *data)
 	data->apply_tex = 1;
 	cub_init(data);
 	tex_load(data);
-	fd = open("Screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
+	if ((fd = open("Screenshot.bmp", O_WRONLY | O_CREAT
+									| O_TRUNC, S_IRWXU)) < 0)
+		error_exit(data, "Screenshot.bmp creation failed");
 	padding = ((data->r_x % 4)) % 4;
 	header_write(data, fd, padding);
 	dda(data);

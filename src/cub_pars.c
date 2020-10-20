@@ -6,32 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:05:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/14 16:16:52 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:31:50 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			tab_free(char **tab)
-{
-	char **tb_cpy;
-
-	tb_cpy = tab;
-	while (*tb_cpy)
-		free(*tb_cpy++);
-	free(tab);
-	tab = NULL;
-}
-
-int				f_err(char *msg, int ret, char **tab)
-{
-	ffrintf(2, "\nError\n%s\n", msg);
-	if (tab)
-		tab_free(tab);
-	return (ret);
-}
-
-static int				ck_open_file(int *fd, char *file)
+static int		ck_open_file(int *fd, char *file)
 {
 	char *str;
 

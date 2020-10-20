@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/19 11:53:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:55:41 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <stdio.h>
 # include <math.h>
 
+
 typedef struct
 {
 	double	x;
@@ -46,6 +47,21 @@ typedef struct
 
 typedef struct
 {
+	t_ivector	tex;
+	double		step;
+	double		tex_pos;
+}	t_draw;
+
+typedef struct
+{
+	t_ivector	size;
+	void		*tex;
+	char		*tex_c;
+	int			*tex_i;
+}	t_tex_data;
+
+typedef struct
+{
 	t_vector	sde_dst;
 	t_vector	ray_dir;
 	t_vector	delta_dist;
@@ -57,16 +73,21 @@ typedef struct
 	int			drawend;
 	int			x;
 	int			lineheight;
+	t_tex_data	*tex_draw;
+
 }	t_dda;
 
 typedef struct
 {
-	t_vector sprite;
-	t_vector transform;
-	t_ivector drawstart;
-	t_ivector drawend;
-	t_ivector spritedata;
-	int spritescreenx;
+	t_vector	sprite;
+	t_vector	transform;
+	t_ivector	drawstart;
+	t_ivector	drawend;
+	t_ivector	spritedata;
+	int			spritescreenx;
+	t_ivector	tex;
+	uint32_t	color;
+	int			stripe;
 }	t_sp_data;
 
 typedef struct
@@ -74,15 +95,6 @@ typedef struct
 	t_vector	pos;
 	double		dist;
 }	t_sp_pos;
-
-
-typedef struct
-{
-	t_ivector	size;
-	void		*tex;
-	char		*tex_c;
-	int			*tex_i;
-}	t_tex_data;
 
 typedef struct
 {
@@ -121,6 +133,8 @@ int				ck_arg(char *str, t_cub *data, unsigned char *ck);
 int				f_err(char *msg, int ret, char **tab);
 void			tab_free(char **tab);
 int				clean_exit(t_cub *data);
+void			error_exit(t_cub *data, char *msg);
+
 
 int				get_map(int fd, t_cub *data);
 

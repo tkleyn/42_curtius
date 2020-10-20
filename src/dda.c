@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:40:29 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/19 12:12:28 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:19:46 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,39 @@ static int	dda_algo(t_cub *data, t_dda *dda)
 	return (1);
 }
 
-int	dda(t_cub *data)
+static void	dda2(t_cub *data, t_dda *dda)
 {
-	t_dda dda;
-	double zbuf[data->r_x];
+	if (dda->side == 0)
+		dda->perpwalldist =
+		(dda->m_pos.x - data->pos.x + (1 - dda->step.x) / 2) / dda->ray_dir.x;
+	else
+		dda->perpwalldist =
+		(dda->m_pos.y - data->pos.y + (1 - dda->step.y) / 2) / dda->ray_dir.y;
+	dda->lineheight = (int)(data->r_y / dda->perpwalldist);
+	dda->drawstart = -dda->lineheight / 2 + data->r_y / 2;
+	if (dda->drawstart < 0)
+		dda->drawstart = 0;
+	dda->drawend = dda->lineheight / 2 + data->r_y / 2;
+	if (dda->drawend > data->r_y)
+		dda->drawend = data->r_y;
+	if (data->apply_tex)
+		draw_tex(data, dda);
+	else
+		draw_image(data, dda);
+	dda->x++;
+}
+
+int			dda(t_cub *data)
+{
+	t_dda	dda;
+	double	zbuf[data->r_x];
 
 	dda.x = 0;
 	while (dda.x < data->r_x)
 	{
 		dda_init(data, &dda);
 		dda_algo(data, &dda);
-		if (dda.side == 0)
-			dda.perpwalldist = (dda.m_pos.x - data->pos.x + (1 - dda.step.x) / 2) / dda.ray_dir.x;
-		else
-			dda.perpwalldist = (dda.m_pos.y - data->pos.y + (1 - dda.step.y) / 2) / dda.ray_dir.y;
-		dda.lineheight = (int)(data->r_y / dda.perpwalldist);
-		dda.drawstart = -dda.lineheight / 2 + data->r_y / 2;
-		if (dda.drawstart < 0)
-			dda.drawstart = 0;
-		dda.drawend = dda.lineheight / 2 + data->r_y / 2;
-		if (dda.drawend > data->r_y)
-			dda.drawend = data->r_y;
-		if (data->apply_tex)
-			draw_tex(data, &dda);
-		else
-			draw_image(data, &dda);
-		dda.x++;
+		dda2(data, &dda);
 		zbuf[dda.x] = dda.perpwalldist;
 	}
 	sprite_cast(data, zbuf);

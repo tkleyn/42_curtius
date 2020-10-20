@@ -6,49 +6,26 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/19 14:29:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:57:12 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int					clean_exit(t_cub *data)
-{
-	if (data->map)
-		tab_free(data->map);
-	if (data->t[0].tex && data->t[0].size.x == 0)
-		free(data->t[0].tex);
-	if (data->t[1].tex && data->t[1].size.x == 0)
-		free(data->t[1].tex);
-	if (data->t[2].tex && data->t[2].size.x == 0)
-		free(data->t[2].tex);
-	if (data->t[3].tex && data->t[3].size.x == 0)
-		free(data->t[3].tex);
-	if (data->t[4].tex && data->t[4].size.x == 0)
-		free(data->t[4].tex);
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
-	if (data->window)
-		mlx_destroy_image(data->mlx, data->window);
-	if (data->mlx)
-		free(data->mlx);
-	exit(0);
-}
 
 int					cub_init(t_cub *data)
 {
 	int	a;
 
 	if (!(data->mlx = mlx_init()))
-		clean_exit(data);
+		error_exit(data, "Impossible to create an instance of mlx");
 	if (!data->apply_tex)
 		if (!(data->window = mlx_new_window(data->mlx, data->r_x,
 											data->r_y, "Cub3d")))
-			clean_exit(data);
+			error_exit(data, "Impossible to create an mlx window");
 	if (!(data->img = mlx_new_image(data->mlx, data->r_x, data->r_y)))
-		clean_exit(data);
+		error_exit(data, "Impossible to create an mlx image");
 	if (!(data->img_c = mlx_get_data_addr(data->img, &a, &a, &a)))
-		clean_exit(data);
+		error_exit(data, "Impossible to get image address");
 	data->img_i = (int*)data->img_c;
 	return (0);
 }
@@ -87,9 +64,9 @@ int					tex_load(t_cub *data)
 		file = data->t[i].tex;
 		if (!(data->t[i].tex = mlx_xpm_file_to_image(data->mlx, file,
 							&data->t[i].size.x, &data->t[i].size.y)))
-			clean_exit(data);
+			error_exit(data, "Wrong texture path");
 		if (!(data->t[i].tex_c = mlx_get_data_addr(data->t[i].tex, &a, &a, &a)))
-			clean_exit(data);
+			error_exit(data, "Impossible to get image address of a texture");
 		data->t[i].tex_i = (int*)data->t[i].tex_c;
 		free(file);
 		i++;

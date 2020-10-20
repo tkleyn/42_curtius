@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/19 12:12:36 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/20 14:33:49 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int					alloc_sprite(t_cub *data)
+static int				alloc_sprite(t_cub *data)
 {
 	int i;
 	int j;
@@ -40,7 +40,7 @@ static int					alloc_sprite(t_cub *data)
 	return (0);
 }
 
-static int					ck_val_map(char *str, t_cub *data, int i)
+static int				ck_val_map(char *str, t_cub *data, int i)
 {
 	while (*(str + 1))
 	{
@@ -79,7 +79,7 @@ static int					ck_val_map(char *str, t_cub *data, int i)
 	return (0);
 }
 
-static int					ck_map(char *str, t_cub *data, int i)
+static int				ck_map(char *str, t_cub *data, int i)
 {
 	static int size;
 	
@@ -97,7 +97,7 @@ static int					ck_map(char *str, t_cub *data, int i)
 	return (ck_val_map(str, data, i));
 }
 
-static int					map_to_tab(int fd, t_cub *data)
+static int				map_to_tab(int fd, t_cub *data)
 {
 	int			len;
 	int			by_read;
@@ -117,7 +117,7 @@ static int					map_to_tab(int fd, t_cub *data)
 	return (0);
 }
 
-int					get_map(int fd, t_cub *data)
+int						get_map(int fd, t_cub *data)
 {
 	char		*tmp;
 	int			i;
