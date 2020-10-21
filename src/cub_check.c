@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:01:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/20 14:34:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/21 12:03:13 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static int				ck_res(char *str, t_cub *data, char *msg)
 		return (f_err(msg, -1, tab));
 	(data->r_x > 5120) ? (data->r_x = 2560) : (1);
 	(data->r_y > 2880) ? (data->r_y = 1440) : (1);
-	(data->r_x < 320) ? (data->r_x = 320) : (1);
-	(data->r_y < 240) ? (data->r_y = 240) : (1);
+	(data->r_x < 640) ? (data->r_x = 640) : (1);
+	(data->r_y < 480) ? (data->r_y = 480) : (1);
 	(data->r_y > data->r_x) ? (data->r_y = data->r_x) : (1);
 	tab_free(tab);
 	return (0);

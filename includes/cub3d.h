@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/20 14:55:41 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/21 11:22:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
-
 
 typedef struct
 {
@@ -134,7 +133,6 @@ int				f_err(char *msg, int ret, char **tab);
 void			tab_free(char **tab);
 int				clean_exit(t_cub *data);
 void			error_exit(t_cub *data, char *msg);
-
 
 int				get_map(int fd, t_cub *data);
 
