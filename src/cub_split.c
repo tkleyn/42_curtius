@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:39:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/23 14:53:01 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:11:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char			**cub_split(char const *s, char c)
 	while (*str)
 	{
 		if (*str == c)
-			size++;		
+			size++;
 		str++;
 	}
 	if (!(tab = (char**)malloc(sizeof(char *) * (size + 1))))

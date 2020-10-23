@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 14:07:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/23 14:37:25 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:22:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,6 @@ int				draw_tex(t_cub *data, t_dda *dda);
 void			sprite_cast(t_cub *data, double *zbuf);
 
 char			**cub_split(char const *s, char c);
+void			check_map_validity(t_cub *data);
 
 #endif

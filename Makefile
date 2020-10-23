@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2020/10/23 14:43:50 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/10/23 15:26:14 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC_NAME =	main.c \
 			draw.c	\
 			sprites.c \
 			cub_exit.c \
-			cub_split.c
+			cub_split.c \
+			map_validity.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)

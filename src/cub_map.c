@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/23 14:39:58 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:25:49 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,102 +40,49 @@ static int				alloc_sprite(t_cub *data)
 	return (0);
 }
 
+void					set_spawn(t_cub *data, char *str)
+{
+	if (*str == 'N')
+	{
+		data->dir.y = -1;
+		data->plane.x = 0.66;
+	}
+	else if (*str == 'S')
+	{
+		data->dir.y = 1;
+		data->plane.x = -0.66;
+	}
+	else if (*str == 'W')
+	{
+		data->dir.x = -1;
+		data->plane.y = -0.66;
+	}
+	else if (*str == 'E')
+	{
+		data->dir.x = 1;
+		data->plane.y = 0.66;
+	}
+	*str++ = '0';
+}
+
 static int				ck_val_map(char *str, t_cub *data, int i)
 {
 	while (*str)
 	{
-		if (*str == '0' || *str == '1' || *str == ' '|| (*str == '2' && (data->n_srites++ || 1)))
+		if (*str == '0' || *str == '1' || *str == ' '
+				|| (*str == '2' && (data->n_srites++ || 1)))
 			str++;
 		else if (data->pos.x < 0 && (*str == 'N' || *str == 'S'
 									|| *str == 'W' || *str == 'E'))
 		{
 			data->pos.x = str - data->map[i] + 0.5;
 			data->pos.y = i + 0.5;
-			if (*str == 'N')
-			{
-				data->dir.y = -1;
-				data->plane.x = 0.66;
-			}
-			else if (*str == 'S')
-			{
-				data->dir.y = 1;
-				data->plane.x = -0.66;
-			}
-			else if (*str == 'W')
-			{
-				data->dir.x = -1;
-				data->plane.y = -0.66;
-			}
-			else if (*str == 'E')
-			{
-				data->dir.x = 1;
-				data->plane.y = 0.66;
-			}
-			*str++ = '0';
+			set_spawn(data, str);
 		}
 		else
 			return (-1);
 	}
 	return (0);
-}
-
-/*static int				ck_map()
-{
-
-}
-*/
-
-
-
-
-
-int		is_valid_pos(t_cub *data, int k, int l)
-{
-	int len;
-
-	if (k >= 0 && k < data->map_height)
-		len = ft_strlen(data->map[k]);
-	else
-		return (0);
-	if (l >= len || l < 0)
-		return (0);
-	if (data->map[k][l] == ' ')
-		return (0);
-	return(1);
-}
-void check_map_validity(t_cub *data)
-{
-	int i;
-	int j;
-	i = 0;
-	while(i < data->map_height)
-	{
-		j = 0;
-		while(data->map[i][j])
-		{
-			if (data->map[i][j] != '1' && data->map[i][j] != ' ')
-			{
-				if (!is_valid_pos(data, i - 1, j - 1))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i - 1, j))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i - 1, j + 1))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i, j - 1))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i, j + 1))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i + 1, j - 1))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i + 1, j))
-					error_exit(data, "Invalid map");
-				if (!is_valid_pos(data, i + 1, j + 1))
-					error_exit(data, "Invalid map");
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 static int				map_to_tab(int fd, t_cub *data)
@@ -155,8 +102,7 @@ static int				map_to_tab(int fd, t_cub *data)
 	}
 	if (!(data->map = cub_split(tmp, '\n')))
 		return (-1);
-	
-	while(data->map[data->map_height])
+	while (data->map[data->map_height])
 		data->map_height++;
 	return (0);
 }
@@ -164,12 +110,13 @@ static int				map_to_tab(int fd, t_cub *data)
 int						get_map(int fd, t_cub *data)
 {
 	int			i;
+
 	if (map_to_tab(fd, data) < 0)
 		error_exit(data, "Allocation Error");
 	i = 0;
 	while (data->map[i] != 0)
 	{
-		if(ck_val_map(data->map[i], data, i) < 0)
+		if (ck_val_map(data->map[i], data, i) < 0)
 			error_exit(data, "Invalid map");
 		i++;
 	}
@@ -178,6 +125,6 @@ int						get_map(int fd, t_cub *data)
 	check_map_validity(data);
 	if (alloc_sprite(data))
 		error_exit(data, "Allocation Error");
-		i = 0;
+	i = 0;
 	return (0);
 }

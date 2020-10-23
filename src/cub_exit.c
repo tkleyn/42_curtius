@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:56:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/23 14:24:21 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:11:16 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int				clean_exit(t_cub *data)
 		mlx_destroy_window(data->mlx, data->window);
 	if (data->mlx)
 		free(data->mlx);
-
 	exit(0);
 }
 
