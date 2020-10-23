@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:31:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/20 14:33:49 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:39:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int				alloc_sprite(t_cub *data)
 
 static int				ck_val_map(char *str, t_cub *data, int i)
 {
-	while (*(str + 1))
+	while (*str)
 	{
-		if (*str == '0' || *str == '1' || (*str == '2' && (data->n_srites++ || 1)))
+		if (*str == '0' || *str == '1' || *str == ' '|| (*str == '2' && (data->n_srites++ || 1)))
 			str++;
 		else if (data->pos.x < 0 && (*str == 'N' || *str == 'S'
 									|| *str == 'W' || *str == 'E'))
@@ -79,29 +79,70 @@ static int				ck_val_map(char *str, t_cub *data, int i)
 	return (0);
 }
 
-static int				ck_map(char *str, t_cub *data, int i)
+/*static int				ck_map()
 {
-	static int size;
-	
-	if (i == 0)
-	{
-		size = ft_strlen(str);
-		while (*str)
-			if (*str++ != '1')
-				return (-1);
+
+}
+*/
+
+
+
+
+
+int		is_valid_pos(t_cub *data, int k, int l)
+{
+	int len;
+
+	if (k >= 0 && k < data->map_height)
+		len = ft_strlen(data->map[k]);
+	else
 		return (0);
+	if (l >= len || l < 0)
+		return (0);
+	if (data->map[k][l] == ' ')
+		return (0);
+	return(1);
+}
+void check_map_validity(t_cub *data)
+{
+	int i;
+	int j;
+	i = 0;
+	while(i < data->map_height)
+	{
+		j = 0;
+		while(data->map[i][j])
+		{
+			if (data->map[i][j] != '1' && data->map[i][j] != ' ')
+			{
+				if (!is_valid_pos(data, i - 1, j - 1))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i - 1, j))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i - 1, j + 1))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i, j - 1))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i, j + 1))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i + 1, j - 1))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i + 1, j))
+					error_exit(data, "Invalid map");
+				if (!is_valid_pos(data, i + 1, j + 1))
+					error_exit(data, "Invalid map");
+			}
+			j++;
+		}
+		i++;
 	}
-	if ((*str != '1' || str[ft_strlen(str) - 1] != '1'
-					|| size != (int)ft_strlen(str)) && str++)
-		return (-1);
-	return (ck_val_map(str, data, i));
 }
 
 static int				map_to_tab(int fd, t_cub *data)
 {
 	int			len;
 	int			by_read;
-	char		buff[60];
+	char		buff[200];
 	char		*tmp;
 
 	(ft_gnl(-fd, &tmp) != 0) ? (tmp = NULL) : (tmp);
@@ -112,34 +153,31 @@ static int				map_to_tab(int fd, t_cub *data)
 			return (-1);
 		len += by_read;
 	}
-	if (!(data->map = ft_split(tmp, '\n')))
+	if (!(data->map = cub_split(tmp, '\n')))
 		return (-1);
+	
+	while(data->map[data->map_height])
+		data->map_height++;
 	return (0);
 }
 
 int						get_map(int fd, t_cub *data)
 {
-	char		*tmp;
 	int			i;
-
 	if (map_to_tab(fd, data) < 0)
-		return (f_err("Invalid map", -1, NULL));
+		error_exit(data, "Allocation Error");
 	i = 0;
 	while (data->map[i] != 0)
 	{
-		tmp = rm_spaces(data->map[i]);
-		free(data->map[i]);
-		data->map[i] = tmp;
-		if (ck_map(tmp, data, i) < 0)
-			return (f_err("Invalid map", -1, data->map));
+		if(ck_val_map(data->map[i], data, i) < 0)
+			error_exit(data, "Invalid map");
 		i++;
 	}
-	while (*tmp)
-		if (*tmp++ != '1')
-			return (f_err("Invalid map", -1, data->map));
 	if (data->pos.x == -1)
-		return (f_err("Invalid map", -1, data->map));
+		error_exit(data, "Invalid map");
+	check_map_validity(data);
 	if (alloc_sprite(data))
-		return (f_err("Allocation Error", -1, data->map));
+		error_exit(data, "Allocation Error");
+		i = 0;
 	return (0);
 }

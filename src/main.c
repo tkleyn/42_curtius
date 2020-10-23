@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:10:55 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/10/20 14:57:12 by tkleynts         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:24:01 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ static void			struct_init(t_cub *data)
 	data->refresh = 1;
 	data->n_srites = 0;
 	data->n_row = 0;
+	data->map_height = 0;
+	data->map = NULL;
+	data->img = NULL;
+	data->window = NULL;
+	data->mlx = NULL;
 }
 
 int					tex_load(t_cub *data)
