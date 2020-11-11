@@ -1,7 +1,7 @@
-; Determines the length of a 0 terminated string.
+; Computes the length of the string s.
 ; 
-; Inputs:   RDI = address of beginning of string
-; Outputs:  RAX = length of the string, including the NUL terminator
+; Inputs:   RDI = address of beginning of s
+; Outputs:  RAX = the number of characters that precede the terminating NUL character.
 global _ft_strlen
 _ft_strlen:
 	mov rax, -1
