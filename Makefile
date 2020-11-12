@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/04 15:08:29 by tkleynts          #+#    #+#              #
-#    Updated: 2020/11/11 13:17:29 by tkleynts         ###   ########.fr        #
+#    Updated: 2020/11/12 13:26:06 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,19 @@ all:	$(NAME)
 
 $(NAME): $(OBJS) libasm.h
 		ar rc $(NAME) $(OBJS)
-		$(CC) $(MAIN) $(NAME) -o libasm
+
+test:	$(OBJS) libasm.h
+		ar rc $(NAME) $(OBJS)
+		$(CC) $(MAIN) $(NAME) -o test
 
 clean:
 	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
+
+tclean: clean
+	rm -f $(NAME)
+	rm -f test
 
 re: fclean all
