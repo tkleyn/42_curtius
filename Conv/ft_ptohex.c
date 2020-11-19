@@ -31,7 +31,8 @@ char					*ft_ptohex(unsigned long long num, char *base)
 	size_t	size;
 
 	size = get_size(num);
-	string = (char *)malloc(size + 1);
+    if (!(string = (char *)malloc(size + 1)))
+        return (NULL);
 	string[0] = '0';
 	string[1] = 'x';
 	string[size] = '\0';
