@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:39:41 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:02:54 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:28:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	dividing(int divider, long num, char *buff_cpy)
 {
-	int first_num;
+	int	first_num;
 
 	first_num = 0;
 	while (divider > 0)
@@ -30,7 +30,7 @@ static void	dividing(int divider, long num, char *buff_cpy)
 	*buff_cpy = '\0';
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	str_buff[12];
 	char	*buff_cpy;

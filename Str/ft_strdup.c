@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 16:48:28 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:05:31 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:07:47 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char *new_str;
-	char *new_cpy;
+	char	*new_str;
+	char	*new_cpy;
 
-	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) + 1))))
+	new_str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) + 1));
+	if (!new_str)
 		return (0);
 	new_cpy = new_str;
 	while (*s1)

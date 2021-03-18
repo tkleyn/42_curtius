@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:10:13 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:02:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:25:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	while (*str == '\r' || *str == '\f' || *str == '\n' || *str == '\v'
-			|| *str == '\t' || *str == ' ')
+		|| *str == '\t' || *str == ' ')
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -32,7 +32,11 @@ int	ft_atoi(const char *str)
 	{
 		number = number * 10 + (*str++ - '0');
 		if (number > 9223372036854775807)
-			return (sign > 0 ? -1 : 0);
+		{
+			if (sign > 0)
+				return (-1);
+			return (0);
+		}
 	}
 	return ((int)(number * sign));
 }

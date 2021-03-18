@@ -6,15 +6,15 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:25:06 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/04 19:28:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:39:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frintf.h"
 
-char			*conv_s(t_utils *data, t_flags *flgs, char *str)
+char	*conv_s(t_utils *data, t_flags *flgs, char *str)
 {
-	int check;
+	int	check;
 
 	check = 1;
 	if (flgs->prec == 0 && check-- && !(str = (ft_strdup(""))))

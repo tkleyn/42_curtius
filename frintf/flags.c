@@ -6,20 +6,20 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:45:33 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 16:51:23 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:52:54 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frintf.h"
 
-char						*error_free(char *str)
+char	*error_free(char *str)
 {
 	if (str)
 		free(str);
 	return (NULL);
 }
 
-static char					*flgs_set(t_flags *flgs, char *str)
+static char	*flgs_set(t_flags *flgs, char *str)
 {
 	flgs->ljust = 0;
 	flgs->pad = 0;
@@ -28,9 +28,9 @@ static char					*flgs_set(t_flags *flgs, char *str)
 	return (str);
 }
 
-static int					skip_atoi(char **s)
+static int	skip_atoi(char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_isdigit(**s))
@@ -38,7 +38,7 @@ static int					skip_atoi(char **s)
 	return (i);
 }
 
-static char					*is_convert(t_utils *data, t_flags *flgs)
+static char	*is_convert(t_utils *data, t_flags *flgs)
 {
 	char		*r;
 	char		*f_work;
@@ -67,11 +67,11 @@ static char					*is_convert(t_utils *data, t_flags *flgs)
 	return (r);
 }
 
-char						*is_flag(t_utils *data)
+char	*is_flag(t_utils *data)
 {
-	char		*f_work;
-	t_flags		flgs;
-	int			ret;
+	char	*f_work;
+	t_flags	flgs;
+	int		ret;
 
 	f_work = flgs_set(&flgs, data->f_cpy);
 	while (*f_work && *f_work == '-' && f_work++)

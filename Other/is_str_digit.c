@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 10:04:25 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/28 10:05:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:53:21 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int		is_str_digit(char *str)
+int	is_str_digit(char *str)
 {
 	while (*str)
 	{

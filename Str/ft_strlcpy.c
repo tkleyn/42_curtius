@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 13:32:15 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:05:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:11:15 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char *src_cpy;
+	char	*src_cpy;
 
 	src_cpy = (char *)src;
 	while (size && size - 1 && *src)

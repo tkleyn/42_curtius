@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:14:00 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/04 19:29:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:54:09 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frintf.h"
 
-static char		*add_l_utils(char **str, int width, char c, int w)
+static char	*add_l_utils(char **str, int width, char c, int w)
 {
 	char	*tmp;
 	int		len;
@@ -28,7 +28,7 @@ static char		*add_l_utils(char **str, int width, char c, int w)
 	return (tmp);
 }
 
-int				ft_add_l(char **str, int width, char c, int w)
+int	ft_add_l(char **str, int width, char c, int w)
 {
 	char		*tmp;
 	int			len;
@@ -57,7 +57,7 @@ int				ft_add_l(char **str, int width, char c, int w)
 	return (0);
 }
 
-int				ft_add_r(char **str, int width, char c, int is_z)
+int	ft_add_r(char **str, int width, char c, int is_z)
 {
 	char		*tmp;
 	int			len;
@@ -70,21 +70,25 @@ int				ft_add_r(char **str, int width, char c, int is_z)
 		len = ft_strlen(*str);
 	if (len >= width)
 		return (0);
-	if (!(tmp = (char *)malloc(width + 1)))
+	tmp = (char *)malloc(width + 1);
+	if (!tmp)
 		return (-1);
 	ft_strncpy(tmp, *str, len);
 	ft_memset(&tmp[len], (int)c, width - len);
 	tmp[width] = '\0';
 	free(*str);
 	*str = tmp;
-	return ((is_z) ? (width - len) : (0));
+	if (is_z) 
+		return (width - len);
+	return (0);
 }
 
-int				ft_s_dow(char **str, int prec)
+int	ft_s_dow(char **str, int prec)
 {
-	char		*tmp;
+	char	*tmp;
 
-	if (!(tmp = ft_strndup(*str, prec)))
+	tmp = ft_strndup(*str, prec);
+	if (!tmp)
 		return (-1);
 	if (*str)
 		free(*str);

@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:18:59 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/25 16:00:15 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:18:24 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static char		**desaloc(char **tab, int allocated)
+static char	**desaloc(char **tab, int allocated)
 {
 	while (0 < allocated--)
 		free(tab[allocated]);
@@ -20,7 +20,7 @@ static char		**desaloc(char **tab, int allocated)
 	return (NULL);
 }
 
-static char		**tab_fill(char **tab, const char *str, int size)
+static char	**tab_fill(char **tab, const char *str, int size)
 {
 	int		i;
 	int		j;
@@ -35,7 +35,8 @@ static char		**tab_fill(char **tab, const char *str, int size)
 		j = i;
 		while ((!ft_isspace(str[j])) && str[j] != '\0')
 			j++;
-		if (!(tab[allocated++] = ft_strndup(&str[i], j - i)))
+		tab[allocated] = ft_strndup(&str[i], j - i);
+		if (!tab[allocated++])
 			return (desaloc(tab, allocated));
 		size--;
 		i = j;
@@ -43,7 +44,7 @@ static char		**tab_fill(char **tab, const char *str, int size)
 	return (tab);
 }
 
-char			**split_space(char const *s)
+char	**split_space(char const *s)
 {
 	char	*str;
 	int		size;
@@ -58,13 +59,14 @@ char			**split_space(char const *s)
 		if (ft_isspace(*str))
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		size++;
 		while (*str && (!ft_isspace(*str)))
 			str++;
 	}
-	if (!(tab = (char**)malloc(sizeof(char *) * (size + 1))))
+	tab = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!tab)
 		return (NULL);
 	tab[size] = 0;
 	return (tab_fill(tab, s, size));

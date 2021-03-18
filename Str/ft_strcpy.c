@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 14:24:45 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:05:21 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:06:38 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strcpy(char *dest, const char *src)
 {
-	char *dst;
+	char	*dst;
 
 	if (!dest || !src)
 		return (NULL);

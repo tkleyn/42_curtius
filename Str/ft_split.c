@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:39:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:04:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:05:40 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static char		**desaloc(char **tab, int allocated)
+static char	**desaloc(char **tab, int allocated)
 {
 	while (0 < allocated--)
 		free(tab[allocated]);
@@ -20,11 +20,11 @@ static char		**desaloc(char **tab, int allocated)
 	return (NULL);
 }
 
-static char		**tab_fill(char **tab, const char *str, char c, int size)
+static char	**tab_fill(char **tab, const char *str, char c, int size)
 {
-	int		i;
-	int		j;
-	int		allocated;
+	int	i;
+	int	j;
+	int	allocated;
 
 	allocated = 0;
 	i = 0;
@@ -35,7 +35,8 @@ static char		**tab_fill(char **tab, const char *str, char c, int size)
 		j = i;
 		while (str[j] != c && str[j] != '\0')
 			j++;
-		if (!(tab[allocated++] = ft_strndup(&str[i], j - i)))
+		tab[allocated] = ft_strndup(&str[i], j - i);
+		if (!tab[allocated++])
 			return (desaloc(tab, allocated));
 		size--;
 		i = j;
@@ -43,7 +44,7 @@ static char		**tab_fill(char **tab, const char *str, char c, int size)
 	return (tab);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	*str;
 	int		size;
@@ -58,13 +59,14 @@ char			**ft_split(char const *s, char c)
 		if (*str == c)
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		size++;
 		while (*str && *str != c)
 			str++;
 	}
-	if (!(tab = (char**)malloc(sizeof(char *) * (size + 1))))
+	tab = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!tab)
 		return (NULL);
 	tab[size] = 0;
 	return (tab_fill(tab, s, c, size));

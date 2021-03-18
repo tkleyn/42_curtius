@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:20:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2020/02/12 17:03:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:31:44 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static size_t			get_size(unsigned long long num)
+static size_t	get_size(unsigned long long num)
 {
 	size_t	size;
 
@@ -25,14 +25,15 @@ static size_t			get_size(unsigned long long num)
 	return (size + 2);
 }
 
-char					*ft_ptohex(unsigned long long num, char *base)
+char	*ft_ptohex(unsigned long long num, char *base)
 {
 	char	*string;
 	size_t	size;
 
 	size = get_size(num);
-    if (!(string = (char *)malloc(size + 1)))
-        return (NULL);
+	string = (char *)malloc(size + 1);
+	if (!string)
+		return (NULL);
 	string[0] = '0';
 	string[1] = 'x';
 	string[size] = '\0';
