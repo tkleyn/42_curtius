@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/03/18 12:55:36 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/03/24 12:32:36 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH)
 INCLUDES = inc/checker.h
 
 SRC_PATH = src
-SRC_NAME =	checker.c
+SRC_NAME =	checker.c instr.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)
