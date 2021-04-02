@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/03/24 15:05:39 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:13:52 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,13 @@ uint8_t	offset_up(int32_t	*stack, int32_t	size);
 uint8_t	offset_down(int32_t	*stack, int32_t	size);
 
 uint8_t	check_instr(char	*instr, t_stacks	*stacks);
+
+t_instr	*lst_new(char *str);
+t_instr	*ft_lstlast(t_instr *lst);
+u_int8_t	lst_add_back(t_instr **lst, char *str);
+t_instr	*lst_rm_head(t_instr **lst);
+uint8_t	lst_free(t_instr **lst);
+
+int	ft_fatoi(const char	*str, uint8_t	*flag);
 
 #endif

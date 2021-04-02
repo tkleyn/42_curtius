@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:34:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/03/24 15:47:41 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:11:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 uint8_t	instr_ra(t_stacks *stacks)
 {
+	printf("in instr_ra\n");
 	int32_t	tmp;
 
+	if (stacks->size_a < 2)
+		return (0);
 	tmp = stacks->stack_a[0];
 	offset_up(stacks->stack_a, stacks->size_a);
 	stacks->stack_a[stacks->size_a - 1] = tmp;
@@ -24,8 +27,11 @@ uint8_t	instr_ra(t_stacks *stacks)
 
 uint8_t	instr_rb(t_stacks *stacks)
 {
+	printf("in instr_rb\n");
 	int32_t	tmp;
 
+	if (stacks->size_b < 2)
+		return (0);
 	tmp = stacks->stack_b[0];
 	offset_up(stacks->stack_b, stacks->size_b);
 	stacks->stack_b[stacks->size_b - 1] = tmp;
@@ -34,5 +40,8 @@ uint8_t	instr_rb(t_stacks *stacks)
 
 uint8_t	instr_rr(t_stacks *stacks)
 {
-
+	printf("in instr_rr\n");
+	instr_ra(stacks);
+	instr_rb(stacks);
+	return (0);
 }

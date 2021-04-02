@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:24:54 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/03/24 15:50:27 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:19:14 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 uint8_t	instr_sa(t_stacks *stacks)
 {
+	printf("in instr_sa\n");
 	int32_t	tmp;
-
+	
 	if (stacks->size_a < 2)
 		return (0);
 	tmp = stacks->stack_a[0];
@@ -26,6 +27,7 @@ uint8_t	instr_sa(t_stacks *stacks)
 
 uint8_t	instr_sb(t_stacks *stacks)
 {
+	printf("in instr_sb\n");
 	int32_t	tmp;
 
 	if (stacks->size_b < 2)
@@ -38,32 +40,33 @@ uint8_t	instr_sb(t_stacks *stacks)
 
 uint8_t	instr_ss(t_stacks *stacks)
 {
+	printf("in instr_ss\n");
 	return (instr_sa(stacks) + instr_sb(stacks));
 }
 
 uint8_t	check_instr(char	*instr, t_stacks	*stacks)
 {
-	if (strncmp(instr, "sa", 3))
+	if (!ft_strncmp(instr, "sa", 3))
 		return (instr_sa(stacks));
-	else if (strncmp(instr, "sb", 3))
+	else if (!ft_strncmp(instr, "sb", 3))
 		return (instr_sb(stacks));
-	else if (strncmp(instr, "ss", 3))
+	else if (!ft_strncmp(instr, "ss", 3))
 		return (instr_ss(stacks));
-	else if (strncmp(instr, "pa", 3))
+	else if (!ft_strncmp(instr, "pa", 3))
 		return (instr_pa(stacks));
-	else if (strncmp(instr, "pb", 3))
+	else if (!ft_strncmp(instr, "pb", 3))
 		return (instr_pb(stacks));
-	else if (strncmp(instr, "ra", 3))
+	else if (!ft_strncmp(instr, "ra", 3))
 		return (instr_ra(stacks));
-	else if (strncmp(instr, "rb", 3))
+	else if (!ft_strncmp(instr, "rb", 3))
 		return (instr_rb(stacks));
-	else if (strncmp(instr, "rr", 3))
+	else if (!ft_strncmp(instr, "rr", 3))
 		return (instr_rr(stacks));
-	else if (strncmp(instr, "rra", 4))
+	else if (!ft_strncmp(instr, "rra", 4))
 		return (instr_rra(stacks));
-	else if (strncmp(instr, "rrb", 4))
+	else if (!ft_strncmp(instr, "rrb", 4))
 		return (instr_rrb(stacks));
-	else if (strncmp(instr, "rrr", 4))
+	else if (!ft_strncmp(instr, "rrr", 4))
 		return (instr_rrr(stacks));
 	return (-1);
 }
