@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/03/18 12:53:36 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/06 14:52:04 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(LIBFT) :
 			@make -C libft all
 			
 clean :
-			@rm -f src/$(OBJS)
+			@rm -f $(OBJS)
 
 fclean :	clean
 			@rm -f $(NAME)
