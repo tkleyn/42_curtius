@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:24:54 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/02 16:19:14 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:05:33 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 uint8_t	instr_sa(t_stacks *stacks)
 {
-	printf("in instr_sa\n");
 	int32_t	tmp;
 	
 	if (stacks->size_a < 2)
@@ -27,7 +26,6 @@ uint8_t	instr_sa(t_stacks *stacks)
 
 uint8_t	instr_sb(t_stacks *stacks)
 {
-	printf("in instr_sb\n");
 	int32_t	tmp;
 
 	if (stacks->size_b < 2)
@@ -40,7 +38,6 @@ uint8_t	instr_sb(t_stacks *stacks)
 
 uint8_t	instr_ss(t_stacks *stacks)
 {
-	printf("in instr_ss\n");
 	return (instr_sa(stacks) + instr_sb(stacks));
 }
 

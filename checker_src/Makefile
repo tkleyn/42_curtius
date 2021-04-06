@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/02 15:16:16 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/06 14:36:32 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,17 @@ CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH)
 INCLUDES = inc/checker.h
 
 SRC_PATH = src
-SRC_NAME =	checker.c instr_push.c instr_rotate.c instr_rrotate.c instr_swap.c lst.c offset.c utils.c
 
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+SRC_NAME =	instr_push.c \
+			checker.c \
+			instr_rotate.c \
+			instr_rrotate.c \
+			instr_swap.c \
+			lst.c \
+			offset.c \
+			utils.c
+
+SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
@@ -38,7 +46,7 @@ $(LIBFT) :
 			@make -C libft all
 			
 clean :
-			@rm -f src/$(OBJS)
+			@rm -f $(OBJS)
 
 fclean :	clean
 			@rm -f $(NAME)

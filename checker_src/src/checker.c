@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/06 13:36:47 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:47:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ uint8_t	check_arg(int	argc, char	*argv[], t_stacks *stacks)
 	while (i < argc)
 	{
 		stacks->stack_a[i - 1] = ft_fatoi(argv[i], &flg);
-		printf("%d\n", stacks->stack_a[i - 1]);
 		if (flg)
 			return (-1);
 		i++;
