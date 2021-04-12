@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/06 14:52:04 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/11 10:59:02 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,13 @@ CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH)
 INCLUDES = inc/push_swap.h
 
 SRC_PATH = src
-SRC_NAME =	push_swap.c
+SRC_NAME =	push_swap.c \
+			instr_push.c \
+			instr_rotate.c \
+			instr_rrotate.c \
+			instr_swap.c \
+			offset.c \
+			utils.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)
@@ -35,7 +41,7 @@ $(NAME) : $(INCLUDES) $(OBJS) $(LIBFT)
 			@printf "\r\033[48;5;15;30m✅ $(NAME)\033[0m\033[K\n"
 
 $(LIBFT) : 
-			@make -C libft all
+			@make -C $(LIBFT_PATH) all
 			
 clean :
 			@rm -f $(OBJS)

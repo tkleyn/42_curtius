@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/06 14:36:32 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/11 10:59:36 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(NAME) : $(INCLUDES) $(OBJS) $(LIBFT)
 			@printf "\r\033[48;5;15;30m✅ $(NAME)\033[0m\033[K\n"
 
 $(LIBFT) : 
-			@make -C libft all
+			@make -C $(LIBFT_PATH) all
 			
 clean :
 			@rm -f $(OBJS)
