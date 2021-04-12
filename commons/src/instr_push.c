@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:34:13 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/11 10:37:52 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:18:51 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "commons.h"
 
 uint8_t	instr_pa(t_stacks *stacks)
 {

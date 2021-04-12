@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/11 10:59:36 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/12 11:12:34 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,29 +17,36 @@ NAME = checker
 LIBFT_PATH = ../libft/
 LIBFT = $(LIBFT_PATH)libft.a
 
+COMMONS_PATH = ../commons
+COMMONS_INC = $(COMMONS_PATH)/inc/
+COMMONS_SRC_PATH = $(COMMONS_PATH)/src
+COMMONS_NAME = instr_push.c \
+			instr_rotate.c \
+			instr_rrotate.c \
+			instr_swap.c \
+			offset.c \
+			utils.c
+
+COMMONS_SRC = $(addprefix $(COMMONS_SRC_PATH)/,$(COMMONS_NAME))
+COMMONS_OBJS = $(COMMONS_SRC:.c=.o)
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH)
+CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH) -I$(COMMONS_INC)
 
 INCLUDES = inc/checker.h
 
 SRC_PATH = src
 
-SRC_NAME =	instr_push.c \
-			checker.c \
-			instr_rotate.c \
-			instr_rrotate.c \
-			instr_swap.c \
-			lst.c \
-			offset.c \
-			utils.c
+SRC_NAME =	checker.c \
+			lst.c 
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 OBJS = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(INCLUDES) $(OBJS) $(LIBFT)
-			@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME) : $(INCLUDES) $(COMMONS_OBJS) $(OBJS) $(LIBFT)
+			@$(CC) $(CFLAGS) $(COMMONS_OBJS) $(OBJS) $(LIBFT) -o $(NAME)
 			@printf "\r\033[48;5;15;30m✅ $(NAME)\033[0m\033[K\n"
 
 $(LIBFT) : 
@@ -47,6 +54,7 @@ $(LIBFT) :
 			
 clean :
 			@rm -f $(OBJS)
+			@rm -f $(COMMONS_OBJS)
 
 fclean :	clean
 			@rm -f $(NAME)

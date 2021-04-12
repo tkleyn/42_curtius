@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/06 14:47:23 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:20:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_error(t_stacks *stacks, t_instr **lst)
+static void	ft_error(t_stacks *stacks, t_instr **lst)
 {
 	write(2, "Error\n", 6);
 	if (stacks->size_a)
@@ -23,7 +23,7 @@ void	ft_error(t_stacks *stacks, t_instr **lst)
 	exit (-42);
 }
 
-u_int8_t	ft_read(t_instr **lst)
+static u_int8_t	ft_read(t_instr **lst)
 {
 	char	*instr;
 
@@ -32,37 +32,34 @@ u_int8_t	ft_read(t_instr **lst)
 	return (0);
 }
 
-uint8_t	check_arg(int	argc, char	*argv[], t_stacks *stacks)
+uint8_t	check_instr(char	*instr, t_stacks	*stacks)
 {
-	int	i;
-	uint8_t	flg;
-
-	stacks->stack_a = malloc(sizeof(int32_t) * (argc - 1));
-	stacks->stack_b = malloc(sizeof(int32_t) * (argc - 1));
-	if (!stacks->stack_a || !stacks->stack_b)
-		return (-1);
-	i = 1;
-	while (i < argc)
-	{
-		stacks->stack_a[i - 1] = ft_fatoi(argv[i], &flg);
-		if (flg)
-			return (-1);
-		i++;
-	}
-	stacks->size_a = argc - 1;
-	return (0);
+	if (!ft_strncmp(instr, "sa", 3))
+		return (instr_sa(stacks));
+	else if (!ft_strncmp(instr, "sb", 3))
+		return (instr_sb(stacks));
+	else if (!ft_strncmp(instr, "ss", 3))
+		return (instr_ss(stacks));
+	else if (!ft_strncmp(instr, "pa", 3))
+		return (instr_pa(stacks));
+	else if (!ft_strncmp(instr, "pb", 3))
+		return (instr_pb(stacks));
+	else if (!ft_strncmp(instr, "ra", 3))
+		return (instr_ra(stacks));
+	else if (!ft_strncmp(instr, "rb", 3))
+		return (instr_rb(stacks));
+	else if (!ft_strncmp(instr, "rr", 3))
+		return (instr_rr(stacks));
+	else if (!ft_strncmp(instr, "rra", 4))
+		return (instr_rra(stacks));
+	else if (!ft_strncmp(instr, "rrb", 4))
+		return (instr_rrb(stacks));
+	else if (!ft_strncmp(instr, "rrr", 4))
+		return (instr_rrr(stacks));
+	return (-1);
 }
 
-uint8_t	instr_init(t_stacks *stacks)
-{
-	stacks->stack_a = NULL;
-	stacks->stack_b = NULL;
-	stacks->size_a = 0;
-	stacks->size_b = 0;
-	return (0);
-}
-
-uint8_t	instr_exec(t_stacks *stacks, t_instr **lst)
+static uint8_t	instr_exec(t_stacks *stacks, t_instr **lst)
 {
 	t_instr *tmp;
 	
@@ -72,29 +69,6 @@ uint8_t	instr_exec(t_stacks *stacks, t_instr **lst)
 		if (check_instr(tmp->instr, stacks) != 0)
 			return (-1);
 		tmp = lst_rm_head(lst);
-	}
-	return (0);
-}
-
-uint8_t	print_stacks(t_stacks *stacks)
-{
-	int i;
-
-	i = 0;
-	printf("a \t\t\tb\n-\t\t\t-\n");
-
-	while (i < stacks->size_a || i < stacks->size_b)
-	{
-		if (i < stacks->size_a)
-			printf("%d\t\t\t", stacks->stack_a[i]);
-		else
-			printf("/\t\t\t");
-		
-		if (i < stacks->size_b)
-			printf("%d\n", stacks->stack_b[i]);
-		else
-			printf("/\n");
-		i++;
 	}
 	return (0);
 }

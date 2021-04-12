@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:52:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/11 10:52:49 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:19:06 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "commons.h"
 
 uint8_t	offset_up(int32_t	*stack, int32_t size)
 {

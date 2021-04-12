@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 15:12:47 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/11 10:45:23 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 10:50:17 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "commons.h"
 
 int	ft_fatoi(const char	*str, uint8_t	*flag)
 {
@@ -68,5 +68,28 @@ uint8_t	instr_init(t_stacks *stacks)
 	stacks->stack_b = NULL;
 	stacks->size_a = 0;
 	stacks->size_b = 0;
+	return (0);
+}
+
+uint8_t	print_stacks(t_stacks *stacks)
+{
+	int i;
+
+	i = 0;
+	printf("a \t\t\tb\n-\t\t\t-\n");
+
+	while (i < stacks->size_a || i < stacks->size_b)
+	{
+		if (i < stacks->size_a)
+			printf("%d\t\t\t", stacks->stack_a[i]);
+		else
+			printf("/\t\t\t");
+		
+		if (i < stacks->size_b)
+			printf("%d\n", stacks->stack_b[i]);
+		else
+			printf("/\n");
+		i++;
+	}
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:34:07 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/06 14:05:42 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:18:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "commons.h"
 
 uint8_t	instr_rra(t_stacks *stacks)
 {

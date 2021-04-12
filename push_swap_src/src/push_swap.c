@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 13:00:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/11 12:00:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 11:18:02 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error(t_stacks *stacks)
+static void	ft_error(t_stacks *stacks)
 {
 	write(2, "Error\n", 6);
 	if (stacks->size_a)
@@ -22,7 +22,7 @@ void	ft_error(t_stacks *stacks)
 	exit (-42);
 }
 
-uint8_t	write_instr(t_stacks *stacks, char	*str, uint8_t	len, uint8_t	(*fct)(t_stacks	*))
+static uint8_t	write_instr(t_stacks *stacks, char	*str, uint8_t	len, uint8_t	(*fct)(t_stacks	*))
 {
 	write(1, str, len);
 	(*fct)(stacks);
