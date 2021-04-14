@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 11:15:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 14:38:41 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int	ft_fatoi(const char	*str, uint8_t	*flag);
 uint8_t	instr_init(t_stacks *stacks);
 uint8_t	check_arg(int	argc, char	*argv[], t_stacks *stacks);
 uint8_t	print_stacks(t_stacks *stacks);
+uint8_t	is_sorted(int32_t	*stack, int32_t	size);
 
 #endif

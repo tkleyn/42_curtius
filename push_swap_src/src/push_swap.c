@@ -6,13 +6,13 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 13:00:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 11:18:02 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:17:10 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_error(t_stacks *stacks)
+ void	ft_error(t_stacks *stacks)
 {
 	write(2, "Error\n", 6);
 	if (stacks->size_a)
@@ -22,9 +22,11 @@ static void	ft_error(t_stacks *stacks)
 	exit (-42);
 }
 
-static uint8_t	write_instr(t_stacks *stacks, char	*str, uint8_t	len, uint8_t	(*fct)(t_stacks	*))
+ uint8_t	write_instr(t_stacks *stacks, char	*str, uint8_t	len, uint8_t	(*fct)(t_stacks	*))
 {
 	write(1, str, len);
+	(void) str;
+	(void) len;
 	(*fct)(stacks);
 	return (0);
 }
@@ -45,18 +47,53 @@ uint8_t	sort_3(t_stacks	*stacks)
 	return (0);
 }
 
+uint32_t	find_smallest(int32_t	*stack, int32_t	size)
+{
+	uint32_t	smallest;
+	int32_t		i;
+
+	smallest = 0;
+	i = 0;
+	while (i < size)
+	{
+		if (stack[i] < stack[smallest])
+			smallest = i;
+		i++;
+	}
+	return (smallest);
+}
+
+uint8_t	push_smallest(t_stacks	*stacks)
+{
+	int32_t	i;
+
+	i = find_smallest(stacks->stack_a, stacks->size_a);
+	if (i < (stacks->size_a / 2))
+		while (i-- > 0)
+			write_instr(stacks, "ra\n", 3, &instr_ra);
+	else
+		while (i++ < stacks->size_a)
+			write_instr(stacks, "rra\n", 4, &instr_rra);	
+	write_instr(stacks, "pb\n", 3, &instr_pb);
+	return (0);
+}
+
 uint8_t	sort_5(t_stacks	*stacks)
 {
-	(void) stacks;
+	push_smallest(stacks);
+	push_smallest(stacks);
+	sort_3(stacks);
+	write_instr(stacks, "pa\n", 3, &instr_pa);
+	write_instr(stacks, "pa\n", 3, &instr_pa);
 	return (0);
 }
 
 uint8_t	ft_sort(t_stacks	*stacks)
 {
-	if (stacks->size_a == 1)
-		return (0);
+	if (is_sorted(stacks->stack_a, stacks->size_a))
+		return (0);//envoyer eof
 	if (stacks->size_a == 2)
-		return (0);
+		return (0);// a gerer
 	if (stacks->size_a == 3)
 		sort_3(stacks);
 	if (stacks->size_a == 5)
@@ -73,6 +110,6 @@ int main(int	argc, char *argv[])
 	if (check_arg(argc, argv, &stacks) != 0)
 		ft_error(&stacks);
 	ft_sort(&stacks);
-	
+	//print_stacks(&stacks);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 15:12:47 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 10:50:17 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/12 14:42:41 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,20 @@ uint8_t	print_stacks(t_stacks *stacks)
 		i++;
 	}
 	return (0);
+}
+
+uint8_t	is_sorted(int32_t	*stack, int32_t	size)
+{
+	int32_t	i;
+
+	if (size <=1)
+		return (1);
+	i = 1;
+	while (i < size)
+	{
+		if (stack[i - 1] >= stack[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }
