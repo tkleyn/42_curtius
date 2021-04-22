@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/12 11:09:43 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/04/22 15:48:05 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I. -I./inc -I$(LIBFT_PATH) -I$(COMMONS_INC)
 
 SRC_PATH = src
-SRC_NAME =	push_swap.c
+SRC_NAME =	push_swap.c \
+			find.c	\
+			move_push.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(SRC:.c=.o)

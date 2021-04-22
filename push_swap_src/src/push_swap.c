@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 13:00:43 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/14 15:17:10 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/22 15:49:23 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,6 @@ uint8_t	sort_3(t_stacks	*stacks)
 	return (0);
 }
 
-uint32_t	find_smallest(int32_t	*stack, int32_t	size)
-{
-	uint32_t	smallest;
-	int32_t		i;
-
-	smallest = 0;
-	i = 0;
-	while (i < size)
-	{
-		if (stack[i] < stack[smallest])
-			smallest = i;
-		i++;
-	}
-	return (smallest);
-}
-
-uint8_t	push_smallest(t_stacks	*stacks)
-{
-	int32_t	i;
-
-	i = find_smallest(stacks->stack_a, stacks->size_a);
-	if (i < (stacks->size_a / 2))
-		while (i-- > 0)
-			write_instr(stacks, "ra\n", 3, &instr_ra);
-	else
-		while (i++ < stacks->size_a)
-			write_instr(stacks, "rra\n", 4, &instr_rra);	
-	write_instr(stacks, "pb\n", 3, &instr_pb);
-	return (0);
-}
-
 uint8_t	sort_5(t_stacks	*stacks)
 {
 	push_smallest(stacks);
@@ -85,6 +54,12 @@ uint8_t	sort_5(t_stacks	*stacks)
 	sort_3(stacks);
 	write_instr(stacks, "pa\n", 3, &instr_pa);
 	write_instr(stacks, "pa\n", 3, &instr_pa);
+	return (0);
+}
+
+uint8_t	sort_100(t_stacks	*stacks)
+{
+	(void)stacks;
 	return (0);
 }
 
@@ -98,6 +73,8 @@ uint8_t	ft_sort(t_stacks	*stacks)
 		sort_3(stacks);
 	if (stacks->size_a == 5)
 		sort_5(stacks);
+	if (stacks->size_a == 100)
+		sort_100(stacks);
 	return (0);
 }
 
