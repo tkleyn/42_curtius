@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:33:19 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/22 15:34:17 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:35:51 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ int32_t	find_chunck(t_stacks	*stacks, int32_t	min, int32_t	max)
 		}
 		i++;
 	}
+	if((first == -1) && (sec == -1))
+		return (-1);
+	
 
-	if (first < stacks->size_a - sec)
+	if (first != -1 && first < stacks->size_a - sec)
 		return (first);
 	return (sec);
 }
