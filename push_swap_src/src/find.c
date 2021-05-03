@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:33:19 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/28 15:35:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:44:41 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,39 +44,44 @@ uint32_t	find_bigest(int32_t	*stack, int32_t	size)
 	return (bigest);
 }
 
+void	find_half(t_stacks	*stacks, int32_t	min, int32_t	max,
+			int32_t	*first)
+{
+	int32_t	i;
+
+	i = 0;
+	*first = -1;
+	while (i < stacks->size_a / 2)
+	{
+		if (stacks->stack_a[i] >= min && stacks->stack_a[i] <= max)
+		{
+			*first = i;
+			break ;
+		}
+		i++;
+	}
+}
+
 int32_t	find_chunck(t_stacks	*stacks, int32_t	min, int32_t	max)
 {
 	int32_t	i;
 	int32_t	first;
 	int32_t	sec;
 
-	i = 0;
-	first = -1;
 	sec = -1;
-	while (i < stacks->size_a / 2)
-	{
-		if (stacks->stack_a[i] >= min && stacks->stack_a[i] <= max)
-		{
-			first = i;
-			break;
-		}
-		i++;
-	}
-
+	find_half(stacks, min, max, &first);
 	i = stacks->size_a / 2;
 	while (i < stacks->size_a)
 	{
 		if (stacks->stack_a[i] >= min && stacks->stack_a[i] <= max)
 		{
 			sec = i;
-			break;
+			break ;
 		}
 		i++;
 	}
-	if((first == -1) && (sec == -1))
+	if ((first == -1) && (sec == -1))
 		return (-1);
-	
-
 	if (first != -1 && first < stacks->size_a - sec)
 		return (first);
 	return (sec);

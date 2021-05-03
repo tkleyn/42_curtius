@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 14:38:41 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:17:35 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ uint8_t	instr_rrr(t_stacks *stacks);
 uint8_t	offset_up(int32_t	*stack, int32_t	size);
 uint8_t	offset_down(int32_t	*stack, int32_t	size);
 
-int	ft_fatoi(const char	*str, uint8_t	*flag);
-uint8_t	instr_init(t_stacks *stacks);
+int		ft_fatoi(const char	*str, uint8_t	*flag);
+uint8_t	instr_init(t_stacks	*stacks);
 uint8_t	check_arg(int	argc, char	*argv[], t_stacks *stacks);
 uint8_t	print_stacks(t_stacks *stacks);
 uint8_t	is_sorted(int32_t	*stack, int32_t	size);
+
+int32_t	*copy_stack(int32_t	*stack, int32_t size);
+void	insertion_sort(int32_t	*array, uint32_t	length);
+uint8_t	is_double(t_stacks *stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 11:20:23 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:50:04 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static u_int8_t	ft_read(t_instr **lst)
 	char	*instr;
 
 	while (ft_gnl(0, &instr) > 0)
-		lst_add_back(lst, instr);
+		if (lst_add_back(lst, instr))
+			return (-1);
 	return (0);
 }
 
@@ -61,8 +62,8 @@ uint8_t	check_instr(char	*instr, t_stacks	*stacks)
 
 static uint8_t	instr_exec(t_stacks *stacks, t_instr **lst)
 {
-	t_instr *tmp;
-	
+	t_instr	*tmp;
+
 	tmp = lst_rm_head(lst);
 	while (tmp)
 	{
@@ -79,12 +80,16 @@ int	main(int argc, char *argv[])
 	t_stacks	stacks;
 
 	if (argc <= 1)
-		ft_error(&stacks, &lst);
+		return (0);
 	if (check_arg(argc, argv, &stacks) != 0)
 		ft_error(&stacks, &lst);
-	ft_read(&lst);
+	if (ft_read(&lst))
+		ft_error(&stacks, &lst);
 	if (instr_exec(&stacks, &lst) != 0)
 		ft_error(&stacks, &lst);
-		print_stacks(&stacks);
+	if (is_sorted(stacks.stack_a, stacks.size_a))
+		printf("OK\n");
+	else
+		printf("KO\n");
 	return (0);
 }

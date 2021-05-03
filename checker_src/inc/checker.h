@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:56:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/12 10:52:29 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:15:20 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ typedef struct s_instr
 	struct s_instr	*next;
 }	t_instr;
 
-t_instr	*lst_new(char *str);
-t_instr	*ft_lstlast(t_instr *lst);
+t_instr		*lst_new(char *str);
+t_instr		*ft_lstlast(t_instr *lst);
 u_int8_t	lst_add_back(t_instr **lst, char *str);
-t_instr	*lst_rm_head(t_instr **lst);
-uint8_t	lst_free(t_instr **lst);
+t_instr		*lst_rm_head(t_instr **lst);
+uint8_t		lst_free(t_instr **lst);
 
 #endif

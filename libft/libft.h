@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:49:58 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/06 14:56:18 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:18:09 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ char				*ft_strndup(const char *s1, size_t size);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strnjoin(char *s1, char *s2,
-									size_t size1, size_t size2);
+						size_t size1, size_t size2);
 char				*ft_strnjoin2(char *s1, char *s2,
-									size_t size1, size_t size2);
+						size_t size1, size_t size2);
 char				*ft_strtrim(char const *s1, char const *set);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
@@ -59,7 +59,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnstr(const char *haystack, const char *needle,
-								size_t len);
+						size_t len);
 char				**split_space(char const *s);
 char				*rm_spaces(char *str);
 

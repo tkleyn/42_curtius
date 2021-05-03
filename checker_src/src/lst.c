@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 12:24:50 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/02 15:33:05 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:50:30 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_instr	*lst_new(char *str)
 {
 	t_instr	*new_instr;
 
-	new_instr = malloc(sizeof(t_instr));
+	new_instr = (t_instr *)malloc(sizeof(t_instr));
 	if (new_instr == NULL)
 		return (NULL);
 	new_instr->instr = str;
@@ -35,12 +35,17 @@ t_instr	*ft_lstlast(t_instr *lst)
 
 u_int8_t	lst_add_back(t_instr **lst, char *str)
 {
+	t_instr	*tmp;
+
 	if (!lst || !str)
 		return (-42);
+	tmp = lst_new(str);
+	if (!tmp)
+		return (-42);
 	if (*lst == NULL)
-		*lst = lst_new(str);
+		*lst = tmp;
 	else
-		ft_lstlast(*lst)->next = lst_new(str);
+		ft_lstlast(*lst)->next = tmp;
 	return (0);
 }
 

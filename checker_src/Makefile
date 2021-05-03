@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/09 16:38:24 by tkleynts          #+#    #+#              #
-#    Updated: 2021/04/12 11:12:34 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/05/03 12:46:27 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ COMMONS_NAME = instr_push.c \
 			instr_rrotate.c \
 			instr_swap.c \
 			offset.c \
-			utils.c
+			utils.c	\
+			check.c
 
 COMMONS_SRC = $(addprefix $(COMMONS_SRC_PATH)/,$(COMMONS_NAME))
 COMMONS_OBJS = $(COMMONS_SRC:.c=.o)

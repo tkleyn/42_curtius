@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 15:36:10 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/04/28 15:45:51 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/05/03 13:10:30 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ uint8_t	push_in_b(t_stacks	*stacks, int32_t	index)
 			write_instr(stacks, "ra\n", 3, &instr_ra);
 	else
 		while (index++ < stacks->size_a)
-			write_instr(stacks, "rra\n", 4, &instr_rra);	
+			write_instr(stacks, "rra\n", 4, &instr_rra);
 	write_instr(stacks, "pb\n", 3, &instr_pb);
 	return (0);
 }
@@ -31,7 +31,7 @@ uint8_t	push_in_a(t_stacks	*stacks, int32_t	index)
 			write_instr(stacks, "rb\n", 3, &instr_rb);
 	else
 		while (index++ < stacks->size_b)
-			write_instr(stacks, "rrb\n", 4, &instr_rrb);	
+			write_instr(stacks, "rrb\n", 4, &instr_rrb);
 	write_instr(stacks, "pa\n", 3, &instr_pa);
 	return (0);
 }
@@ -46,7 +46,7 @@ uint8_t	push_smallest(t_stacks	*stacks)
 			write_instr(stacks, "ra\n", 3, &instr_ra);
 	else
 		while (i++ < stacks->size_a)
-			write_instr(stacks, "rra\n", 4, &instr_rra);	
+			write_instr(stacks, "rra\n", 4, &instr_rra);
 	write_instr(stacks, "pb\n", 3, &instr_pb);
 	return (0);
 }
@@ -61,7 +61,7 @@ uint8_t	push_bigest(t_stacks	*stacks)
 			write_instr(stacks, "rb\n", 3, &instr_rb);
 	else
 		while (i++ < stacks->size_b)
-			write_instr(stacks, "rrb\n", 4, &instr_rrb);	
+			write_instr(stacks, "rrb\n", 4, &instr_rrb);
 	write_instr(stacks, "pa\n", 3, &instr_pa);
 	return (0);
 }
