@@ -6,57 +6,88 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/15 12:40:53 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/15 15:51:16 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-uint8_t	struct_init(int argc, char **argv, uint32_t	*n_philo)
+uint8_t	struct_init(int argc, char **argv, t_data	*data)
 {
 	uint8_t flag;
 	flag  = 0;
-	*n_philo = ft_fatoi(argv[1], &flag);
+	data->n_philo = ft_fatoi(argv[1], &flag);
 	if (flag)
 		return (1);
-	g_data.t2die = ft_fatoi(argv[2], &flag);
+	data->t2die = ft_fatoi(argv[2], &flag);
 	if (flag)
 		return (1);
-	g_data.t2eat = ft_fatoi(argv[3], &flag);
+	data->t2eat = ft_fatoi(argv[3], &flag);
 	if (flag)
 		return (1);
-	g_data.t2sleep = ft_fatoi(argv[4], &flag);
+	data->t2sleep = ft_fatoi(argv[4], &flag);
 	if (flag)
 		return (1);
 	if (argc == 6)
 	{
-		g_data.max_eat = ft_fatoi(argv[5], &flag);
+		data->max_eat = ft_fatoi(argv[5], &flag);
 		if (flag)
 			return (-1);
 	}
 	else
-		g_data.max_eat = -1;
+		data->max_eat = -1;
 	
 	return (0);
 }
 
-
-uint8_t	mother_philo()
+uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 {
-	while ()
+	lst_add_back(plst, data);
+	ft_lstlast(*plst)->id = i;
+	if (i == 0)
+		(*plst)->left.fork = data->forks[data->n_philo - 1];
+	else
+		(*plst)->left.fork = data->forks[i - 1];
+	(*plst)->right.fork = data->forks[i];
+	if (/* condition */)
 	{
-		pthread_create();
+		/* code */
+	}
+	
+	return(0);
+}
+
+
+uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
+{
+	uint32_t	i;
+
+	i = 0;
+	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->n_philo);
+	while (i < data->n_philo)
+	{
+		pthread_mutex_init(&data->forks[i], NULL);
+		i++;
+	}
+
+	i = 1;
+	while (i <= data->n_philo)
+	{
+		lst_add_back(plst, data);
+		ft_lstlast(*plst)->id = i;
+		pthread_create(ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst));
+		i++;
 	}
 	
 }
 
 int main(int argc, char *argv[])
 {
-	uint32_t	n_philo;
-	
+	t_data	data;
+	t_philo_lst	*plst;
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong number of args\n"));
-	if (struct_init(argc, argv, &n_philo))
+	if (struct_init(argc, argv, &data))
 		return (printf("Invalid arg(s)\n"));
 
 

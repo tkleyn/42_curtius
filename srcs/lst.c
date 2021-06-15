@@ -6,26 +6,26 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 12:41:51 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/15 12:58:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/15 14:42:58 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_lst	*lst_new(pthread_t	tid)
+t_philo_lst	*lst_new(t_data	*data)
 {
-	t_lst	*new;
+	t_philo_lst	*new;
 
-	new = (t_lst *)malloc(sizeof(t_lst));
+	new = (t_philo_lst *)malloc(sizeof(t_philo_lst));
 	if (new == NULL)
 		return (NULL);
-	new->tid = tid;
-	new->id = 1;
+	new->t_eaten = 0;
+	new->data = data;
 	new->next = NULL;
 	return (new);
 }
 
-t_lst	*ft_lstlast(t_lst *lst)
+t_philo_lst	*ft_lstlast(t_philo_lst *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -34,29 +34,26 @@ t_lst	*ft_lstlast(t_lst *lst)
 	return (lst);
 }
 
-u_int8_t	lst_add_back(t_lst **lst, pthread_t	tid)
+u_int8_t	lst_add_back(t_philo_lst **lst, t_data	*data)
 {
-	t_lst	*tmp;
+	t_philo_lst	*tmp;
 
 	if (!lst)
 		return (-42);
-	tmp = lst_new(tid);
+	tmp = lst_new(data);
 	if (!tmp)
 		return (-42);
 	if (*lst == NULL)
 		*lst = tmp;
 	else
-	{
-		tmp->id = ft_lstlast(*lst)->id + 1;
 		ft_lstlast(*lst)->next = tmp;
-	}
 	return (0);
 }
 
-uint8_t	lst_free(t_lst **lst)
+uint8_t	lst_free(t_philo_lst **lst)
 {
-	t_lst	*nxt;
-	t_lst	*curr;
+	t_philo_lst	*nxt;
+	t_philo_lst	*curr;
 
 	if (!lst || !*lst)
 		return (0);
