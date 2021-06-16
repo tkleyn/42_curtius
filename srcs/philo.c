@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/16 12:31:48 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:14:32 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,18 @@ int main(int argc, char *argv[])
 {
 	t_data	data;
 	t_philo_lst	*plst;
+
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong number of args\n"));
 	if (struct_init(argc, argv, &data))
 		return (printf("Invalid arg(s)\n"));
 	mother_philo(&data, &plst);
 
-
-
+	while (plst)
+	{
+		pthread_join(plst->tid, NULL);
+		plst = plst->next;
+	}
+	
 	return (0);
 }

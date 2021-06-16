@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:23:28 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/16 12:30:30 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/16 14:13:47 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*philo_life(void	*ptr)
 	t_philo_lst	*philo;
 
 	philo = (t_philo_lst	*)ptr;
-	printf("I'm philo number: %d\n", philo->id);
+	printf("I'm philo number: %d -------- %d\n", philo->id, philo->data->forks[3].prev_philo);
 
 	/*
 	eat();
