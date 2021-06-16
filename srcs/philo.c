@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/15 15:51:16 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/16 12:31:48 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,37 @@ uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 	lst_add_back(plst, data);
 	ft_lstlast(*plst)->id = i;
 	if (i == 0)
-		(*plst)->left.fork = data->forks[data->n_philo - 1];
+		(*plst)->left = &data->forks[data->n_philo - 1];
 	else
-		(*plst)->left.fork = data->forks[i - 1];
-	(*plst)->right.fork = data->forks[i];
-	if (/* condition */)
+		(*plst)->left = &data->forks[i - 1];
+	(*plst)->left = &data->forks[i];
+	if (!(i % 2))
 	{
-		/* code */
+		(*plst)->left->prev_philo = (*plst)->id;
+		(*plst)->right->prev_philo = (*plst)->id;
 	}
-	
 	return(0);
 }
-
 
 uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 {
 	uint32_t	i;
 
 	i = 0;
-	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->n_philo);
+	data->forks = (t_fork *)malloc(sizeof(t_fork) * data->n_philo);
 	while (i < data->n_philo)
 	{
-		pthread_mutex_init(&data->forks[i], NULL);
+		pthread_mutex_init(&data->forks[i].fork, NULL);
 		i++;
 	}
-
 	i = 1;
 	while (i <= data->n_philo)
 	{
-		lst_add_back(plst, data);
-		ft_lstlast(*plst)->id = i;
-		pthread_create(ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst));
+		philo_miner(data, plst, i);
+		pthread_create(&ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst));
 		i++;
 	}
-	
+	return (0);
 }
 
 int main(int argc, char *argv[])
@@ -89,6 +86,7 @@ int main(int argc, char *argv[])
 		return (printf("Wrong number of args\n"));
 	if (struct_init(argc, argv, &data))
 		return (printf("Invalid arg(s)\n"));
+	mother_philo(&data, &plst);
 
 
 
