@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 13:03:53 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/14 13:04:57 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/18 11:58:37 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ int	ft_fatoi(const char	*str, uint8_t	*flag)
 	if (*str != '\0')
 		return (*flag = 1);
 	return ((int)(number * sign));
+}
+
+uint64_t get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000000 + time.tv_usec);
 }

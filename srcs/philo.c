@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/16 14:14:32 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/18 12:57:36 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,25 @@ uint8_t	struct_init(int argc, char **argv, t_data	*data)
 
 uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 {
+									write(1, "bonjour 1\n", 10);
+
 	lst_add_back(plst, data);
 	ft_lstlast(*plst)->id = i;
+
 	if (i == 0)
 		(*plst)->left = &data->forks[data->n_philo - 1];
 	else
 		(*plst)->left = &data->forks[i - 1];
+
 	(*plst)->left = &data->forks[i];
-	if (!(i % 2))
+
+	if ((i + 1)  % 2)
 	{
 		(*plst)->left->prev_philo = (*plst)->id;
 		(*plst)->right->prev_philo = (*plst)->id;
 	}
+		write(1, "bonjour 2\n", 10);
+
 	return(0);
 }
 
@@ -69,10 +76,12 @@ uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 		i++;
 	}
 	i = 1;
+	data->feast_start = get_time();
 	while (i <= data->n_philo)
 	{
 		philo_miner(data, plst, i);
 		pthread_create(&ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst));
+
 		i++;
 	}
 	return (0);
@@ -83,6 +92,7 @@ int main(int argc, char *argv[])
 	t_data	data;
 	t_philo_lst	*plst;
 
+	plst = NULL;
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong number of args\n"));
 	if (struct_init(argc, argv, &data))
