@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:23:28 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 16:32:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:54:24 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 uint8_t	write_act(t_philo_lst	*philo, char *msg)
 {
-	char *str;
+	char	*str;
 
 	str = ft_strjoin(ft_ltoa(get_time() - philo->data->feast_start), " ");
 	if (str == NULL)
@@ -30,13 +30,15 @@ uint8_t	write_act(t_philo_lst	*philo, char *msg)
 		return (1);
 	write(1, str, ft_strlen(str));
 	free(str);
+	return (0);
 }
 
 uint8_t	dead(t_philo_lst	*philo)
 {
-	int64_t cur_t;
+	int64_t	cur_t;
+
 	cur_t = get_time() - philo->data->feast_start;
-	if(*philo->data->alive == 0)
+	if (*philo->data->alive == 0)
 		return (1);
 	if (cur_t - philo->last_eaten < philo->data->t2die)
 		return (0);
@@ -61,11 +63,11 @@ uint8_t	eat(t_philo_lst	*philo)
 		philo->left->prev_philo = philo->id;
 		usleep(philo->data->t2eat);
 		philo->t_eaten++;
-		philo->last_eaten = get_time()  - philo->data->feast_start;
+		philo->last_eaten = get_time() - philo->data->feast_start;
 		pthread_mutex_unlock(&philo->right->fork);
 		pthread_mutex_unlock(&philo->left->fork);
 	}
-	return(0);
+	return (0);
 }
 
 uint8_t	p_sleep(t_philo_lst	*philo)
@@ -78,17 +80,17 @@ uint8_t	p_sleep(t_philo_lst	*philo)
 
 void	*philo_life(void	*ptr)
 {
-	
 	t_philo_lst	*philo;
-	philo = (t_philo_lst	*)ptr;
+
+	philo = (t_philo_lstc *)ptr;
 	philo->last_eaten = get_time() - philo->data->feast_start;
-	while ((philo->t_eaten < philo->data->max_eat || philo->data->max_eat == -1) && *philo->data->alive)
+	while ((philo->t_eaten < philo->data->max_eat
+			|| philo->data->max_eat == -1) && *philo->data->alive)
 	{
 		if (!dead(philo))
-			if (write_act(philo, T))
-				return (1);
+			write_act(philo, T);
 		while (philo->right->prev_philo == philo->id && *philo->data->alive)
-			continue;
+			continue ;
 		if (!dead(philo))
 			eat(philo);
 		if (!dead(philo))

@@ -6,11 +6,11 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 13:03:53 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 15:03:55 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/21 17:02:36 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 int	ft_fatoi(const char	*str, uint8_t	*flag)
 {
@@ -39,7 +39,7 @@ int	ft_fatoi(const char	*str, uint8_t	*flag)
 	return ((int)(number * sign));
 }
 
-uint64_t get_time(void)
+uint64_t	get_time(void)
 {
 	struct timeval	time;
 
@@ -91,7 +91,10 @@ char	*ft_ltoa(int64_t n)
 	size_t	len;
 	char	sign;
 
-	sign = (n < 0) ? -1 : 1;
+	if (n < 0)
+		sign = -1;
+	else
+		sign = 1;
 	len = 2 + (n < 0);
 	nc = n;
 	while ((n = n / 10))
@@ -107,4 +110,3 @@ char	*ft_ltoa(int64_t n)
 		str[len] = '-';
 	return (str);
 }
-
