@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/18 12:57:36 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:27:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,18 @@ uint8_t	struct_init(int argc, char **argv, t_data	*data)
 
 uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 {
-									write(1, "bonjour 1\n", 10);
-
 	lst_add_back(plst, data);
 	ft_lstlast(*plst)->id = i;
-
-	if (i == 0)
-		(*plst)->left = &data->forks[data->n_philo - 1];
+	ft_lstlast(*plst)->right = &data->forks[i - 1];
+	if (i == 1)
+		ft_lstlast(*plst)->left = &data->forks[data->n_philo - 1];
 	else
-		(*plst)->left = &data->forks[i - 1];
-
-	(*plst)->left = &data->forks[i];
-
-	if ((i + 1)  % 2)
+		ft_lstlast(*plst)->left = &data->forks[i - 2];
+	if ((i + 1) % 2)
 	{
-		(*plst)->left->prev_philo = (*plst)->id;
-		(*plst)->right->prev_philo = (*plst)->id;
+		ft_lstlast(*plst)->left->prev_philo = i;
+		ft_lstlast(*plst)->right->prev_philo = i;
 	}
-		write(1, "bonjour 2\n", 10);
-
 	return(0);
 }
 
