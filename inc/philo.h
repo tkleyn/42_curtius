@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 13:20:30 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/21 15:11:21 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <unistd.h>
 #include <sys/time.h>
 
-# define F "has taken a fork"
-# define E "is eating"
-# define  S "is sleeping"
-# define T "is thinking"
-# define  D "died"
+# define F "has taken a fork\n"
+# define E "is eating\n"
+# define  S "is sleeping\n"
+# define T "is thinking\n"
+# define  D "died\n"
 
 typedef struct s_fork
 {
@@ -40,6 +40,8 @@ typedef struct s_data
 	int32_t		max_eat;
 	t_fork		*forks;
 	int64_t		feast_start;
+	uint8_t		*alive;
+
 }	t_data;
 
 typedef struct s_philo_data
@@ -62,6 +64,10 @@ uint8_t	lst_free(t_philo_lst **plst);
 void	*philo_life(void	*d);
 
 int	ft_fatoi(const char	*str, uint8_t	*flag);
+size_t	ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_ltoa(int64_t n);
+
 
 uint64_t get_time(void);
 

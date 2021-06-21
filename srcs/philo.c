@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 13:27:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/21 16:29:09 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ uint8_t	struct_init(int argc, char **argv, t_data	*data)
 	data->n_philo = ft_fatoi(argv[1], &flag);
 	if (flag)
 		return (1);
-	data->t2die = ft_fatoi(argv[2], &flag);
+	data->t2die = ft_fatoi(argv[2], &flag) * 1000;
 	if (flag)
 		return (1);
-	data->t2eat = ft_fatoi(argv[3], &flag);
+	data->t2eat = ft_fatoi(argv[3], &flag) * 1000;
 	if (flag)
 		return (1);
-	data->t2sleep = ft_fatoi(argv[4], &flag);
+	data->t2sleep = ft_fatoi(argv[4], &flag) * 1000;
 	if (flag)
 		return (1);
 	if (argc == 6)
@@ -63,9 +63,12 @@ uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 
 	i = 0;
 	data->forks = (t_fork *)malloc(sizeof(t_fork) * data->n_philo);
+	if (data->forks == NULL)
+		return(1);
 	while (i < data->n_philo)
 	{
-		pthread_mutex_init(&data->forks[i].fork, NULL);
+		if(!pthread_mutex_init(&data->forks[i].fork, NULL))
+			return(1);
 		i++;
 	}
 	i = 1;
@@ -73,30 +76,54 @@ uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 	while (i <= data->n_philo)
 	{
 		philo_miner(data, plst, i);
-		pthread_create(&ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst));
-
+		if (!pthread_create(&ft_lstlast(*plst)->tid, NULL, &philo_life, (void	*)ft_lstlast(*plst)))
+			return(1);
 		i++;
 	}
 	return (0);
+}
+
+void	clean_data(t_philo_lst	**plst, t_data	*data)
+{
+	uint32_t i;
+
+	i = 0;
+	while (i < data->n_philo)
+		pthread_mutex_destroy(&data->forks[i++].fork);
+	free(data->forks);
+	lst_free(plst);
 }
 
 int main(int argc, char *argv[])
 {
 	t_data	data;
 	t_philo_lst	*plst;
+	t_philo_lst	*plst_cpy;
+	uint32_t i;
 
+	uint8_t	life;
+
+	data.alive = &life;
+	*data.alive = 1;
 	plst = NULL;
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong number of args\n"));
 	if (struct_init(argc, argv, &data))
 		return (printf("Invalid arg(s)\n"));
-	mother_philo(&data, &plst);
+	if (mother_philo(&data, &plst))
+		return (printf("Mallo-Mutex error\n"));
 
-	while (plst)
+	plst_cpy = plst;
+	i = 0;
+	while (i < data.n_philo)
 	{
-		pthread_join(plst->tid, NULL);
-		plst = plst->next;
+		write(1, ft_ltoa(i), ft_strlen(ft_ltoa(i)));
+		write(1,"\n", 1);
+		pthread_join(plst_cpy->tid, NULL);
+		plst_cpy = plst_cpy->next;
+		i++;
 	}
+	clean_data(&plst, &data);
 	
 	return (0);
 }
