@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 16:59:21 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 10:40:00 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < data.n_philo)
 	{
-		write(1, ft_ltoa(i), ft_strlen(ft_ltoa(i)));
-		write(1, "\n", 1);
+		//write(1, ft_ltoa(i), ft_strlen(ft_ltoa(i)));
+	//	write(1, "\n", 1);
 		pthread_join(plst_cpy->tid, NULL);
 		plst_cpy = plst_cpy->next;
 		i++;

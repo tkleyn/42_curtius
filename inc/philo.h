@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 15:11:21 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:21:24 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_fatoi(const char	*str, uint8_t	*flag);
 size_t	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_ltoa(int64_t n);
+int	ft_strncmp(const char *s1, const char *s2, size_t size);
 
 
 uint64_t get_time(void);

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 13:03:53 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 17:02:36 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:20:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,61 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (new_str);
 }
 
+static void	lengths(long int n, size_t *len, long int *weight)
+{
+	*len = 1;
+	if (n >= 0)
+	{
+		*len = 0;
+		n = -n;
+	}
+	*weight = 1;
+	while (n / *weight < -9)
+	{
+		*weight *= 10;
+		*len += 1;
+	}
+}
+
 char	*ft_ltoa(int64_t n)
 {
-	char	*str;
-	int64_t	nc;
-	size_t	len;
-	char	sign;
+	size_t		len;
+	long int	weight;
+	size_t		cur;
+	char		*str;
 
-	if (n < 0)
-		sign = -1;
-	else
-		sign = 1;
-	len = 2 + (n < 0);
-	nc = n;
-	while ((n = n / 10))
-		len++;
-	n = nc;
-	if (NULL == (str = (char *)malloc(len--)))
+	lengths(n, &len, &weight);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	str[len--] = '\0';
-	str[len--] = sign * (n % 10) + '0';
-	while ((n = n / 10))
-		str[len--] = sign * (n % 10) + '0';
-	if (sign < 0)
-		str[len] = '-';
+	cur = 0;
+	if (n < 0)
+	{
+		str[cur] = '-';
+		cur++;
+	}
+	if (n > 0)
+		n = -n;
+	while (weight >= 1)
+	{
+		str[cur++] = -(n / weight % 10) + 48;
+		weight /= 10;
+	}
+	str[cur] = '\0';
 	return (str);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t size)
+{
+	if (!s1)
+		return (-1);
+	while (size != 0 && (*s1 || *s2))
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		size--;
+		s1++;
+		s2++;
+	}
+	return (0);
 }
