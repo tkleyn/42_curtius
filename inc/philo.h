@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/22 12:21:24 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:12:34 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_data
 	t_fork		*forks;
 	int64_t		feast_start;
 	uint8_t		*alive;
-
+	pthread_mutex_t alive_mutex;
+	uint8_t	end;
 }	t_data;
 
 typedef struct s_philo_data
@@ -54,6 +55,7 @@ typedef struct s_philo_data
 	t_fork	*right;
 	t_fork	*left;
 	struct s_philo_data *next;
+	uint8_t	eating;
 }	t_philo_lst;
 
 
@@ -68,12 +70,8 @@ size_t	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_ltoa(int64_t n);
 int	ft_strncmp(const char *s1, const char *s2, size_t size);
-
+uint8_t	write_act(t_philo_lst	*philo, char *msg);
 
 uint64_t get_time(void);
-
-
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 12:41:51 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/21 17:00:08 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:12:45 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_philo_lst	*lst_new(t_data	*data)
 	new->t_eaten = 0;
 	new->data = data;
 	new->next = NULL;
+	new->eating = 0;
 	return (new);
 }
 

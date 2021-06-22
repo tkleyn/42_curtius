@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/22 10:40:00 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:46:56 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,34 @@ uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 	return (0);
 }
 
+void	death_check(t_philo_lst	*philo)
+{
+	t_philo_lst	*cpy;
+	int64_t	curent_time;
+
+	while (!philo->data->end)
+	{
+		cpy = philo;
+		curent_time = get_time() - philo->data->feast_start;
+		while (cpy && !philo->data->end)
+		{
+			if ((curent_time - cpy->last_eaten >= cpy->data->t2die) && !cpy->eating)
+			{
+				write_act(cpy, D);
+				return ;
+			}
+			cpy = cpy->next;
+		}
+	}
+}
+
 uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 {
 	uint32_t	i;
 
 	i = 0;
+	pthread_mutex_init(&data->alive_mutex, NULL);
+	data->end = 0;
 	data->forks = (t_fork *)malloc(sizeof(t_fork) * data->n_philo);
 	if (data->forks == NULL)
 		return (1);
@@ -112,12 +135,11 @@ int	main(int argc, char *argv[])
 		return (printf("Invalid arg(s)\n"));
 	if (mother_philo(&data, &plst))
 		return (printf("Mallo-Mutex error\n"));
+	death_check(plst);
 	plst_cpy = plst;
 	i = 0;
 	while (i < data.n_philo)
 	{
-		//write(1, ft_ltoa(i), ft_strlen(ft_ltoa(i)));
-	//	write(1, "\n", 1);
 		pthread_join(plst_cpy->tid, NULL);
 		plst_cpy = plst_cpy->next;
 		i++;
