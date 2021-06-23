@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:20 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/23 10:05:34 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:12:25 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_fork
 
 typedef struct s_data
 {
-	uint32_t		n_philo;
+	int32_t			n_philo;
 	int32_t			t2die;
 	int32_t			t2eat;
 	int32_t			t2sleep;
@@ -63,7 +63,7 @@ typedef struct s_main_struct
 	t_data		data;
 	t_philo_lst	*plst;
 	t_philo_lst	*plst_cpy;
-	uint32_t	i;
+	int32_t		i;
 	uint8_t		life;
 }	t_main_struct;
 
@@ -80,5 +80,6 @@ uint8_t		write_act(t_philo_lst	*philo, char *msg);
 void		write_mutex(t_philo_lst	*philo, char *msg, char *str);
 void		clean_data(t_philo_lst	**plst, t_data	*data);
 uint64_t	get_time(void);
+uint8_t		ft_one(t_data *data);
 
 #endif

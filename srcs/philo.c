@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/23 10:01:54 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:12:37 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ uint8_t	struct_init(int argc, char **argv, t_data	*data)
 
 	flag = 0;
 	data->n_philo = ft_fatoi(argv[1], &flag);
-	if (flag)
+	if (flag || data->n_philo <= 0)
 		return (1);
 	data->t2die = ft_fatoi(argv[2], &flag) * 1000;
-	if (flag)
+	if (flag || data->t2die < 0)
 		return (1);
 	data->t2eat = ft_fatoi(argv[3], &flag) * 1000;
-	if (flag)
+	if (flag || data->t2eat < 0)
 		return (1);
 	data->t2sleep = ft_fatoi(argv[4], &flag) * 1000;
-	if (flag)
+	if (flag || data->t2sleep < 0)
 		return (1);
 	if (argc == 6)
 	{
 		data->max_eat = ft_fatoi(argv[5], &flag);
-		if (flag)
+		if (flag || data->max_eat < 0)
 			return (-1);
 	}
 	else
@@ -81,7 +81,7 @@ void	death_check(t_philo_lst	*philo)
 
 uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 {
-	uint32_t	i;
+	int32_t	i;
 
 	i = 0;
 	pthread_mutex_init(&data->alive_mutex, NULL);
@@ -119,6 +119,8 @@ int	main(int argc, char *argv[])
 		return (printf("Wrong number of args\n"));
 	if (struct_init(argc, argv, &m_s.data))
 		return (printf("Invalid arg(s)\n"));
+	if (m_s.data.n_philo == 1)
+		return (ft_one(&m_s.data));
 	if (mother_philo(&m_s.data, &m_s.plst))
 		return (printf("Mallo-Mutex error\n"));
 	death_check(m_s.plst);

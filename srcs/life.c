@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:23:28 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/23 09:54:59 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 16:26:02 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ uint8_t	eat(t_philo_lst	*philo)
 	philo->eating = 1;
 	if (write_act(philo, E))
 		return (1);
+	philo->eating = 0;
 	usleep(philo->data->t2eat);
 	philo->t_eaten++;
-	philo->eating = 0;
 	pthread_mutex_unlock(&philo->right->fork);
 	pthread_mutex_unlock(&philo->left->fork);
 	philo->right->prev_philo = philo->id;

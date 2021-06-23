@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:52:02 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/23 09:54:45 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 17:15:18 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ uint8_t	write_act(t_philo_lst	*philo, char *msg)
 
 void	clean_data(t_philo_lst	**plst, t_data	*data)
 {
-	uint32_t	i;
+	int32_t	i;
 
 	i = 0;
 	while (i < data->n_philo)
@@ -73,4 +73,24 @@ void	clean_data(t_philo_lst	**plst, t_data	*data)
 	pthread_mutex_destroy(&data->alive_mutex);
 	free(data->forks);
 	lst_free(plst);
+}
+
+uint8_t	ft_one(t_data *data)
+{
+	t_philo_lst		p;
+	pthread_mutex_t	i;
+	uint8_t			alive;
+
+	pthread_mutex_init(&i, NULL);
+	data->alive_mutex = i;
+	data->feast_start = get_time();
+	p.data = data;
+	p.id = 1;
+	data->alive = &alive;
+	*data->alive = 1;
+	write_act(&p, T);
+	write_act(&p, F);
+	usleep(data->t2die);
+	write_act(&p, D);
+	return (0);
 }
