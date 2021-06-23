@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 12:48:24 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/22 15:46:56 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 10:01:54 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ uint8_t	philo_miner(t_data *data, t_philo_lst	**plst, uint32_t	i)
 void	death_check(t_philo_lst	*philo)
 {
 	t_philo_lst	*cpy;
-	int64_t	curent_time;
+	int64_t		curent_time;
 
 	while (!philo->data->end)
 	{
@@ -68,7 +68,8 @@ void	death_check(t_philo_lst	*philo)
 		curent_time = get_time() - philo->data->feast_start;
 		while (cpy && !philo->data->end)
 		{
-			if ((curent_time - cpy->last_eaten >= cpy->data->t2die) && !cpy->eating)
+			if ((curent_time - cpy->last_eaten >= cpy->data->t2die)
+				&& !cpy->eating)
 			{
 				write_act(cpy, D);
 				return ;
@@ -107,43 +108,28 @@ uint8_t	mother_philo(t_data *data, t_philo_lst	**plst)
 	return (0);
 }
 
-void	clean_data(t_philo_lst	**plst, t_data	*data)
-{
-	uint32_t	i;
-
-	i = 0;
-	while (i < data->n_philo)
-		pthread_mutex_destroy(&data->forks[i++].fork);
-	free(data->forks);
-	lst_free(plst);
-}
-
 int	main(int argc, char *argv[])
 {
-	t_data		data;
-	t_philo_lst	*plst;
-	t_philo_lst	*plst_cpy;
-	uint32_t	i;
-	uint8_t		life;
+	t_main_struct	m_s;
 
-	data.alive = &life;
-	*data.alive = 1;
-	plst = NULL;
+	m_s.data.alive = &m_s.life;
+	*m_s.data.alive = 1;
+	m_s.plst = NULL;
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong number of args\n"));
-	if (struct_init(argc, argv, &data))
+	if (struct_init(argc, argv, &m_s.data))
 		return (printf("Invalid arg(s)\n"));
-	if (mother_philo(&data, &plst))
+	if (mother_philo(&m_s.data, &m_s.plst))
 		return (printf("Mallo-Mutex error\n"));
-	death_check(plst);
-	plst_cpy = plst;
-	i = 0;
-	while (i < data.n_philo)
+	death_check(m_s.plst);
+	m_s.plst_cpy = m_s.plst;
+	m_s.i = 0;
+	while (m_s.i < m_s.data.n_philo)
 	{
-		pthread_join(plst_cpy->tid, NULL);
-		plst_cpy = plst_cpy->next;
-		i++;
+		pthread_join(m_s.plst_cpy->tid, NULL);
+		m_s.plst_cpy = m_s.plst_cpy->next;
+		m_s.i++;
 	}
-	clean_data(&plst, &data);
+	clean_data(&m_s.plst, &m_s.data);
 	return (0);
 }

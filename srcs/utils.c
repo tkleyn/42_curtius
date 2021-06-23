@@ -6,7 +6,7 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 13:03:53 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/22 15:52:00 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 09:46:37 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ int	ft_fatoi(const char	*str, uint8_t	*flag)
 	if (*str != '\0')
 		return (*flag = 1);
 	return ((int)(number * sign));
-}
-
-uint64_t	get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000000 + time.tv_usec);
 }
 
 size_t	ft_strlen(char *str)
@@ -126,50 +118,4 @@ char	*ft_ltoa(int64_t n)
 	}
 	str[cur] = '\0';
 	return (str);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t size)
-{
-	if (!s1)
-		return (-1);
-	while (size != 0 && (*s1 || *s2))
-	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		size--;
-		s1++;
-		s2++;
-	}
-	return (0);
-}
-
-uint8_t	write_act(t_philo_lst	*philo, char *msg)
-{
-	char	*str;
-	if (!ft_strncmp(msg, E, sizeof(E)))
-	{
-		philo->last_eaten = (get_time() - philo->data->feast_start);
-		str = ft_strjoin(ft_ltoa(philo->last_eaten / 1000), " ");
-	}
-	else
-		str = ft_strjoin(ft_ltoa((get_time() - philo->data->feast_start) / 1000), " ");
-	if (str == NULL)
-		return (1);
-	str = ft_strjoin(str, ft_ltoa((int64_t)philo->id));
-	if (str == NULL)
-		return (1);
-	str = ft_strjoin(str, " ");
-	if (str == NULL)
-		return (1);
-	str = ft_strjoin(str, msg);
-	if (str == NULL)
-		return (1);
-	pthread_mutex_lock(&philo->data->alive_mutex);
-	if (*philo->data->alive == 1)
-		write(1, str, ft_strlen(str));
-	if (!ft_strncmp(msg, D, sizeof(D)))
-		*philo->data->alive = 0;
-	pthread_mutex_unlock(&philo->data->alive_mutex);
-	free(str);
-	return (0);
 }

@@ -6,11 +6,21 @@
 /*   By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:23:28 by tkleynts          #+#    #+#             */
-/*   Updated: 2021/06/22 15:14:42 by tkleynts         ###   ########.fr       */
+/*   Updated: 2021/06/23 09:54:59 by tkleynts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	write_mutex(t_philo_lst	*philo, char *msg, char *str)
+{
+	pthread_mutex_lock(&philo->data->alive_mutex);
+	if (*philo->data->alive == 1)
+		write(1, str, ft_strlen(str));
+	if (!ft_strncmp(msg, D, sizeof(D)))
+		*philo->data->alive = 0;
+	pthread_mutex_unlock(&philo->data->alive_mutex);
+}
 
 uint8_t	eat(t_philo_lst	*philo)
 {

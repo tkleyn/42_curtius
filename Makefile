@@ -6,7 +6,7 @@
 #    By: tkleynts <tkleynts@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/16 12:18:47 by tkleynts          #+#    #+#              #
-#    Updated: 2021/06/16 12:23:41 by tkleynts         ###   ########.fr        #
+#    Updated: 2021/06/23 09:47:05 by tkleynts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_PATH = srcs
 SRC_NAME =	philo.c \
 			lst.c \
 			utils.c \
+			utils2.c \
 			life.c 
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
