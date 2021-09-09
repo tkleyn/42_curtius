@@ -1,0 +1,4 @@
+CREATE DATABASE wordpress CHARACTER SET utf8mb4 COLLATE 'utf8mb4_general_ci';
+CREATE USER 'tom'@'localhost' IDENTIFIED BY 'tom';
+GRANT ALL ON wordpress.* TO 'tom'@'localhost';
+FLUSH PRIVILEGES;
